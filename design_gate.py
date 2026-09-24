@@ -51,18 +51,31 @@ for sel, body in rules:
 # 1. frosted blur / faux grain
 blur = sorted({sel for (sel, prop), v in eff.items() if prop in ("backdrop-filter", "-webkit-backdrop-filter") and v != "none"})
 check("no active backdrop-filter (frosted glass)", not blur, str(blur[:4]))
-check("faux grain overlay is off", last_value(r"^\.grain$", "display") == "none")
+check("no faux grain overlay (node and rules are gone)", 'class="grain"' not in html and not re.search(r"\.grain\b", css))
 check("no wood/paper texture overlay on cards", last_value(r"^\.card::before$", "display") == "none")
 
 # 2. default indigo / violet
 check("no default indigo #6366f1", "6366f1" not in html.lower())
 
-# 3. orange is for controls and alerts only (judged on what actually wins, not on overridden rules)
-ORANGE = re.compile(r"(?<!var\(--c, )var\(--accent\)|#ff5c00|#e0622a|rgba\(255,\s*92,\s*0", re.I)
+# 3. orange is for controls and alerts only - RAW source, so overridden/dead orange fails too
+ORANGE = re.compile(r"(?<!var\(--c, )var\(--accent\)|#ff5c00|#e0622a|rgba\(\s*255\s*,\s*92\s*,\s*0", re.I)
 CONTROLS = re.compile(r"button|\.btn|select|\.nav a\.on|:hover|:focus|\.bar|\.alert|\.flag|#dateSel|^:root$|^\.hero-live")
-COLORISH = ("color", "background", "background-color", "border", "border-color", "border-left", "border-top", "border-bottom", "outline", "box-shadow", "text-shadow", "fill", "stroke")
-offenders = sorted({sel for (sel, prop), v in eff.items() if prop in COLORISH and ORANGE.search(v.replace("var(--c, var(--accent))", "")) and not CONTROLS.search(sel)})
-check("orange only on controls / alerts", not offenders, str(offenders[:6]))
+offenders = []
+for sel, body in rules:
+    if ORANGE.search(body.replace("var(--c, var(--accent))", "")) and not CONTROLS.search(sel):
+        # the token DEFINITION in :root is allowed; any other use of orange outside controls is not
+        if sel.strip() == ":root" and re.fullmatch(r"\s*--accent\s*:\s*#ff5c00\s*;?\s*", body, re.I):
+            continue
+        offenders.append(sel)
+check("orange only on controls / alerts (raw source, dead rules count)", not offenders, str(sorted(set(offenders))[:6]))
+
+# 3b. nothing hidden ships in the DOM: a class used in the markup whose winning rule is display:none is a corpse
+markup = re.sub(r"<script>.*?</script>|<style>.*?</style>", "", html, flags=re.S)
+used = set(re.findall(r'class="([^"]+)"', markup))
+used = {c for cl in used for c in cl.split()}
+FUNCTIONAL_HIDDEN = {"winbar"}  # the frameless-window title bar: hidden by default, shown when the desktop widget opens the paper
+corpses = sorted(c for c in used if c not in FUNCTIONAL_HIDDEN and last_value(r"^\." + re.escape(c) + r"$", "display") == "none")
+check("no display:none nodes shipped in the DOM", not corpses, str(corpses))
 
 # 4. reading measure
 m = last_value(r"\.body p", "max-width")

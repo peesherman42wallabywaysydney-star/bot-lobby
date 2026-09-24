@@ -46,14 +46,14 @@
 
   /* masthead */
   .mast { text-align: center; padding: 26px 0 10px; animation: rise .9s var(--ease) both; }
-  .kick { font: 800 10px var(--ui); letter-spacing: .34em; text-transform: uppercase; color: var(--accent); }
+  .kick { font: 800 10px var(--ui); letter-spacing: .34em; text-transform: uppercase; }
   .mast h1 { margin: 8px 0 4px; font: 900 44px/.95 var(--display); letter-spacing: -.03em; text-transform: uppercase;
     background: linear-gradient(100deg, #ff7a59, #f0cd7a 30%, #8ee7c9 60%, #b69bff 90%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: flow 9s linear infinite; }
   @keyframes flow { to { background-position: -220% 0; } }
   .date { color: var(--dim); font-size: 12px; letter-spacing: .04em; } .ed { color: var(--dim); font: italic 12.5px var(--serif); margin: 5px 6px 0; }
   .ticker { margin: 14px -16px 0; overflow: hidden; border-block: 1px solid var(--line); background: rgba(0,0,0,.35); padding: 7px 0; }
   .ticker div { display: inline-flex; gap: 34px; white-space: nowrap; animation: marq 55s linear infinite; padding-left: 100%; font: 800 11px var(--ui); letter-spacing: .1em; text-transform: uppercase; }
-  .ticker span b { color: var(--accent); } .ticker:hover div { animation-play-state: paused; } @keyframes marq { to { transform: translateX(-100%); } }
+  .ticker span b { } .ticker:hover div { animation-play-state: paused; } @keyframes marq { to { transform: translateX(-100%); } }
   .headline { font: 900 30px/1.08 var(--display); letter-spacing: -.02em; margin: 24px 0 10px; text-transform: none; animation: rise .9s .1s var(--ease) both; }
   .dek { font: italic 16px/1.5 var(--serif); color: #ebe0cc; animation: rise .9s .18s var(--ease) both; }
   @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
@@ -66,7 +66,7 @@
   .alm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; } .alm b { display: block; font: 900 24px/1.1 var(--display); } .alm span { font-size: 10.5px; color: var(--dim); }
 
   /* sections */
-  .sec { scroll-margin-top: 112px; margin-top: 46px; --c: var(--accent); }
+  .sec { scroll-margin-top: 112px; margin-top: 46px; }
   .tag { display: inline-flex; align-items: center; gap: 9px; transform: rotate(-1.6deg); background: var(--c); color: #120e16; padding: 6px 14px 6px 10px; border-radius: 10px; box-shadow: 4px 5px 0 rgba(0,0,0,.45), 0 0 26px color-mix(in srgb, var(--c) 45%, transparent); }
   .tag i { font: 900 11px var(--display); font-style: normal; background: #120e16; color: var(--c); padding: 2px 6px; border-radius: 6px; }
   .tag h2 { margin: 0; font: 900 21px/1 var(--display); letter-spacing: -.02em; text-transform: uppercase; }
@@ -96,9 +96,7 @@
   .empty { color: var(--dim); text-align: center; padding: 70px 0; }
 
   /* ============ design system 2: eroded plaster, oxidized metal, prairie friezes, linework, assembly manuals ============ */
-  :root { --ash: #D9CDB8; --copper: #E0622A; --verd: #C9A46A; --ochre: #B08D57; --steel: #A9AEB5; --scrawl: #F5333A; --lilac: #A69B8B; }
-  .grain { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: .13; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  :root { --ash: #D9CDB8; --verd: #C9A46A; --ochre: #B08D57; --steel: #A9AEB5; --scrawl: #F5333A; --lilac: #A69B8B; }
   .veil { background: linear-gradient(180deg, rgba(14,12,10,.78), rgba(14,12,10,.66) 40%, rgba(14,12,10,.9)); }
 
   /* Prairie-style frieze: a banded horizontal pattern in the section colour */
@@ -112,7 +110,7 @@
 
   /* masthead: eroded-ash type on a metal ground, with drawn-on floral linework */
   .mast { position: relative; overflow: visible; }
-  .mast h1 { background: linear-gradient(100deg, #f0e6d2, #D9CDB8 22%, #E0622A 48%, #C9A46A 74%, #D9CDB8); background-size: 240% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  .mast h1 { background-size: 240% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
     filter: drop-shadow(0 2px 0 rgba(0,0,0,.5)); }
   .floral { position: absolute; top: 4px; width: 92px; height: 130px; color: var(--lilac); opacity: .85; pointer-events: none; }
   .floral.l { left: -6px; } .floral.r { right: -6px; transform: scaleX(-1); }
@@ -204,8 +202,8 @@
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } .rv { opacity: 1; transform: none; } }
 
   /* ============ design system 3 (Muse moodboard v2): plaster + steel + rust, spec-sheet front page, woven-label kickers ============ */
-  :root { --ink: #EDE6D6; --dim: rgba(237,230,214,.66); --accent: #FF5C00; --line: rgba(237,230,214,.16); --glass: rgba(22,19,14,.8);
-    --steelc: #A9AEB5; --rust: #E0622A; --ground: #16130E; --plaster: #D9CDB8;
+  :root { --ink: #EDE6D6; --dim: rgba(237,230,214,.66); --line: rgba(237,230,214,.16); --glass: rgba(22,19,14,.8);
+    --steelc: #A9AEB5; --ground: #16130E; --plaster: #D9CDB8;
     --display: "Archivo Black", "Segoe UI Black", "Arial Black", Impact, sans-serif;
     --ui: "Jost", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -215,7 +213,7 @@
   .bg { filter: grayscale(.7) sepia(.35) contrast(1.05) brightness(.8); }
   .veil { background: linear-gradient(180deg, rgba(22,19,14,.82), rgba(22,19,14,.72) 40%, rgba(22,19,14,.93)); }
   .wrap::after { background: linear-gradient(0deg, rgba(176,141,87,.12), transparent); }
-  .prog { background: linear-gradient(90deg, var(--rust), #FF5C00); box-shadow: 0 0 10px rgba(255,92,0,.6); }
+  .prog { }
   .bar { background: rgba(22,19,14,.97); border-bottom: 1px solid rgba(237,230,214,.12); }
   .nav { background: linear-gradient(180deg, rgba(22,19,14,.8), rgba(22,19,14,0)); }
 
@@ -228,13 +226,13 @@
   button:hover, .btn:hover { background: var(--accent); color: #16130E; }
 
   /* masthead: box-logo wordmark, one colour; orange woven label as the kicker */
-  .kick { display: inline-block; background: var(--accent); color: #16130E; font: 700 10px var(--mono); letter-spacing: .22em; padding: 4px 11px 3px; border-radius: 1px; box-shadow: 0 0 0 1px #16130E, 0 0 0 2px var(--accent); }
+  .kick { display: inline-block; color: #16130E; font: 700 10px var(--mono); letter-spacing: .22em; padding: 4px 11px 3px; border-radius: 1px; }
   .mast h1 { font: 400 clamp(28px, 8.2vw, 54px)/.92 var(--display); overflow-wrap: anywhere; letter-spacing: -.035em; text-transform: uppercase; background: none; -webkit-background-clip: initial; background-clip: initial; color: var(--ink); animation: none;
-    filter: none; text-shadow: 3px 3px 0 rgba(255,92,0,.85); margin: 14px 0 8px; }
+    filter: none; margin: 14px 0 8px; }
   .date { font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
   .ed { font: italic 400 14px/1.4 var(--serif); color: var(--plaster); }
   .floral { color: var(--steelc); opacity: .42; }
-  .ticker { background: rgba(255,92,0,.1); border-block: 1px solid var(--rust); } .ticker div { font: 500 10.5px var(--mono); letter-spacing: .14em; } .ticker span b { color: var(--accent); }
+  .ticker { border-block: 1px solid var(--rust); } .ticker div { font: 500 10.5px var(--mono); letter-spacing: .14em; } .ticker span b { }
   .headline { font: 400 30px/1.06 var(--display); letter-spacing: -.025em; text-transform: uppercase; }
   .dek { font: italic 400 17px/1.5 var(--serif); color: var(--plaster); }
 
@@ -250,8 +248,8 @@
   .by { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
   .lbl { font-size: 10px; letter-spacing: .18em; }
   .sub { font: 600 19px/1.28 var(--ui); letter-spacing: -.005em; }
-  .pull { font: 400 21px/1.22 var(--display); letter-spacing: -.02em; border-radius: 2px; background: linear-gradient(135deg, rgba(255,92,0,.13), rgba(237,230,214,.03)); border: 1px solid rgba(255,92,0,.38); border-left: 4px solid var(--accent); }
-  .pull::before { color: var(--accent); }
+  .pull { font: 400 21px/1.22 var(--display); letter-spacing: -.02em; border-radius: 2px; }
+  .pull::before { }
   .body p { font: var(--fs)/1.68 var(--serif); font-weight: 400; color: #F1EBDD; }
   .story .h, .more-i .h, .lz-i div, .facts, .split, .diff, .tl, .alm span, .letter .t { font-family: var(--ui); }
   .story .h, .more-i .h { font-weight: 600; font-size: 14.5px; }
@@ -328,7 +326,7 @@
   .mast .plate h1 { margin: 0; color: #1a1712; font-size: clamp(20px, 6vw, 50px); overflow-wrap: normal; word-break: normal; white-space: normal; text-wrap: balance; text-shadow: 0 1px 0 rgba(255,255,255,.55); }
 
   /* plaster reading sheets: the article text sits on a warm paper surface, the ground stays ink */
-  .sec > .body { background: #EDE6D6; color: #1d1a15; padding: 18px clamp(16px, 4vw, 26px) 6px; border-radius: 2px; box-shadow: 0 10px 26px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.06); }
+  .sec > .body { background: #EDE6D6; color: #1d1a15; padding: 18px clamp(16px, 4vw, 26px) 6px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
   .sec > .body p { color: #1d1a15; }
 
   /* daily photograph: one credited picture per edition, full-bleed under the masthead */
@@ -338,9 +336,8 @@
   .hero figcaption a { text-decoration: underline; text-underline-offset: 2px; }
 
   /* ============ design v5 (agreed with Muse): brushed, detailed steel + the merge-gate rules ============ */
-  :root { --brush: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='96'><filter id='b' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='0.0035 0.9' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.3 -.35'/></filter><rect width='100%25' height='100%25' filter='url(%23b)'/></svg>"); --screw: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><defs><radialGradient id='g' cx='.35' cy='.3' r='.85'><stop offset='0' stop-color='%23fbfbfc'/><stop offset='.5' stop-color='%23a4a9af'/><stop offset='1' stop-color='%234c5056'/></radialGradient></defs><circle cx='10' cy='10' r='9.5' fill='%231b1d20' opacity='.55'/><circle cx='10' cy='10' r='8.4' fill='url(%23g)' stroke='%2334373c' stroke-width='1.2'/><rect x='2.6' y='8.7' width='14.8' height='2.6' rx='.6' fill='%232a2d31'/><rect x='2.6' y='10.4' width='14.8' height='.9' fill='%23ffffff' opacity='.35'/></svg>"); }
+  :root { --brush: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='200'><filter id='b' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='0.003 0.45' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.3 -.35'/></filter><rect width='100%25' height='100%25' filter='url(%23b)'/></svg>"); --screw: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><defs><radialGradient id='g' cx='.35' cy='.3' r='.85'><stop offset='0' stop-color='%23fbfbfc'/><stop offset='.5' stop-color='%23a4a9af'/><stop offset='1' stop-color='%234c5056'/></radialGradient></defs><circle cx='10' cy='10' r='9.5' fill='%231b1d20' opacity='.55'/><circle cx='10' cy='10' r='8.4' fill='url(%23g)' stroke='%2334373c' stroke-width='1.2'/><rect x='2.6' y='8.7' width='14.8' height='2.6' rx='.6' fill='%232a2d31'/><rect x='2.6' y='10.4' width='14.8' height='.9' fill='%23ffffff' opacity='.35'/></svg>"); }
   /* gate: no faux grain overlay, no drop cap or frieze (the ONE heritage device is the steel frame around the daily photo) */
-  .grain { display: none; }
   .frieze, .fin::before, .fin::after { display: none; }
   .fin { letter-spacing: .34em; }
   .colophon { text-align: center; font: 500 9.5px/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin: 10px 14px 34px; }
@@ -348,7 +345,7 @@
   /* brushed steel: horizontal stretched-noise grain over two raking highlight bands over a hard vertical falloff */
   .metal, .mast .plate, .tag, .hero .frame {
     background:
-      var(--brush) 0 0 / 420px 96px,
+      var(--brush) center / 100% 100% no-repeat,
       linear-gradient(104deg, transparent 16%, rgba(255,255,255,.46) 27%, transparent 39%, transparent 57%, rgba(255,255,255,.32) 66%, transparent 79%),
       linear-gradient(180deg, #e2e5e8 0%, #b6bbc1 38%, #969ba2 53%, #bec2c8 100%);
     background-blend-mode: soft-light, normal, normal;
@@ -364,9 +361,9 @@
   /* section plates: same brushed metal, tinted by the chapter colour; two screws, stencil caps engraved into the face */
   .tag { position: relative; border-radius: 2px; padding: 7px 26px 7px 26px; transform: none;
     background:
-      var(--brush) 0 0 / 420px 96px,
+      var(--brush) center / 100% 100% no-repeat,
       linear-gradient(104deg, transparent 14%, rgba(255,255,255,.4) 26%, transparent 38%, transparent 60%, rgba(255,255,255,.26) 68%, transparent 80%),
-      linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff), color-mix(in srgb, var(--c) 92%, #888) 45%, color-mix(in srgb, var(--c) 82%, #000) 100%);
+      linear-gradient(180deg, #e2e5e8 0%, #b6bbc1 40%, #969ba2 54%, #bec2c8 100%);
     background-blend-mode: soft-light, normal, normal; }
   .tag::before, .tag::after { content: ""; position: absolute; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; background: var(--screw) center / contain no-repeat; inset: auto; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
   .tag::before { left: 8px; transform: rotate(40deg); } .tag::after { right: 8px; left: auto; transform: rotate(-20deg); }
@@ -380,28 +377,28 @@
   .hero figcaption { padding: 9px 2px 0; }
 
   /* controls at rest: gunmetal with a fine brush; hover still turns orange (orange = controls) */
-  .bar button, .bar .btn, .bar select { background: var(--brush) 0 0 / 300px 70px, linear-gradient(180deg, #55595f, #33363b 55%, #2a2c30); background-blend-mode: soft-light, normal;
+  .bar button, .bar .btn, .bar select { background: var(--brush) center / 100% 100% no-repeat, linear-gradient(180deg, #55595f, #33363b 55%, #2a2c30); background-blend-mode: soft-light, normal;
     border: 1px solid #14161a; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 6px rgba(0,0,0,.4); color: var(--ink); }
   .bar button:hover, .bar .btn:hover { background: var(--accent); color: #16130E; }
 
   /* ============ design v6 (Muse metal notes + Virgil quote-labels): different light on every plate, quote-labels, wired spec tag ============ */
   /* highlight bands sit at different positions/angles per element so the metal never reads as one stamped texture */
   .mast .plate { background:
-      var(--brush) 0 0 / 420px 96px,
+      var(--brush) center / 100% 100% no-repeat,
       linear-gradient(104deg, transparent 16%, rgba(255,255,255,.46) 27%, transparent 39%, transparent 57%, rgba(255,255,255,.32) 66%, transparent 79%),
       linear-gradient(180deg, #e2e5e8 0%, #b6bbc1 38%, #969ba2 53%, #bec2c8 100%); background-blend-mode: soft-light, normal, normal; }
   .tag { background:
-      var(--brush) 40px 12px / 420px 96px,
+      var(--brush) center / 100% 100% no-repeat,
       linear-gradient(97deg, transparent 6%, rgba(255,255,255,.4) 17%, transparent 30%, transparent 62%, rgba(255,255,255,.28) 72%, transparent 86%),
-      linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff), color-mix(in srgb, var(--c) 92%, #888) 45%, color-mix(in srgb, var(--c) 82%, #000) 100%);
+      linear-gradient(180deg, #e2e5e8 0%, #b6bbc1 40%, #969ba2 54%, #bec2c8 100%);
     background-blend-mode: soft-light, normal, normal; }
   .sec:nth-of-type(even) .tag { background:
-      var(--brush) 120px 30px / 420px 96px,
+      var(--brush) center / 100% 100% no-repeat,
       linear-gradient(112deg, transparent 22%, rgba(255,255,255,.4) 34%, transparent 46%, transparent 68%, rgba(255,255,255,.26) 78%, transparent 90%),
-      linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff), color-mix(in srgb, var(--c) 92%, #888) 45%, color-mix(in srgb, var(--c) 82%, #000) 100%);
+      linear-gradient(180deg, #e2e5e8 0%, #b6bbc1 40%, #969ba2 54%, #bec2c8 100%);
     background-blend-mode: soft-light, normal, normal; }
   .hero .frame { position: relative; background:
-      var(--brush) 200px 8px / 420px 96px,
+      var(--brush) center / 100% 100% no-repeat,
       linear-gradient(118deg, transparent 30%, rgba(255,255,255,.44) 42%, transparent 54%, transparent 70%, rgba(255,255,255,.3) 80%, transparent 92%),
       linear-gradient(180deg, #dfe2e5 0%, #b3b8be 40%, #93989f 54%, #bbbfc5 100%); background-blend-mode: soft-light, normal, normal; }
 
@@ -411,12 +408,16 @@
 
   /* wired spec tag: a small brushed tag on the photo frame, same corner every edition */
   .hero .spec { position: absolute; left: 14px; bottom: 14px; padding: 4px 9px 3px; border-radius: 1px; font: 500 9.5px/1.2 var(--mono); letter-spacing: .12em; color: #1b1d20;
-    background: var(--brush) 60px 0 / 300px 70px, linear-gradient(180deg, #dfe2e5, #a9aeb5 55%, #c4c8cd); background-blend-mode: soft-light, normal;
+    background: var(--brush) center / 100% 100% no-repeat, linear-gradient(180deg, #dfe2e5, #a9aeb5 55%, #c4c8cd); background-blend-mode: soft-light, normal;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.7), inset 0 -1px 0 rgba(0,0,0,.35), 0 3px 8px rgba(0,0,0,.55); text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+
+  /* ============ design v7: tokens restored after the dead-orange purge; orange is a CONTROL token only ============ */
+  :root { --accent: #FF5C00; }
+  .sec { --c: #D9CDB8; }
 </style>
 </head>
 <body><div style="position:fixed;left:0;right:0;bottom:0;z-index:99;background:#FF5C00;color:#16130E;font:700 11px/1.3 monospace;letter-spacing:.06em;text-align:center;padding:5px 8px">DESIGN PREVIEW &middot; ALL TEXT IS PLACEHOLDER &middot; REAL LAYOUT, TYPE AND COLOUR</div>
-<div class="prog" id="prog"></div><div class="grain"></div>
+<div class="prog" id="prog"></div>
 <div class="bg" id="bg"></div><div class="veil"></div>
 <div class="winbar pywebview-drag-region"><span class="wl pywebview-drag-region">THE RECLAMATION DAILY</span><span><button id="closeWin" title="Close">&#10005;</button></span></div>
 
@@ -452,7 +453,7 @@
     let h = 0; String(dateStr || '').split('').forEach((c) => { h = (h * 31 + c.charCodeAt(0)) >>> 0; });
     const k = keys[h % keys.length], c = credits[k], mast = document.querySelector('.mast'); if (!mast) return;
     const fig = document.createElement('figure'); fig.className = 'hero'; fig.id = 'hero';
-    fig.innerHTML = `<div class="frame"><img src="${PHOTO_BASE + k}.jpg" alt="${esc(c.title)}" loading="eager"><span class="spec">&ldquo;PLATE ${esc(k.toUpperCase())} &middot; ${esc(String(dateStr || '').replace(/-/g, '.'))}&rdquo;</span></div><figcaption>${esc(c.title)} &mdash; ${esc(c.author)}, ${esc(c.license)}${safe(c.page) ? ` &middot; <a href="${esc(safe(c.page))}">source</a>` : ''}</figcaption>`;
+    fig.innerHTML = `<div class="frame"><img src="${PHOTO_BASE + k}.jpg" alt="${esc(c.title_en || c.title)}" loading="eager"><span class="spec">&ldquo;PLATE ${esc(k.toUpperCase())} &middot; ${esc(String(dateStr || '').replace(/-/g, '.'))}&rdquo;</span></div><figcaption>${esc(c.title_en || c.title)} &mdash; ${esc(c.author)}, ${esc(c.license)}${safe(c.page) ? ` &middot; <a href="${esc(safe(c.page))}">source</a>` : ''}</figcaption>`;
     mast.insertAdjacentElement('afterend', fig);
   }
   let fs = +(localStorage.getItem('ncr_paper_fs2') || 16.5);
