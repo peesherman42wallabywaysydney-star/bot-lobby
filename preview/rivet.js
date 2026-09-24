@@ -73,7 +73,7 @@
 
   function svg(id, size) {
     const g = 'rv' + id;
-    return `<svg class="rv-svg" viewBox="0 0 240 340" width="${size}" height="${Math.round(size * 340 / 240)}" role="img" aria-label="Rivet, a chrome robot reporter with a microphone">
+    return `<svg class="rv-svg" viewBox="0 -26 240 366" width="${size}" height="${Math.round(size * 366 / 240)}" role="img" aria-label="Rivet, a chrome robot reporter with a microphone">
     <defs>
       <linearGradient id="${g}c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f8fa"/><stop offset=".35" stop-color="#c4c9cf"/><stop offset=".55" stop-color="#8d939b"/><stop offset=".8" stop-color="#d4d8dd"/><stop offset="1" stop-color="#a7adb4"/></linearGradient>
       <linearGradient id="${g}d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8bdc4"/><stop offset="1" stop-color="#6c727a"/></linearGradient>
@@ -83,13 +83,17 @@
     </defs>
     <g class="rv-all">
       <!-- camera drone -->
-      <g class="rv-drone"><ellipse cx="204" cy="56" rx="13" ry="8" fill="url(#${g}c)" stroke="#5b6168" stroke-width="1.2"/><circle cx="204" cy="58" r="5" fill="#16130E"/><circle cx="204" cy="58" r="2.6" fill="url(#${g}i)"/>
-        <g class="rv-prop" stroke="#5b6168" stroke-width="2" stroke-linecap="round"><path d="M190 46 L200 48"/><path d="M218 46 L208 48"/></g></g>
-      <!-- hair (back mass, then the sculpted front wave and pin curl) -->
-      <path d="M46 122 C 28 72, 62 22, 122 20 C 182 22, 214 72, 194 122 C 190 98, 176 82, 160 78 L 80 78 C 64 82, 50 98, 46 122 Z" fill="url(#${g}h)"/>
-      <path d="M60 98 C 56 54, 98 24, 138 32 C 178 40, 188 76, 178 100 C 164 72, 140 60, 118 66 C 96 70, 74 80, 60 98 Z" fill="url(#${g}h)"/>
-      <g fill="none" stroke="#cfd4da" stroke-width="2.2" stroke-linecap="round" opacity=".75"><path d="M74 86 C 92 62, 124 54, 152 62"/><path d="M70 96 C 92 72, 130 66, 170 80"/><path d="M92 44 C 112 36, 140 38, 156 48"/></g>
-      <path d="M172 96 C 184 92, 192 104, 184 114 C 176 122, 162 116, 166 106 C 169 100, 178 101, 177 107" fill="none" stroke="#9aa0a8" stroke-width="3" stroke-linecap="round"/>
+      <g class="rv-drone"><ellipse cx="222" cy="14" rx="12" ry="7.5" fill="url(#${g}c)" stroke="#5b6168" stroke-width="1.2"/><circle cx="222" cy="16" r="4.6" fill="#16130E"/><circle cx="222" cy="16" r="2.4" fill="url(#${g}i)"/>
+        <g class="rv-prop" stroke="#5b6168" stroke-width="2" stroke-linecap="round"><path d="M209 4 L218 6"/><path d="M235 4 L226 6"/></g></g>
+      <!-- hair: big sculpted architecture. Back mass, a rolled pompadour, three stacked finger-wave ridges, two pin curls -->
+      <path d="M38 132 C 6 72, 38 -10, 122 -16 C 206 -10, 238 72, 206 132 C 200 106, 184 88, 164 84 L 76 84 C 56 88, 44 106, 38 132 Z" fill="url(#${g}h)"/>
+      <path d="M50 106 C 32 40, 90 -12, 146 -4 C 202 4, 216 58, 192 108 C 180 66, 150 40, 118 44 C 86 48, 60 70, 50 106 Z" fill="url(#${g}h)"/>
+      <g fill="none" stroke-linecap="round">
+        <g stroke="#0e1013" stroke-width="2.6"><path d="M58 94 C 72 60, 104 42, 138 44 C 166 46, 184 62, 190 88"/><path d="M64 82 C 82 48, 118 28, 150 32 C 178 36, 196 54, 198 76"/><path d="M74 68 C 94 36, 128 16, 158 20 C 180 24, 192 38, 194 54"/></g>
+        <g stroke="#d7dbe0" stroke-width="2.4" opacity=".85"><path d="M60 90 C 74 56, 106 38, 140 40 C 168 42, 186 58, 192 84"/><path d="M66 78 C 84 44, 120 24, 152 28 C 180 32, 198 50, 200 72"/><path d="M76 64 C 96 32, 130 12, 160 16"/></g>
+      </g>
+      <path d="M190 98 C 208 90, 220 112, 206 124 C 192 134, 174 122, 180 108 C 184 98, 198 100, 196 110" fill="none" stroke="#a3a9b1" stroke-width="4" stroke-linecap="round"/>
+      <path d="M52 108 C 34 102, 24 122, 38 132 C 50 140, 66 128, 60 116 C 56 108, 46 112, 48 120" fill="none" stroke="#a3a9b1" stroke-width="4" stroke-linecap="round"/>
       <!-- ears, pearls -->
       <circle cx="68" cy="122" r="9" fill="url(#${g}d)" stroke="#5b6168" stroke-width="1"/><circle cx="172" cy="122" r="9" fill="url(#${g}d)" stroke="#5b6168" stroke-width="1"/>
       <circle cx="66" cy="136" r="4.6" fill="url(#${g}p)" stroke="#9da2a9" stroke-width=".8"/><circle cx="174" cy="136" r="4.6" fill="url(#${g}p)" stroke="#9da2a9" stroke-width=".8"/>
@@ -143,6 +147,8 @@
 
   const CSS = `
     .rivet { position: relative; display: inline-block; line-height: 0; }
+    .rivet.pre { opacity: 0; transform: translateY(46px) scale(.72) rotate(-6deg); }
+    .rivet.enter { animation: rv-pop .9s cubic-bezier(.34, 1.56, .64, 1) both; }
     .rivet .m { display: none; } .rivet[data-mood="idle"] .m-idle, .rivet[data-mood="smug"] .m-smug, .rivet[data-mood="talk"] .m-talk, .rivet[data-mood="laugh"] .m-laugh, .rivet[data-mood="shock"] .m-o { display: block; }
     .rivet .rv-lid { transform-box: fill-box; transform-origin: top; transform: scaleY(0); animation: rv-blink 4.6s infinite; }
     .rivet .rv-all { transform-box: fill-box; transform-origin: 50% 100%; animation: rv-bob 3.4s ease-in-out infinite; }
@@ -159,6 +165,7 @@
     .rivet .rv-bubble { position: absolute; left: 100%; top: 4%; margin-left: 10px; width: max-content; max-width: min(260px, 52vw); padding: 9px 12px; border-radius: 4px 14px 14px 14px; background: #EDE6D6; color: #1d1a15;
       font: 500 13px/1.4 "Newsreader", Georgia, serif; text-align: left; box-shadow: 0 6px 16px rgba(0,0,0,.35); opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s; pointer-events: none; }
     .rivet .rv-bubble.on { opacity: 1; transform: none; }
+    @keyframes rv-pop { from { opacity: 0; transform: translateY(46px) scale(.72) rotate(-6deg); } to { opacity: 1; transform: none; } }
     @keyframes rv-blink { 0%, 92%, 100% { transform: scaleY(0); } 95% { transform: scaleY(1); } }
     @keyframes rv-bob { 0%, 100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-3px) rotate(.6deg); } }
     @keyframes rv-hover { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(3px, -5px); } }
@@ -182,7 +189,7 @@
   function make(opts) {
     opts = opts || {}; injectCss();
     const size = opts.size || 140, id = ++uid;
-    const el = document.createElement('div'); el.className = 'rivet'; el.dataset.mood = 'idle';
+    const el = document.createElement('div'); el.className = 'rivet' + (opts.pre ? ' pre' : ''); el.dataset.mood = 'idle';
     el.innerHTML = svg(id, size) + '<div class="rv-bubble" aria-live="polite"></div>';
     const bubble = el.querySelector('.rv-bubble');
     let t = 0;
@@ -200,7 +207,9 @@
       }
       t = setTimeout(() => { mood(o.after || 'idle'); if (!o.stay) bubble.classList.remove('on'); }, ms);
     }
-    return { el, mood, say, quip };
+    function enter() { el.classList.remove('pre'); el.classList.add('enter'); }
+    if (opts.enter) enter();
+    return { el, mood, say, quip, enter };
   }
 
   global.Rivet = { make, quip, QUIPS };

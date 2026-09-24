@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>[Placeholder] The Reclamation Daily</title>
+<title>Design preview: The Reclamation Daily</title>
 <style>
   /* Fresh build (v8). Nothing here overrides an older rule: there are no older rules.
      Ground: warm newsprint. Type: ink. Metal: ONE photographed steel (nameplate + photo frame). Life: chapter colours,
@@ -74,9 +74,9 @@
 
   .nav { position: sticky; top: 0; z-index: 60; background: var(--paper); border-top: 4px double var(--ink); border-bottom: 1px solid var(--ink); margin-top: 16px; }
   .native .nav { top: 32px; }
-  .track { position: relative; display: flex; gap: clamp(16px, 2.4vw, 34px); overflow-x: auto; scrollbar-width: none; }
+  .track { position: relative; display: flex; gap: clamp(12px, 1.5vw, 20px); overflow-x: auto; scrollbar-width: none; justify-content: safe center; }
   .track::-webkit-scrollbar { display: none; }
-  .nav a { flex: none; padding: 14px 2px 13px; min-height: 44px; display: inline-flex; align-items: center; font: 500 11px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--mute); transition: color .16s; }
+  .nav a { flex: none; padding: 14px 2px 13px; min-height: 44px; display: inline-flex; align-items: center; font: 500 11px var(--mono); letter-spacing: .13em; text-transform: uppercase; color: var(--mute); transition: color .16s; }
   .nav a.on { color: var(--ink); }
   @media (hover: hover) and (pointer: fine) { .nav a:hover { color: var(--ct, var(--ink)); text-decoration: none; } }
   .nav .ink { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--ink); transition: transform .26s var(--ease), width .26s var(--ease), background-color .2s; }
@@ -225,6 +225,12 @@
     *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
     .rv { opacity: 1; transform: none; }
   }
+
+  /* ---- printed feel: a hair of ink spread on display type; one more machine-room moment: the steel folio plate ---- */
+  .headline, .sub, .pull, .sh h2, .col h3 { text-shadow: 0 0 .7px rgba(22,19,14,.5); }
+  .band .col h3, .band .sh h2 { text-shadow: 0 0 .7px rgba(241,236,224,.45); }
+  .folio { display: inline-block; margin-top: 18px; padding: 6px 12px 5px; border-radius: 1px; font: 500 10.5px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #1c1d1f;
+    background: #b7b8b4 url(img/steel-nameplate.webp) center / cover; box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 0 1px rgba(0,0,0,.3), 0 6px 10px -6px rgba(0,0,0,.6); text-shadow: 0 1px 0 rgba(255,255,255,.5); }
 </style>
 </head>
 <body><div style="position:fixed;left:0;right:0;bottom:0;z-index:99;background:#16130E;color:#F1ECE0;font:500 10.5px/1.3 monospace;letter-spacing:.08em;text-align:center;padding:5px 8px;text-transform:uppercase">Design preview &middot; all text is placeholder &middot; real layout, type and colour</div>
@@ -270,6 +276,7 @@
   const tokv = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const CH = [1, 2, 3, 4, 5, 6].map((n) => tokv('--c' + n)), CT = [1, 2, 3, 4, 5, 6].map((n) => tokv('--ct' + n));
   const ctOf = (c) => CT[Math.max(0, CH.indexOf(c))] || c;
+  const shortName = (n) => String(n).replace(/^the\s+/i, '').replace(/,.*$/, '').trim();
   const PHOTO_BASE = 'photos/';
   const seedOf = (s) => String(s || '').split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
   const dayOfYear = (s) => { const d = new Date(String(s) + 'T00:00:00'); if (isNaN(d)) return ''; return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5); };
@@ -363,10 +370,10 @@
         <p class="note">Every story the paper pulled but didn&rsquo;t print. Facts only: each outlet&rsquo;s own headline and its own summary line, side by side, with a link to the original. No spin added by us.</p>
         ${moKeys.map((k) => `<div class="lz-g"><div class="lz-h">${esc(mo[k].name)}<span>${mo[k].items.length} more</span></div>${xp(mo[k].items.map((it) => `<div class="more-i"><div class="h"><span class="t">${esc(it.headline)}</span><span class="n">${it.n} outlet${it.n === 1 ? '' : 's'}</span></div>${xp(`${it.lede ? `<div class="lede">${esc(it.lede)}</div>` : ''}<div class="src">${it.sources.map((x) => srcRow(x, true)).join('')}</div>`)}</div>`).join(''))}</div>`).join('')}</section>`;
     }
-    h += `<footer class="foot"><div><div class="sign">${(ed.signoff || []).map(esc).join('<br>')}</div><div class="fin">that&rsquo;s the paper</div></div><div class="rivet-slot" id="rivetSign"></div>
+    h += `<footer class="foot"><div><div class="sign">${(ed.signoff || []).map(esc).join('<br>')}</div><div class="fin">that&rsquo;s the paper</div><div class="folio">Edition N&ordm; ${no || ''} &middot; ${esc(ed.date)}</div></div><div class="rivet-slot" id="rivetSign"></div>
       <div class="colophon">STYLE ANCHOR: THE INDUSTRIAL NEWSPAPER &middot; warm newsprint, ink, one photographed steel &middot; Plate steel: photograph by Gordeonbleu, public domain via Wikimedia Commons &middot; Daily photograph credited beneath it</div></footer>`;
     $('paper').innerHTML = h;
-    $('track').innerHTML = navs.map(([id, t, c]) => `<a href="#${id}" data-t="${id}" style="--c:${c};--ct:${ctOf(c)}">${esc(t)}</a>`).join('') + '<span class="ink" id="navInk"></span>';
+    $('track').innerHTML = navs.map(([id, t, c]) => `<a href="#${id}" data-t="${id}" style="--c:${c};--ct:${ctOf(c)}">${esc(shortName(t))}</a>`).join('') + '<span class="ink" id="navInk"></span>';
     $('dateSel').innerHTML = (archive || []).map((a) => `<option value="${esc(a.date)}" ${a.date === ed.date ? 'selected' : ''}>${esc(a.date)}</option>`).join('');
     mountRivets(ed.date);
     watch();
@@ -374,8 +381,9 @@
 
   function mountRivets(dateStr) {
     if (!window.Rivet) return;
-    const put = (slot, size, kind, mood) => { const el = $(slot); if (!el) return; const r = Rivet.make({ size }); el.appendChild(r.el); r.say(Rivet.quip(kind, seedOf(dateStr + kind)), { stay: true, mood, after: 'idle' }); };
-    put('rivetMach', 190, 'weird', 'smug'); put('rivetSign', 130, 'signoff', 'talk');
+    const put = (slot, size, kind, mood) => { const el = $(slot); if (!el) return; const r = Rivet.make({ size, pre: true }); el.appendChild(r.el);
+      const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io2.disconnect(); r.enter(); setTimeout(() => r.say(Rivet.quip(kind, seedOf(dateStr + kind)), { stay: true, mood, after: 'idle' }), 500); } }), { threshold: 0.35 }); io2.observe(el); };
+    put('rivetMach', 250, 'fuss', 'smug'); put('rivetSign', 160, 'signoff', 'talk');
   }
 
   // reveal-on-scroll + active chapter (with a sliding underline) + progress bar
