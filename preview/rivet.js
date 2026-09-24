@@ -73,7 +73,7 @@
 
   function svg(id, size) {
     const g = 'rv' + id;
-    return `<svg class="rv-svg" viewBox="0 -26 240 366" width="${size}" height="${Math.round(size * 366 / 240)}" role="img" aria-label="Rivet, a chrome robot reporter with a microphone">
+    return `<svg class="rv-svg" viewBox="-30 -60 300 402" width="${size}" height="${Math.round(size * 402 / 300)}" role="img" aria-label="Rivet, a chrome robot reporter with a microphone">
     <defs>
       <linearGradient id="${g}c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f8fa"/><stop offset=".35" stop-color="#c4c9cf"/><stop offset=".55" stop-color="#8d939b"/><stop offset=".8" stop-color="#d4d8dd"/><stop offset="1" stop-color="#a7adb4"/></linearGradient>
       <linearGradient id="${g}d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8bdc4"/><stop offset="1" stop-color="#6c727a"/></linearGradient>
@@ -83,9 +83,12 @@
     </defs>
     <g class="rv-all">
       <!-- camera drone -->
-      <g class="rv-drone"><ellipse cx="222" cy="14" rx="12" ry="7.5" fill="url(#${g}c)" stroke="#5b6168" stroke-width="1.2"/><circle cx="222" cy="16" r="4.6" fill="#16130E"/><circle cx="222" cy="16" r="2.4" fill="url(#${g}i)"/>
-        <g class="rv-prop" stroke="#5b6168" stroke-width="2" stroke-linecap="round"><path d="M209 4 L218 6"/><path d="M235 4 L226 6"/></g></g>
-      <!-- hair: big sculpted architecture. Back mass, a rolled pompadour, three stacked finger-wave ridges, two pin curls -->
+      <g class="rv-drone"><ellipse cx="258" cy="-18" rx="12" ry="7.5" fill="url(#${g}c)" stroke="#5b6168" stroke-width="1.2"/><circle cx="258" cy="-16" r="4.6" fill="#16130E"/><circle cx="258" cy="-16" r="2.4" fill="url(#${g}i)"/>
+        <g class="rv-prop" stroke="#5b6168" stroke-width="2" stroke-linecap="round"><path d="M245 -28 L254 -26"/><path d="M271 -28 L262 -26"/></g></g>
+      <!-- hair: BIG sculpted architecture, scaled up around the head. Back mass, tall crest, rolled pompadour, stacked finger-wave ridges, pin curls, a chrome rivet-flower -->
+      <g transform="translate(120 96) scale(1.14) translate(-120 -96)">
+      <path d="M60 44 C 64 -20, 132 -50, 184 -16 C 210 0, 214 34, 200 56 C 190 26, 160 4, 126 8 C 96 12, 70 26, 60 44 Z" fill="url(#${g}h)"/>
+      <g fill="none" stroke="#d7dbe0" stroke-width="2.4" stroke-linecap="round" opacity=".8"><path d="M74 30 C 90 -6, 130 -22, 168 -6"/><path d="M84 24 C 100 0, 128 -10, 156 -2"/></g>
       <path d="M38 132 C 6 72, 38 -10, 122 -16 C 206 -10, 238 72, 206 132 C 200 106, 184 88, 164 84 L 76 84 C 56 88, 44 106, 38 132 Z" fill="url(#${g}h)"/>
       <path d="M50 106 C 32 40, 90 -12, 146 -4 C 202 4, 216 58, 192 108 C 180 66, 150 40, 118 44 C 86 48, 60 70, 50 106 Z" fill="url(#${g}h)"/>
       <g fill="none" stroke-linecap="round">
@@ -94,6 +97,8 @@
       </g>
       <path d="M190 98 C 208 90, 220 112, 206 124 C 192 134, 174 122, 180 108 C 184 98, 198 100, 196 110" fill="none" stroke="#a3a9b1" stroke-width="4" stroke-linecap="round"/>
       <path d="M52 108 C 34 102, 24 122, 38 132 C 50 140, 66 128, 60 116 C 56 108, 46 112, 48 120" fill="none" stroke="#a3a9b1" stroke-width="4" stroke-linecap="round"/>
+      <g transform="translate(74 62)"><g fill="url(#${g}p)" stroke="#8c929a" stroke-width="1"><ellipse cx="0" cy="-8" rx="4.6" ry="7"/><ellipse cx="0" cy="8" rx="4.6" ry="7"/><ellipse cx="-8" cy="0" rx="7" ry="4.6"/><ellipse cx="8" cy="0" rx="7" ry="4.6"/></g><circle r="4.2" fill="url(#${g}i)" stroke="#7d5f2b" stroke-width="1"/></g>
+      </g>
       <!-- ears, pearls -->
       <circle cx="68" cy="122" r="9" fill="url(#${g}d)" stroke="#5b6168" stroke-width="1"/><circle cx="172" cy="122" r="9" fill="url(#${g}d)" stroke="#5b6168" stroke-width="1"/>
       <circle cx="66" cy="136" r="4.6" fill="url(#${g}p)" stroke="#9da2a9" stroke-width=".8"/><circle cx="174" cy="136" r="4.6" fill="url(#${g}p)" stroke="#9da2a9" stroke-width=".8"/>

@@ -82,6 +82,8 @@ if paper and ink:
         if tok.get(k) and ratio(tok[k], paper) < 3: low.append(f"{k} numeral/paper {ratio(tok[k], paper):.1f}")
 if brass and ink and ratio(brass, ink) < 4.5: low.append(f"brass/ink {ratio(brass, ink):.1f}")
 check("contrast: body 7+, muted 4.5+, chapter numerals 3+, brass on ink 4.5+", bool(paper and ink) and not low, "; ".join(low))
+slab = [f"c{n}" for n in range(1, 7) if tok.get(f"c{n}") and paper and ratio(paper, tok[f"c{n}"]) < 3]
+check("paper-coloured chapter titles reach 3:1 on every chapter slab (large text)", not slab, str(slab))
 smalltext = [f"ct{n}" for n in range(1, 7) if tok.get(f"ct{n}") and paper and ratio(tok[f"ct{n}"], paper) < 4.5]
 check("chapter TEXT colours (--ct1..6) reach 4.5 on paper (numeral colours --c1..6 need 3)", not smalltext and all(tok.get(f"ct{n}") for n in range(1, 7)), str(smalltext))
 
@@ -90,6 +92,9 @@ check("never `transition: all`", not re.search(r"transition\s*:\s*all\b", css))
 check("every :hover style is inside @media (hover: hover)", not re.search(r":hover", strip_blocks(css, r"@media\s*\(hover:\s*hover\)[^{]*")))
 check("prefers-reduced-motion is respected", "prefers-reduced-motion" in css)
 check("controls have an :active press state", re.search(r"\.btn:active|button:active", css) is not None)
+
+# ---- scrolling safety (a nav highlight once hijacked the page scroll: the nav may only scroll its own strip)
+check("the nav never calls scrollIntoView on its links (it hijacks the window scroll)", not re.search(r"\bon\.scrollIntoView|\ba\.scrollIntoView|navLink\.scrollIntoView", js))
 
 # ---- structure
 m = re.search(r"\.body p\s*\{[^}]*max-width:\s*(\d+)ch", css)

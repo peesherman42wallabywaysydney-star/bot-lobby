@@ -119,7 +119,8 @@
   /* ---- front page ---- */
   .lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; margin: 38px 0 8px; }
   @media (min-width: 1000px) { .lead { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; } }
-  .lead .q { font: 500 10.5px var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--ct1); margin-bottom: 10px; }
+  .lead .q { display: inline-block; padding: 5px 14px 4px; border-radius: 99px; font: 700 10.5px var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--paper); margin-bottom: 14px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c1) 78%, #fff), var(--c1) 50%, color-mix(in srgb, var(--c1) 76%, #000)); box-shadow: inset 0 2px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.2); }
   .headline { font: 600 clamp(36px, 6.4vw, 84px)/.98 var(--serif); letter-spacing: -.028em; margin: 0; text-wrap: balance; }
   .dek { font: italic 400 clamp(19px, 2.2vw, 26px)/1.45 var(--serif); color: var(--ink2); margin: 18px 0 0; max-width: 46ch; }
   .sheet { border-top: 4px double var(--ink); border-bottom: 1px solid var(--ink); padding: 12px 0 10px; align-self: start; }
@@ -153,11 +154,25 @@
   .rv { opacity: 0; transform: translateY(24px); transition: opacity .52s var(--ease), transform .52s var(--ease); }
   .rv.in, html:not(.js) .rv { opacity: 1; transform: none; }
   .sec { margin: 72px 0 0; }
-  .sh { display: grid; grid-template-columns: auto 1fr; align-items: end; gap: clamp(14px, 2.6vw, 34px); border-top: 4px solid var(--ink); padding-top: 14px; }
-  .num { font: 400 clamp(64px, 11vw, 148px)/.8 var(--display); color: var(--c); letter-spacing: -.04em; }
-  .sh h2 { margin: 0 0 4px; font: 400 clamp(26px, 4.4vw, 52px)/1 var(--display); text-transform: uppercase; letter-spacing: -.02em; }
+  /* chapter opener: a bold, glossy colour slab with radiating rays and a chunky extruded numeral (1989-2012 whimsy, original) */
+  .sh { position: relative; overflow: hidden; display: flex; align-items: center; gap: clamp(14px, 2.6vw, 34px); padding: clamp(14px, 2.2vw, 24px) clamp(18px, 3vw, 40px); border-radius: 10px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff) 0%, var(--c) 46%, color-mix(in srgb, var(--c) 76%, #000) 100%);
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,.22), inset 0 2px 0 rgba(255,255,255,.35); }
+  .sh::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 52%; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0)); border-radius: 10px 10px 60% 60% / 10px 10px 100% 100%; }
+  .sun { position: absolute; left: 0; top: 50%; width: min(78%, 620px); aspect-ratio: 1; transform: translate(-16%, -50%); fill: #fff; opacity: .13; pointer-events: none; overflow: visible; }
+  .num { position: relative; z-index: 1; flex: none; font: 400 clamp(56px, 10vw, 132px)/.86 var(--display); letter-spacing: -.04em;
+    background: linear-gradient(180deg, #ffffff 0%, #fbf3dc 42%, #e3d5ad 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 0 var(--dk)) drop-shadow(2px 2px 0 var(--dk)) drop-shadow(3px 3px 0 var(--dk)) drop-shadow(4px 4px 0 var(--dk)) drop-shadow(5px 6px 0 var(--dk)) drop-shadow(8px 12px 10px rgba(0,0,0,.35));
+    transform-origin: 50% 80%; transition: transform .32s cubic-bezier(.34, 1.56, .64, 1); }
+  @media (hover: hover) and (pointer: fine) { .sh:hover .num { transform: scale(1.07) rotate(-3deg); } }
+  .sh h2 { position: relative; z-index: 1; margin: 0; font: 400 clamp(26px, 4.4vw, 52px)/1 var(--display); text-transform: uppercase; letter-spacing: -.02em; color: var(--paper); text-shadow: 0 2px 0 rgba(0,0,0,.28); }
+  .shmeta { margin: 10px 0 0; }
+  .sec { --dk: color-mix(in srgb, var(--c) 52%, #000); }
+  .band { --dk: #7a5f1f; }
+  .band .sh { background: none; box-shadow: none; border-radius: 0; padding-inline: 0; border-top: 4px solid var(--brass); }
+  .band .sh::after { display: none; } .band .sun { display: none; } .band .sh h2 { color: var(--paper); }
   .by { font: 500 11px/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin-top: 6px; }
-  .cols { display: grid; gap: 34px; margin-top: 26px; }
+  .cols { display: grid; gap: 34px; margin-top: 22px; }
   @media (min-width: 1000px) { .cols { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; } .rail { border-left: 1px solid var(--line); padding-left: 32px; } }
   .sub { font: 600 clamp(21px, 2.4vw, 29px)/1.25 var(--serif); letter-spacing: -.01em; margin: 0 0 14px; }
   .pull { font: italic 500 clamp(21px, 2.6vw, 32px)/1.3 var(--serif); border-left: 5px solid var(--c); padding: 2px 0 2px 20px; margin: 18px 0 24px; text-wrap: balance; }
@@ -200,7 +215,8 @@
 
   /* dark bands: the loud half of the loud/quiet rhythm */
   .band { margin: 84px calc(50% - 50vw) 0; padding: 60px calc(50vw - 50%) 64px; background: var(--ink); color: var(--paper); --c: var(--brass); }
-  .band .sh { border-top-color: var(--brass); } .band .num { color: var(--brass); } .band .by { color: rgba(241,236,224,.62); }
+  .band .by { color: rgba(241,236,224,.62); }
+  .band .tl b { color: var(--brass); }
   .band :focus-visible { outline-color: var(--brass); } .band .tl { background: rgba(241,236,224,.09); } .band .tl em { color: rgba(241,236,224,.62); }
   .opgrid { display: grid; gap: 40px 56px; margin-top: 30px; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 900px) { .opgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -208,7 +224,7 @@
   .col h3 { font: 600 clamp(24px, 2.8vw, 34px)/1.15 var(--serif); letter-spacing: -.015em; margin: 8px 0 12px; }
   .band .body p { color: rgba(241,236,224,.92); }
   .machine { display: grid; gap: 34px; grid-template-columns: minmax(0, 1fr); align-items: start; }
-  @media (min-width: 900px) { .machine { grid-template-columns: minmax(0, 1fr) 280px; gap: 64px; } }
+  @media (min-width: 900px) { .machine { grid-template-columns: minmax(0, 1fr) 330px; gap: 56px; } }
   .rivet-slot { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 6px; }
   .rivet-slot .rivet .rv-bubble { position: static; margin: 6px 0 0; opacity: 1; transform: none; width: auto; max-width: min(260px, 100%); text-align: center; }
   .rivet-slot .rivet { max-width: 100%; }
@@ -294,10 +310,15 @@
     const k = keys[seedOf(dateStr) % keys.length], c = credits[k], title = c.title_en || c.title;
     let dev = false; try { const key = 'ncr_dev_' + dateStr; if (!localStorage.getItem(key)) { localStorage.setItem(key, '1'); dev = true; } } catch (e) {}
     const fig = document.createElement('figure'); fig.className = 'hero' + (dev ? ' dev' : ''); fig.id = 'hero'; fig.style.margin = '24px 0 6px';
-    fig.innerHTML = `<div class="frame" tabindex="0"><img src="${PHOTO_BASE + k}.jpg" alt="${esc(title)}" loading="eager"><span class="spec">PLATE ${esc(k.toUpperCase())} &middot; ${esc(String(dateStr || '').replace(/-/g, '.'))}</span><div class="full">${esc(title)}</div></div>
+    fig.innerHTML = `<div class="frame" tabindex="0"><img src="${PHOTO_BASE + k}.jpg" alt="${esc(title)}" loading="eager" style="object-position:${esc(c.focus || '50% 50%')}"><span class="spec">PLATE ${esc(k.toUpperCase())} &middot; ${esc(String(dateStr || '').replace(/-/g, '.'))}</span><div class="full">${esc(title)}</div></div>
       <figcaption><span>${esc(title)}</span><span>${esc(c.author)}, ${esc(c.license)}${safe(c.page) ? ` &middot; <a href="${esc(safe(c.page))}">source</a>` : ''}</span></figcaption>`;
     $('heroSlot').replaceChildren(fig);
   }
+
+  // radiating deco rays behind the numeral (original composition; alternating wedges, drawn once)
+  const SUN = (() => { const R = 420, w = []; for (let i = 0; i < 18; i++) { const a = i * 20 * Math.PI / 180, b = (i * 20 + 10) * Math.PI / 180; w.push(`M0 0 L${(R * Math.cos(a)).toFixed(1)} ${(R * Math.sin(a)).toFixed(1)} L${(R * Math.cos(b)).toFixed(1)} ${(R * Math.sin(b)).toFixed(1)} Z`); }
+    return `<svg class="sun" viewBox="-200 -200 400 400" aria-hidden="true" focusable="false"><path d="${w.join(' ')}"/></svg>`; })();
+  const head = (num, title, meta) => `<header class="sh">${SUN}<span class="num" aria-hidden="true">${num}</span><h2>${esc(title)}</h2></header>${meta ? `<div class="shmeta">${meta}</div>` : ''}`;
 
   function render(d, archive) {
     const ed = d.edition; if (!ed) { $('paper').innerHTML = '<div class="empty">No edition yet.</div>'; return; }
@@ -331,42 +352,41 @@
       const c = CH[i % CH.length]; navs.push([`s${i}`, s.name, c]);
       const rail = (s.stories || []).length ? `<aside class="rail" aria-label="Receipts"><div class="rl">Receipts <span>&mdash; assembly not required</span></div>${s.stories.map((st) => `<div class="story"><div class="h"><span class="t">${esc(st.headline)}</span><span class="n">${(st.sources || []).length} outlets</span></div>${xp(`<div class="src">${(st.facts || []).length ? `<div class="cmp">Facts &mdash; cross-read from ${st.read || (st.sources || []).length} of ${(st.sources || []).length} outlets</div><ul class="facts">${st.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}${st.split ? `<div class="split"><b>Where the outlets differ:</b> ${esc(st.split)}</div>` : ''}${diffPanel(st.diffs)}<div class="cmp">Every outlet, in their own words</div>${(st.sources || []).map((x) => srcRow(x, false)).join('')}</div>`)}</div>`).join('')}</aside>` : '';
       const deep = s.deep && (s.deep.body || []).length ? `<div class="art" id="s${i}d"><div class="ah"><span>${esc(s.deep.headline)}</span></div>${xp(`<div class="by" style="margin:0 0 6px">${esc(s.deep.subhead || '')}</div><div class="tl" data-tl="s${i}d"></div><div class="body">${paras(s.deep.body)}</div>`)}</div>` : '';
-      h += `<section class="sec rv" id="s${i}" style="--c:${c};--ct:${ctOf(c)}"><header class="sh"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><div><h2>${esc(s.name)}</h2>
-        <div class="manual"><span>by ${esc(s.byline)}</span><span>${PERSON}${Math.max(1, Math.round(wc(s.body) / 210))} min read</span></div></div></header>
+      h += `<section class="sec rv" id="s${i}" style="--c:${c};--ct:${ctOf(c)}">${head(String(i + 1).padStart(2, '0'), s.name, `<div class="manual"><span>by ${esc(s.byline)}</span><span>${PERSON}${Math.max(1, Math.round(wc(s.body) / 210))} min read</span></div>`)}
         <div class="cols"><div><p class="sub">${esc(s.subhead)}</p><div class="tl" data-tl="s${i}"></div><div class="pull">${esc(pullOf(s.body))}</div><div class="body">${paras(s.body)}</div>${deep ? `<div style="margin-top:24px"><div class="lbl" style="color:${ctOf(c)}">Cover story</div>${deep}</div>` : ''}</div>${rail}</div></section>`;
     });
 
     const op = ed.opinion;
     if (op && (op.columns || []).length) {
       navs.push(['op', 'Hot Takes', '#16130E']);
-      h += `<section class="band rv" id="op"><header class="sh"><span class="num" aria-hidden="true">HT</span><div><h2>${esc(op.name)}</h2><div class="by">${esc(op.label)}</div></div></header>
+      h += `<section class="band rv" id="op">${head('HT', op.name, `<div class="by">${esc(op.label)}</div>`)}
         <div class="opgrid">${op.columns.map((c, j) => `<div class="col" id="c${j}"><div class="who">${esc(c.name)} <span>&middot; ${esc(c.stance)}</span></div><h3>${esc(c.headline)}</h3><div class="tl" data-tl="c${j}"></div><div class="body">${paras(c.body)}</div></div>`).join('')}</div></section>`;
       if (op.machine) {
         const m = op.machine; navs.push(['mach', 'The Machine', '#16130E']);
-        h += `<section class="band rv" id="mach" style="margin-top:0;border-top:1px solid rgba(241,236,224,.18)"><header class="sh"><span class="num" aria-hidden="true">AI</span><div><h2>${esc(m.name)}</h2><div class="by">${esc(m.stance)}</div></div></header>
+        h += `<section class="band rv" id="mach" style="margin-top:0;border-top:1px solid rgba(241,236,224,.18)">${head('AI', m.name, `<div class="by">${esc(m.stance)}</div>`)}
           <div class="machine"><div><p class="sub" style="margin-top:26px">${esc(m.headline)}</p><div class="tl" data-tl="mach"></div>${(m.thinking || []).length ? `<div class="think">${(m.thinking || []).map(esc).join('<br><br>')}</div>` : ''}<div class="body">${paras(m.body)}</div></div><div class="rivet-slot" id="rivetMach"></div></div></section>`;
       }
     }
     if ((ed.letters || []).length) {
       navs.push(['let', 'Letters', CH[3]]);
-      h += `<section class="sec rv" id="let" style="--c:${CH[3]};--ct:${CT[3]}"><header class="sh"><span class="num" aria-hidden="true">DM</span><div><h2>Letters</h2></div></header><div style="margin-top:22px;max-width:760px">${ed.letters.map((l) => `<div class="letter"><div class="lbl" style="margin-bottom:4px">${esc(l.from)}</div><div class="t">${esc(l.text)}</div><div class="r">${esc(l.reply)}</div></div>`).join('')}</div></section>`;
+      h += `<section class="sec rv" id="let" style="--c:${CH[3]};--ct:${CT[3]}">${head('DM', 'Letters', '')}<div style="margin-top:22px;max-width:760px">${ed.letters.map((l) => `<div class="letter"><div class="lbl" style="margin-bottom:4px">${esc(l.from)}</div><div class="t">${esc(l.text)}</div><div class="r">${esc(l.reply)}</div></div>`).join('')}</div></section>`;
     }
     const lr = ed.longread;
     if (lr && lr.headline) {
       navs.push(['lr', 'Long Read', CH[4]]);
-      h += `<section class="sec rv" id="lr" style="--c:${CH[4]};--ct:${CT[4]}"><header class="sh"><span class="num" aria-hidden="true">LR</span><div><h2>${esc(lr.name || 'The Long Read')}</h2><div class="by">${esc(lr.subhead)}</div></div></header>
+      h += `<section class="sec rv" id="lr" style="--c:${CH[4]};--ct:${CT[4]}">${head('LR', lr.name || 'The Long Read', `<div class="by">${esc(lr.subhead)}</div>`)}
         <div class="cols"><div><p class="sub">${esc(lr.headline)}</p><div class="tl" data-tl="lr"></div><div class="body">${paras(lr.body)}</div></div>
         ${(lr.sources || []).length ? `<aside class="rail"><div class="rl">Reading list</div>${lr.sources.map((x) => `<div class="art"><a href="${esc(safe(x.link))}" style="display:block;padding:10px 0;font:600 15px/1.4 var(--ui)">${esc(x.source)} <small style="color:var(--mute);font-weight:400">&mdash; ${esc(x.title)}</small></a></div>`).join('')}</aside>` : ''}</div></section>`;
     }
     if ((ed.magazines || []).length) {
       navs.push(['mags', 'Mag Rack', CH[5]]);
-      h += `<section class="sec rv" id="mags" style="--c:${CH[5]};--ct:${CT[5]}"><header class="sh"><span class="num" aria-hidden="true">${ed.magazines.length}</span><div><h2>The Mag Rack</h2></div></header><div style="margin-top:22px">${ed.magazines.map((m, mi) => `<div class="mag" id="mg${mi}" style="--c:${CH[mi % CH.length]};--ct:${CT[mi % CH.length]}"><div class="mh"><span class="cv" aria-hidden="true">${esc(String(m.name || '?').replace(/^the\s+/i, '').charAt(0))}</span><div><b>${esc(m.name)}</b><span>${esc(m.tagline)}</span></div></div>
+      h += `<section class="sec rv" id="mags" style="--c:${CH[5]};--ct:${CT[5]}">${head(String(ed.magazines.length), 'The Mag Rack', '')}<div style="margin-top:22px">${ed.magazines.map((m, mi) => `<div class="mag" id="mg${mi}" style="--c:${CH[mi % CH.length]};--ct:${CT[mi % CH.length]}"><div class="mh"><span class="cv" aria-hidden="true">${esc(String(m.name || '?').replace(/^the\s+/i, '').charAt(0))}</span><div><b>${esc(m.name)}</b><span>${esc(m.tagline)}</span></div></div>
         ${xp(`<div class="by" style="margin:0 0 6px">edited by ${esc(m.editor)}</div>${(m.editors_note || []).map((t) => `<div class="think">${esc(t)}</div>`).join('')}${(m.articles || []).map((a, bi) => `<div class="art" id="m${mi}_${bi}"><div class="ah"><span>${esc(a.headline)}</span></div>${xp(`<div class="by" style="margin:0 0 4px">${esc(a.byline || '')} ${a.subhead ? '&middot; ' + esc(a.subhead) : ''}</div><div class="tl" data-tl="m${mi}_${bi}"></div><div class="body">${paras(a.body)}</div>`)}</div>`).join('')}`)}</div>`).join('')}</div></section>`;
     }
     const mo = ed.more || {}, moKeys = Object.keys(mo);
     if (moKeys.length) {
       const total = moKeys.reduce((n, k) => n + mo[k].items.length, 0); navs.push(['more', 'More', CH[0]]);
-      h += `<section class="sec rv" id="more" style="--c:${CH[0]};--ct:${CT[0]}"><header class="sh"><span class="num" aria-hidden="true">${total}</span><div><h2>The Rest of the Pile</h2></div></header>
+      h += `<section class="sec rv" id="more" style="--c:${CH[0]};--ct:${CT[0]}">${head(String(total), 'The Rest of the Pile', '')}
         <p class="note">Every story the paper pulled but didn&rsquo;t print. Facts only: each outlet&rsquo;s own headline and its own summary line, side by side, with a link to the original. No spin added by us.</p>
         ${moKeys.map((k) => `<div class="lz-g"><div class="lz-h">${esc(mo[k].name)}<span>${mo[k].items.length} more</span></div>${xp(mo[k].items.map((it) => `<div class="more-i"><div class="h"><span class="t">${esc(it.headline)}</span><span class="n">${it.n} outlet${it.n === 1 ? '' : 's'}</span></div>${xp(`${it.lede ? `<div class="lede">${esc(it.lede)}</div>` : ''}<div class="src">${it.sources.map((x) => srcRow(x, true)).join('')}</div>`)}</div>`).join(''))}</div>`).join('')}</section>`;
     }
@@ -383,7 +403,7 @@
     if (!window.Rivet) return;
     const put = (slot, size, kind, mood) => { const el = $(slot); if (!el) return; const r = Rivet.make({ size, pre: true }); el.appendChild(r.el);
       const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io2.disconnect(); r.enter(); setTimeout(() => r.say(Rivet.quip(kind, seedOf(dateStr + kind)), { stay: true, mood, after: 'idle' }), 500); } }), { threshold: 0.35 }); io2.observe(el); };
-    put('rivetMach', 250, 'fuss', 'smug'); put('rivetSign', 160, 'signoff', 'talk');
+    put('rivetMach', 300, 'fuss', 'smug'); put('rivetSign', 160, 'signoff', 'talk');
   }
 
   // reveal-on-scroll + active chapter (with a sliding underline) + progress bar
@@ -393,7 +413,7 @@
     if (io) io.disconnect(); if (spy) spy.disconnect();
     io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
     document.querySelectorAll('.rv').forEach((n) => io.observe(n));
-    spy = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { let on = null; document.querySelectorAll('#track a').forEach((a) => { const hit = a.dataset.t === e.target.id; a.classList.toggle('on', hit); if (hit) on = a; }); if (on) { moveInk(on); on.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } } }), { rootMargin: '-25% 0px -65% 0px' });
+    spy = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { let on = null; document.querySelectorAll('#track a').forEach((a) => { const hit = a.dataset.t === e.target.id; a.classList.toggle('on', hit); if (hit) on = a; }); if (on) { moveInk(on); const tr = $('track'); if (tr.scrollWidth > tr.clientWidth + 1) tr.scrollTo({ left: on.offsetLeft - (tr.clientWidth - on.offsetWidth) / 2, behavior: 'smooth' }); } } }), { rootMargin: '-25% 0px -65% 0px' });
     document.querySelectorAll('.sec, .band').forEach((n) => spy.observe(n));
     moveInk(document.querySelector('#track a'));
   }

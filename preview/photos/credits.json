@@ -1,41 +1,50 @@
 {
- "sunrise": {
-  "author": "RodrigoErse",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Aurora_amaz%C3%B4nica_no_Lago_do_Cuni%C3%A3.jpg",
-  "title": "Aurora amazônica no Lago do Cuniã",
-  "title_en": "Amazon sunrise over Lake Cuniã, Brazil"
+ "aerial": {
+  "author": "A . from Antarctica",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:E_c_l_i_p_s_e_-_Flickr_-_jonhyblaze.jpg",
+  "title": "E c l i p s e - Flickr - jonhyblaze",
+  "title_en": "A residential district near Chernobyl, surrendered to the forest",
+  "focus": "50% 42%"
  },
- "mist": {
-  "author": "Kuhnmi",
+ "vines": {
+  "author": "TCY",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Baumsilhouetten_am_Uetliberg_mit_Novembernebel_und_Sonnenstrahlen.jpg",
-  "title": "Baumsilhouetten am Uetliberg mit Novembernebel und Sonnenstrahlen",
-  "title_en": "Tree silhouettes on the Uetliberg in November fog and sunbeams"
+  "page": "https://commons.wikimedia.org/wiki/File:Entr%C3%A9e_de_l%27ancien_h%C3%B4tel_de_Paris,_%C3%A0_Saint-Nectaire.jpg",
+  "title": "Entrée de l'ancien hôtel de Paris, à Saint-Nectaire",
+  "title_en": "The abandoned Hôtel de Paris in Saint-Nectaire, France, its entrance swallowed by plants",
+  "focus": "50% 30%"
  },
- "falls": {
-  "author": "Basile Morin",
+ "tracks": {
+  "author": "trolleway",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Dinamo_works_abandoned_access_railway,_Moscow1.jpg",
+  "title": "Dinamo works abandoned access railway, Moscow1",
+  "title_en": "A disused access railway to the Dinamo works, Moscow (unused since the 1980s)",
+  "focus": "50% 62%"
+ },
+ "green": {
+  "author": "trolleway",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Dinamo_works_abandoned_access_railway,_Moscow.jpg",
+  "title": "Dinamo works abandoned access railway, Moscow",
+  "title_en": "The same disused Moscow line, in full summer green",
+  "focus": "50% 58%"
+ },
+ "street": {
+  "author": "Paulo Ordoveza from Washington, DC",
+  "license": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:The_old_overgrown_tracks_at_Elizabeth_Station_(9638021740).jpg",
+  "title": "The old overgrown tracks at Elizabeth Station (9638021740)",
+  "title_en": "Old overgrown tracks at Elizabeth Station",
+  "focus": "50% 55%"
+ },
+ "doors": {
+  "author": "Synaps commons",
   "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Kuang_Si_Falls_with_submerged_tree_in_turquoise_water_near_Luang_Prabang_Laos.jpg",
-  "title": "Kuang Si Falls with submerged tree in turquoise water near Luang Prabang Laos"
- },
- "lake": {
-  "author": "Krzysztof Golik",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Blue_Lake_in_Mount_Cook_National_Park.jpg",
-  "title": "Blue Lake in Mount Cook National Park"
- },
- "dusk": {
-  "author": "Diego Delso",
-  "license": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Amanecer_en_el_lago_Titicaca%2C_Puno%2C_Per%C3%BA%2C_2015-08-01%2C_DD_01.JPG",
-  "title": "Amanecer en el lago Titicaca, Puno, Perú, 2015-08-01, DD 01",
-  "title_en": "Sunrise on Lake Titicaca, Puno, Peru"
- },
- "ferns": {
-  "author": "W.carter",
-  "license": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:Beech_and_ferns_in_Gullmarsskogen.jpg",
-  "title": "Beech and ferns in Gullmarsskogen"
+  "page": "https://commons.wikimedia.org/wiki/File:Overgrown_entrance_to_a_building_in_Beirut,_Lebanon.jpg",
+  "title": "Overgrown entrance to a building in Beirut, Lebanon",
+  "title_en": "Trees growing through the entrance of an abandoned building in Beirut",
+  "focus": "50% 30%"
  }
 }
