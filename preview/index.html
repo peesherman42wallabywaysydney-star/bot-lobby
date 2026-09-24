@@ -5,268 +5,273 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Design preview: The Reclamation Daily</title>
 <style>
-  /* Fresh build (v8). Nothing here overrides an older rule: there are no older rules.
-     Ground: warm newsprint. Type: ink. Metal: ONE photographed steel (nameplate + photo frame). Life: chapter colours,
-     photography, motion. Orange = the live pulse only. Red = breaking only. */
+  /* v12: the magazine cover. Unbiased reports, presented with 1980s-2000s newsstand energy.
+     Ground: deep saturated colour (never white). Cover: full-bleed photo, huge masthead, Rivet as the cover star.
+     Reports: facts first, then where the sources differ. Opinion and fun live OFF THE RECORD, in their own band. */
   @font-face { font-family: 'Archivo Black'; font-weight: 400; font-display: swap; src: url(fonts/ArchivoBlack-normal-400.woff2) format('woff2'); }
   @font-face { font-family: 'Jost'; font-weight: 400 700; font-display: swap; src: url(fonts/Jost-normal-400.woff2) format('woff2'); }
-  @font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-display: swap; src: url(fonts/IBMPlexMono-normal-400.woff2) format('woff2'); }
   @font-face { font-family: 'IBM Plex Mono'; font-weight: 500; font-display: swap; src: url(fonts/IBMPlexMono-normal-500.woff2) format('woff2'); }
   @font-face { font-family: 'IBM Plex Mono'; font-weight: 700; font-display: swap; src: url(fonts/IBMPlexMono-normal-700.woff2) format('woff2'); }
   @font-face { font-family: 'Newsreader'; font-weight: 400 600; font-display: swap; src: url(fonts/Newsreader-normal-400.woff2) format('woff2'); }
   @font-face { font-family: 'Newsreader'; font-style: italic; font-weight: 400; font-display: swap; src: url(fonts/Newsreader-italic-400.woff2) format('woff2'); }
 
   :root {
-    --paper: #F1ECE0; --paper2: #E8E1D0; --ink: #16130E; --ink2: #2a251b; --mute: #5a5347; --line: rgba(22,19,14,.2);
+    --ink: #100D09; --ink2: #1B1712; --cream: #F6F0DE; --dim: rgba(246,240,222,.72); --line: rgba(246,240,222,.2);
     --brass: #F0CD7A; --hot: #FF5C00; --red: #ED1C24;
-    --c1: #2350FF; --c2: #2F7D5B; --c3: #A67600; --c4: #8C2331; --c5: #1D6F8C; --c6: #B23A6D;
-    --ct1: #2350FF; --ct2: #25694A; --ct3: #7A5A00; --ct4: #8C2331; --ct5: #1D6F8C; --ct6: #A8305F;
-    --fs: 17px; --ease: cubic-bezier(.22, 1, .36, 1);
+    /* six hues, each in three tones: g = deep ground (cream text >= 7:1), c = the saturated slab colour, l = light tone for text on ink (>= 4.5:1) */
+    --g1: #14237E; --c1: #2350FF; --l1: #8FA8FF;
+    --g2: #124834; --c2: #2F7D5B; --l2: #63D6A0;
+    --g3: #5C4300; --c3: #A67600; --l3: #F2C94C;
+    --g4: #5A1020; --c4: #8C2331; --l4: #FF9AA8;
+    --g5: #0D4457; --c5: #1D6F8C; --l5: #62CFEA;
+    --g6: #61183E; --c6: #B23A6D; --l6: #F49AC8;
+    --fs: 17px; --ease: cubic-bezier(.22, 1, .36, 1); --spring: cubic-bezier(.34, 1.56, .64, 1);
     --display: "Archivo Black", "Arial Black", Impact, sans-serif;
     --ui: "Jost", "Segoe UI", system-ui, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
     --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
-    --screw: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='9.5' fill='%23202225' opacity='.5'/><circle cx='10' cy='10' r='8.2' fill='%23b9bdc2' stroke='%2334373c' stroke-width='1.2'/><circle cx='8' cy='8' r='4' fill='%23e4e6e8' opacity='.6'/><rect x='2.8' y='8.7' width='14.4' height='2.6' rx='.6' fill='%232a2d31'/></svg>");
   }
   * { box-sizing: border-box; }
-  html { background: var(--paper); -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--fs)/1.7 var(--serif); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  html { background: var(--ink); -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--ink); color: var(--cream); font: 400 var(--fs)/1.65 var(--ui); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   @media (hover: hover) and (pointer: fine) { a:hover { text-decoration: underline; text-underline-offset: 3px; } }
+  :focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
   .mono { font: 500 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 3.2vw, 44px) 40px; }
-  .prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--ink); z-index: 80; }
-  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 1px; }
+  .prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--brass); z-index: 90; }
 
-  .winbar { display: none; position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 70; align-items: center; justify-content: space-between; padding: 0 8px 0 14px; cursor: grab; background: var(--ink); color: var(--paper); }
+  .winbar { display: none; position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 95; align-items: center; justify-content: space-between; padding: 0 8px 0 14px; cursor: grab; background: var(--ink); color: var(--cream); }
   .native .winbar { display: flex; } .winbar .wl { font: 500 10px var(--mono); letter-spacing: .22em; }
-  .winbar button { background: none; box-shadow: none; color: var(--paper); min-height: 24px; padding: 0 8px; }
-  .native .wrap { padding-top: 32px; }
+  .winbar button { background: none; box-shadow: none; color: var(--cream); min-height: 24px; padding: 0 8px; }
 
-  /* ---- controls: ink keys that feel physical ---- */
-  .btn, button, select { font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--paper); background: var(--ink); border: 0; border-radius: 2px; padding: 0 14px; min-height: 36px;
-    display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 2px 0 rgba(22,19,14,.35); transition: transform .1s ease-out, background-color .16s, color .16s, box-shadow .16s; }
-  select { padding-right: 8px; max-width: 150px; } select option { background: #fff; color: #111; }
-  @media (hover: hover) and (pointer: fine) {
-    .btn:hover, button:hover, select:hover { background: #2b251b; color: var(--brass); transform: translateY(-1px); box-shadow: 0 4px 0 rgba(22,19,14,.3); text-decoration: none; }
-  }
-  .btn:active, button:active { transform: scale(.97); box-shadow: 0 1px 0 rgba(22,19,14,.4); }
-  .grow { flex: 1; }
-  .util { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--line); }
-  .util .date { color: var(--mute); order: 9; flex-basis: 100%; }
-  @media (min-width: 720px) { .util .date { order: 0; flex-basis: auto; margin-left: 10px; } }
-  .util .btn, .util button, .util select { padding: 0 11px; }
+  /* ---- controls: glossy keys that press ---- */
+  .btn, button, select { font: 700 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); background: linear-gradient(180deg, #fff6d6, var(--brass) 55%, #d9b155); border: 0; border-radius: 99px; padding: 0 16px; min-height: 36px;
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 3px 0 #8a6a1f, 0 6px 12px rgba(0,0,0,.35); transition: transform .1s ease-out, box-shadow .16s, filter .16s; }
+  select { padding-right: 10px; max-width: 140px; } select option { background: #fff; color: #111; }
+  @media (hover: hover) and (pointer: fine) { .btn:hover, button:hover, select:hover { transform: translateY(-2px); box-shadow: 0 5px 0 #8a6a1f, 0 10px 16px rgba(0,0,0,.4); filter: brightness(1.06); text-decoration: none; } }
+  .btn:active, button:active { transform: scale(.96) translateY(1px); box-shadow: 0 1px 0 #8a6a1f; }
+  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 70; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 12px clamp(14px, 3vw, 40px); background: linear-gradient(180deg, rgba(16,13,9,.7), rgba(16,13,9,0)); transition: background .3s; }
+  .top.solid { background: rgba(16,13,9,.94); box-shadow: 0 1px 0 var(--line); }
+  .native .top { top: 32px; }
+  .top .grow { flex: 1; }
 
-  /* ---- masthead ---- */
-  .mast { padding: 30px 0 10px; text-align: center; }
-  .mast .q { font: 500 10.5px var(--mono); letter-spacing: .26em; text-transform: uppercase; color: var(--mute); }
-  .plate { position: relative; display: block; margin: 14px auto 12px; width: min(100%, 940px); padding: clamp(18px, 3.4vw, 30px) clamp(30px, 6vw, 68px) clamp(16px, 3vw, 26px); border-radius: 3px;
-    background: #a3a4a0 url(img/steel-nameplate.webp) center / cover no-repeat;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -1px 0 rgba(0,0,0,.4), inset 0 0 0 1px rgba(0,0,0,.28), 0 16px 22px -16px rgba(0,0,0,.6); animation: settle .5s var(--ease) both; }
-  .plate h1 { margin: 0; font: 400 clamp(21px, 6.1vw, 76px)/.96 var(--display); letter-spacing: -.02em; text-transform: uppercase; color: #2a2c30; text-wrap: balance; overflow-wrap: normal;
-    text-shadow: 0 1px 0 rgba(255,255,255,.55); }
-  .sc { position: absolute; width: 13px; height: 13px; background: var(--screw) center / contain no-repeat; transition: transform .5s var(--ease); }
-  .sc.a { left: 10px; top: 10px; transform: rotate(28deg); } .sc.b { right: 10px; top: 10px; transform: rotate(-64deg); }
-  .sc.c { left: 10px; bottom: 10px; transform: rotate(75deg); } .sc.d { right: 10px; bottom: 10px; transform: rotate(-12deg); }
-  @media (hover: hover) { .plate:hover .sc.a { transform: rotate(88deg); } .plate:hover .sc.b { transform: rotate(-4deg); } .plate:hover .sc.c { transform: rotate(135deg); } .plate:hover .sc.d { transform: rotate(48deg); } }
-  .persona { font: italic 400 clamp(15px, 1.6vw, 19px)/1.45 var(--serif); color: var(--mute); margin: 12px auto 0; max-width: 62ch; }
-  @keyframes settle { from { transform: translateY(-8px); opacity: .6; } to { transform: none; opacity: 1; } }
+  /* ---- THE COVER ---- */
+  .cover { position: relative; isolation: isolate; overflow: hidden; min-height: max(100svh, 720px); display: flex; flex-direction: column; padding: clamp(74px, 11vh, 108px) clamp(16px, 4vw, 56px) clamp(20px, 3vh, 34px); }
+  .cover .bg { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; animation: settle 1.8s var(--ease) both; }
+  .cover::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgba(10,8,5,.66) 0%, rgba(10,8,5,.05) 30%, rgba(10,8,5,.08) 46%, rgba(10,8,5,.9) 100%); }
+  .cover::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, color-mix(in srgb, var(--g1) 70%, transparent) 0%, rgba(0,0,0,0) 56%); }
+  @keyframes settle { from { transform: scale(1.09); } to { transform: none; } }
+  .issue { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--cream); text-shadow: 0 1px 6px rgba(0,0,0,.7); margin-bottom: clamp(6px, 1.4vh, 14px); }
+  .mast { position: relative; z-index: 1; margin: 0; line-height: .8; text-transform: uppercase; font-family: var(--display); letter-spacing: -.045em; pointer-events: none; }
+  .mast .big { display: block; font-size: 15vw; white-space: nowrap; width: max-content; color: var(--cream);
+    filter: drop-shadow(1px 1px 0 #1a2a86) drop-shadow(2px 2px 0 #1a2a86) drop-shadow(3px 3px 0 #1a2a86) drop-shadow(4px 4px 0 #1a2a86) drop-shadow(6px 8px 0 #12185a) drop-shadow(10px 16px 14px rgba(0,0,0,.45)); }
+  .mast .big span { display: inline-block; animation: drop .9s var(--spring) both; animation-delay: calc(var(--i) * 38ms + 250ms); }
+  .mast .sm { display: inline-block; font-size: clamp(14px, 2.6vw, 34px); letter-spacing: .06em; color: var(--brass); text-shadow: 0 2px 0 rgba(0,0,0,.6); padding: 0 .3em; }
+  .mast .sm.r { float: right; }
+  @keyframes drop { from { transform: translateY(-70%) rotate(-8deg); opacity: 0; } to { transform: none; opacity: 1; } }
 
-  .nav { position: sticky; top: 0; z-index: 60; background: var(--paper); border-top: 4px double var(--ink); border-bottom: 1px solid var(--ink); margin-top: 16px; }
-  .native .nav { top: 32px; }
-  .track { position: relative; display: flex; gap: clamp(12px, 1.5vw, 20px); overflow-x: auto; scrollbar-width: none; justify-content: safe center; }
-  .track::-webkit-scrollbar { display: none; }
-  .nav a { flex: none; padding: 14px 2px 13px; min-height: 44px; display: inline-flex; align-items: center; font: 500 11px var(--mono); letter-spacing: .13em; text-transform: uppercase; color: var(--mute); transition: color .16s; }
-  .nav a.on { color: var(--ink); }
-  @media (hover: hover) and (pointer: fine) { .nav a:hover { color: var(--ct, var(--ink)); text-decoration: none; } }
-  .nav .ink { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--ink); transition: transform .26s var(--ease), width .26s var(--ease), background-color .2s; }
+  .star { position: absolute; z-index: 3; left: min(56vw, 700px); top: clamp(250px, 40vh, 380px); width: clamp(110px, 14vw, 180px); transform: rotate(-9deg); animation: spin 1.1s var(--spring) .9s both; filter: drop-shadow(0 6px 0 rgba(0,0,0,.4)); }
+  @keyframes spin { from { transform: rotate(-200deg) scale(.1); opacity: 0; } to { transform: rotate(-9deg) scale(1); opacity: 1; } }
+  .star polygon { fill: var(--brass); stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; }
+  .star text { font-family: var(--display); fill: var(--ink); text-anchor: middle; }
 
-  /* ---- breaking (only rendered when the edition has one): the only place red lives ---- */
-  .breaking { margin: 0 calc(50% - 50vw); background: var(--ink); color: var(--paper); border-top: 8px solid var(--red); }
-  .breaking .in { max-width: 1180px; margin: 0 auto; padding: 12px clamp(16px, 3.2vw, 44px); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .lines { position: relative; z-index: 2; margin-top: auto; padding-top: 22px; width: min(100%, 520px); display: flex; flex-direction: column; gap: clamp(8px, 1.3vh, 14px); }
+  .cl { display: block; position: relative; padding-left: 0; animation: slidein .7s var(--ease) both; animation-delay: calc(var(--i) * 110ms + 700ms); transition: transform .22s var(--ease); }
+  @keyframes slidein { from { transform: translateX(-40px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .cl .k { display: inline-block; font: 700 10.5px var(--mono); letter-spacing: .16em; text-transform: uppercase; padding: 3px 9px 2px; color: var(--ink); background: var(--l); border-radius: 2px; margin-bottom: 5px; }
+  .cl b { display: block; font: 400 clamp(17px, 2.1vw, 27px)/1.04 var(--display); text-transform: uppercase; letter-spacing: -.02em; color: var(--cream); text-shadow: 2px 2px 0 rgba(0,0,0,.75), 0 0 18px rgba(0,0,0,.5); text-wrap: balance; }
+  .cl.lead b { font-size: clamp(28px, 4.1vw, 56px); line-height: .98; }
+  .cl:nth-child(n+5) { display: none; }
+  .cl .n { display: inline-block; margin-top: 4px; font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--brass); text-shadow: 0 1px 4px rgba(0,0,0,.8); }
+  @media (hover: hover) and (pointer: fine) { .cl:hover { transform: translateX(6px); text-decoration: none; } }
+  .cl:active { transform: scale(.985); }
+  .rivet-cover { position: absolute; z-index: 2; right: clamp(-10px, 2vw, 60px); top: clamp(150px, 25svh, 270px); }
+  .rivet-cover .rv-svg { height: min(74svh, 640px) !important; width: auto !important; }
+  .rivet-cover .rivet { cursor: pointer; filter: drop-shadow(0 18px 20px rgba(0,0,0,.5)); }
+  .rivet-cover .rv-bubble { position: absolute !important; left: auto !important; right: 84% !important; top: 16% !important; margin: 0 !important; }
+  .credit { position: relative; z-index: 2; margin-top: clamp(14px, 2.4vh, 26px); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; color: var(--dim); text-shadow: 0 1px 6px rgba(0,0,0,.8); }
+  .credit .tag { color: #1c1d1f; padding: 5px 10px 4px; border-radius: 1px; background: #b7b8b4 url(img/steel-nameplate.webp) center / cover; text-shadow: 0 1px 0 rgba(255,255,255,.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 0 1px rgba(0,0,0,.3); }
+  .cover.seen *, .cover.seen { animation-duration: .01ms !important; animation-delay: 0ms !important; }
+
+  /* ---- breaking (only when the edition has one): the only place red lives ---- */
+  .breaking { background: var(--ink); color: var(--cream); border-top: 8px solid var(--red); }
+  .breaking .in { max-width: 1240px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 56px); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   .pill { background: var(--red); color: #fff; font: 700 10.5px var(--mono); letter-spacing: .18em; padding: 4px 10px; border-radius: 1px; }
-  .breaking .t { font: 600 clamp(16px, 2vw, 20px)/1.3 var(--serif); }
-  .breaking .s { font: 500 11px var(--mono); letter-spacing: .1em; color: rgba(241,236,224,.7); margin-left: auto; }
+  .breaking .t { font: 600 clamp(17px, 2vw, 22px)/1.3 var(--serif); } .breaking .s { font: 500 11px var(--mono); letter-spacing: .1em; color: var(--dim); margin-left: auto; }
 
-  /* ---- ticker: brass readout on ink, the one live thing ---- */
-  .ticker { margin: 0 calc(50% - 50vw); background: var(--ink); color: var(--brass); display: flex; align-items: center; overflow: hidden; }
-  .live { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px 10px clamp(16px, 3.2vw, 44px); font: 700 10.5px var(--mono); letter-spacing: .2em; color: var(--paper); background: var(--ink); position: relative; z-index: 1; }
+  /* ---- ticker ---- */
+  .ticker { background: var(--ink); color: var(--brass); display: flex; align-items: center; overflow: hidden; border-block: 1px solid var(--line); }
+  .live { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px 10px clamp(16px, 4vw, 56px); font: 700 10.5px var(--mono); letter-spacing: .2em; color: var(--cream); background: var(--ink); position: relative; z-index: 1; }
   .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--hot); animation: pulse 1.6s ease-in-out infinite; }
   .run { flex: 1; overflow: hidden; }
-  .run > div { display: inline-flex; gap: 38px; white-space: nowrap; padding-left: 100%; animation: marq 60s linear infinite; font: 500 11.5px var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+  .run > div { display: inline-flex; gap: 38px; white-space: nowrap; padding-left: 100%; animation: marq 70s linear infinite; font: 500 11.5px var(--mono); letter-spacing: .14em; text-transform: uppercase; }
   .ticker:focus-within .run > div { animation-play-state: paused; }
   @media (hover: hover) and (pointer: fine) { .ticker:hover .run > div { animation-play-state: paused; } }
-  .run b { color: var(--paper); font-weight: 700; }
+  .run b { color: var(--cream); font-weight: 700; }
   @keyframes marq { to { transform: translateX(-100%); } }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.75); } }
 
-  /* ---- the daily photograph in its steel frame ---- */
-  .hero { margin: 24px 0 6px; }
-  .hero .frame { position: relative; padding: clamp(8px, 1.4vw, 14px); border-radius: 3px; background: #9b9c98 url(img/steel-frame.webp) center / cover;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 0 0 1px rgba(0,0,0,.3); overflow: hidden; }
-  .hero img { display: block; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; border: 1px solid rgba(0,0,0,.6); }
-  @media (max-width: 640px) { .hero img { aspect-ratio: 4 / 3; } }
-  .hero.dev img { animation: develop 1.2s var(--ease) both; }
-  @keyframes develop { from { filter: grayscale(1) contrast(1.25) brightness(.7); } to { filter: none; } }
-  .hero .spec { position: absolute; left: clamp(20px, 2.6vw, 32px); bottom: clamp(20px, 2.6vw, 32px); padding: 5px 10px 4px; border-radius: 1px; font: 500 10px/1.2 var(--mono); letter-spacing: .12em; color: #1c1d1f;
-    background: #b7b8b4 url(img/steel-nameplate.webp) center / cover; box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 0 1px rgba(0,0,0,.3), 0 6px 10px -6px rgba(0,0,0,.6); text-shadow: 0 1px 0 rgba(255,255,255,.5); }
-  .hero .full { position: absolute; left: clamp(8px, 1.4vw, 14px); right: clamp(8px, 1.4vw, 14px); bottom: clamp(8px, 1.4vw, 14px); padding: 16px 18px; background: rgba(22,19,14,.88); color: var(--paper);
-    font: italic 500 clamp(16px, 2vw, 24px)/1.3 var(--serif); transform: translateY(101%); transition: transform .32s var(--ease); }
-  @media (hover: hover) and (pointer: fine) { .hero .frame:hover .full, .hero .frame:focus-within .full { transform: none; } .hero .frame:hover .spec { opacity: 0; } }
-  .hero .spec { transition: opacity .2s; }
-  .hero figcaption { display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; padding: 10px 2px 0; font: 500 11px/1.5 var(--mono); letter-spacing: .06em; color: var(--mute); }
+  /* ---- chapter chips (sticky) ---- */
+  .chips { position: sticky; top: 60px; z-index: 60; background: rgba(16,13,9,.94); border-bottom: 1px solid var(--line); }
+  .native .chips { top: 88px; }
+  .chips .track { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 10px clamp(16px, 4vw, 56px); }
+  .chips .track::-webkit-scrollbar { display: none; }
+  .chip { flex: none; min-height: 40px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 99px; font: 700 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--cream);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff), var(--c) 50%, color-mix(in srgb, var(--c) 74%, #000)); box-shadow: inset 0 2px 0 rgba(255,255,255,.3), 0 3px 0 rgba(0,0,0,.4); text-shadow: 0 1px 0 rgba(0,0,0,.35); transition: transform .1s ease-out, filter .16s; }
+  .chip.on { outline: 2px solid var(--cream); outline-offset: 2px; }
+  @media (hover: hover) and (pointer: fine) { .chip:hover { transform: translateY(-2px); filter: brightness(1.1); text-decoration: none; } }
+  .chip:active { transform: scale(.96); }
 
-  /* ---- front page ---- */
-  .lead { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; margin: 38px 0 8px; }
-  @media (min-width: 1000px) { .lead { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; } }
-  .lead .q { display: inline-block; padding: 5px 14px 4px; border-radius: 99px; font: 700 10.5px var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--paper); margin-bottom: 14px;
-    background: linear-gradient(180deg, color-mix(in srgb, var(--c1) 78%, #fff), var(--c1) 50%, color-mix(in srgb, var(--c1) 76%, #000)); box-shadow: inset 0 2px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.2); }
-  .headline { font: 600 clamp(36px, 6.4vw, 84px)/.98 var(--serif); letter-spacing: -.028em; margin: 0; text-wrap: balance; }
-  .dek { font: italic 400 clamp(19px, 2.2vw, 26px)/1.45 var(--serif); color: var(--ink2); margin: 18px 0 0; max-width: 46ch; }
-  .sheet { border-top: 4px double var(--ink); border-bottom: 1px solid var(--ink); padding: 12px 0 10px; align-self: start; }
-  .sheet .lbl, .lbl { font: 500 10.5px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--mute); }
-  .nums { display: grid; grid-template-columns: repeat(3, 1fr); margin: 10px 0 6px; }
-  .nums > div { padding: 4px 8px 4px 0; } .nums > div + div { border-left: 1px solid var(--line); padding-left: 10px; }
-  .nums b { display: block; font: 700 clamp(19px, 2.2vw, 26px)/1.1 var(--mono); letter-spacing: -.03em; }
-  .nums span { font: 500 9.5px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
-  .sheet .row { padding: 7px 0; border-top: 1px solid var(--line); font: 500 11.5px/1.5 var(--mono); letter-spacing: .04em; color: var(--ink2); }
-  .sheet .blurb { padding-top: 10px; border-top: 1px solid var(--line); font: italic 400 15.5px/1.55 var(--serif); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px); }
 
-  .tldr { margin: 34px 0 0; border-top: 1px solid var(--ink); }
-  .tldr > .lbl { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0 8px; }
+  /* ---- the promise ---- */
+  .promise { background: var(--g1); padding: clamp(48px, 9vh, 96px) 0; }
+  .promise .q { font: 700 11px var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--l1); margin-bottom: 14px; }
+  .promise h2 { margin: 0; max-width: 20ch; font: 400 clamp(36px, 7vw, 96px)/.92 var(--display); text-transform: uppercase; letter-spacing: -.035em; text-wrap: balance; text-shadow: 3px 3px 0 rgba(0,0,0,.35); }
+  .promise p { max-width: 58ch; margin: 22px 0 0; font: 400 clamp(18px, 2vw, 22px)/1.55 var(--serif); color: var(--cream); }
+
+  /* ---- the numbers ---- */
+  .nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; padding: clamp(28px, 5vh, 52px) 0; }
+  .num-tile { position: relative; overflow: hidden; padding: 20px 22px 18px; border-radius: 12px; color: var(--cream);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff) 0%, var(--c) 46%, color-mix(in srgb, var(--c) 74%, #000) 100%); box-shadow: inset 0 2px 0 rgba(255,255,255,.35), inset 0 -3px 0 rgba(0,0,0,.25); }
+  .num-tile::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0)); pointer-events: none; }
+  .num-tile b { position: relative; display: block; font: 700 clamp(34px, 5vw, 60px)/1 var(--mono); letter-spacing: -.04em; text-shadow: 0 3px 0 rgba(0,0,0,.3); }
+  .num-tile span { position: relative; display: block; margin-top: 6px; font: 700 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,.35); }
+  .rows { padding-bottom: 8px; color: var(--dim); font: 500 12px/1.7 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+
+  /* ---- TL;DR: the whole record on one screen ---- */
+  .tldr { background: var(--ink2); border-block: 1px solid var(--line); padding: 30px 0 34px; }
+  .tldr .lbl { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 700 11px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--brass); padding-bottom: 8px; }
   .lz-g { border-top: 1px solid var(--line); }
-  .lz-h { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; font: 700 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; transition: transform .22s var(--ease), color .16s; }
-  .lz-h span { margin-left: auto; color: var(--mute); font-weight: 500; }
-  .lz-h::after, .story > .h::after, .more-i > .h::after, .mag > .mh::after, .art > .ah::after { content: "+"; flex: none; font: 500 18px/1 var(--mono); transition: transform .26s var(--ease); }
+  .lz-h { display: flex; align-items: center; gap: 10px; min-height: 48px; cursor: pointer; font: 700 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; transition: transform .22s var(--ease), color .16s; }
+  .lz-h span { margin-left: auto; color: var(--dim); font-weight: 500; }
+  .lz-h::after, .rep > .h::after, .more-i > .h::after, .mag > .mh::after, .art > .ah::after { content: "+"; flex: none; font: 500 20px/1 var(--mono); transition: transform .26s var(--ease); }
   .open > .lz-h::after, .open > .h::after, .open > .mh::after, .open > .ah::after { transform: rotate(45deg); }
   .lz-i { padding: 8px 0 8px 14px; margin: 4px 0; border-left: 3px solid var(--line); cursor: pointer; transition: border-color .2s, transform .22s var(--ease); }
-  @media (hover: hover) and (pointer: fine) { .lz-i:hover { border-left-color: var(--c1); transform: translateX(3px); } }
-  .lz-i .t { font: 500 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
-  .lz-i div { font: 500 15px/1.45 var(--ui); } .lz-i small { display: block; color: var(--mute); font: italic 400 14px var(--serif); margin-top: 2px; }
+  @media (hover: hover) and (pointer: fine) { .lz-i:hover { border-left-color: var(--brass); transform: translateX(3px); } .lz-h:hover { color: var(--brass); } }
+  .lz-i .t { font: 500 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .lz-i div { font: 500 16px/1.45 var(--ui); } .lz-i small { display: block; color: var(--dim); font: italic 400 15px var(--serif); margin-top: 2px; }
 
-  /* expanding rows: grid 0fr -> 1fr, no layout jump */
-  .xp { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .26s var(--ease); }
+  .xp { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s var(--ease); }
   .xp > .in { overflow: hidden; min-height: 0; }
-  .open > .xp, .lz-g.open > .xp { grid-template-rows: 1fr; }
-  .pad { padding: 4px 0 14px 16px; margin-left: 2px; border-left: 3px solid var(--c, var(--ink)); }
+  .open > .xp { grid-template-rows: 1fr; }
+  .pad { padding: 4px 0 16px 16px; margin-left: 2px; border-left: 3px solid var(--l, var(--brass)); }
 
-  /* ---- sections: one chapter colour, spent on the numeral, the quote marks, the rules and the hovers ---- */
-  .rv { opacity: 0; transform: translateY(24px); transition: opacity .52s var(--ease), transform .52s var(--ease); }
-  .rv.in, html:not(.js) .rv { opacity: 1; transform: none; }
-  .sec { margin: 72px 0 0; }
-  /* chapter opener: a bold, glossy colour slab with radiating rays and a chunky extruded numeral (1989-2012 whimsy, original) */
-  .sh { position: relative; overflow: hidden; display: flex; align-items: center; gap: clamp(14px, 2.6vw, 34px); padding: clamp(14px, 2.2vw, 24px) clamp(18px, 3vw, 40px); border-radius: 10px;
-    background: linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff) 0%, var(--c) 46%, color-mix(in srgb, var(--c) 76%, #000) 100%);
-    box-shadow: inset 0 -3px 0 rgba(0,0,0,.22), inset 0 2px 0 rgba(255,255,255,.35); }
-  .sh::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 52%; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0)); border-radius: 10px 10px 60% 60% / 10px 10px 100% 100%; }
-  .sun { position: absolute; left: 0; top: 50%; width: min(78%, 620px); aspect-ratio: 1; transform: translate(-16%, -50%); fill: #fff; opacity: .13; pointer-events: none; overflow: visible; }
-  .num { position: relative; z-index: 1; flex: none; font: 400 clamp(56px, 10vw, 132px)/.86 var(--display); letter-spacing: -.04em;
-    background: linear-gradient(180deg, #ffffff 0%, #fbf3dc 42%, #e3d5ad 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(1px 1px 0 var(--dk)) drop-shadow(2px 2px 0 var(--dk)) drop-shadow(3px 3px 0 var(--dk)) drop-shadow(4px 4px 0 var(--dk)) drop-shadow(5px 6px 0 var(--dk)) drop-shadow(8px 12px 10px rgba(0,0,0,.35));
-    transform-origin: 50% 80%; transition: transform .32s cubic-bezier(.34, 1.56, .64, 1); }
-  @media (hover: hover) and (pointer: fine) { .sh:hover .num { transform: scale(1.07) rotate(-3deg); } }
-  .sh h2 { position: relative; z-index: 1; margin: 0; font: 400 clamp(26px, 4.4vw, 52px)/1 var(--display); text-transform: uppercase; letter-spacing: -.02em; color: var(--paper); text-shadow: 0 2px 0 rgba(0,0,0,.28); }
-  .shmeta { margin: 10px 0 0; }
-  .sec { --dk: color-mix(in srgb, var(--c) 52%, #000); }
-  .band { --dk: #7a5f1f; }
-  .band .sh { background: none; box-shadow: none; border-radius: 0; padding-inline: 0; border-top: 4px solid var(--brass); }
-  .band .sh::after { display: none; } .band .sun { display: none; } .band .sh h2 { color: var(--paper); }
-  .by { font: 500 11px/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin-top: 6px; }
-  .cols { display: grid; gap: 34px; margin-top: 22px; }
-  @media (min-width: 1000px) { .cols { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; } .rail { border-left: 1px solid var(--line); padding-left: 32px; } }
-  .sub { font: 600 clamp(21px, 2.4vw, 29px)/1.25 var(--serif); letter-spacing: -.01em; margin: 0 0 14px; }
-  .pull { font: italic 500 clamp(21px, 2.6vw, 32px)/1.3 var(--serif); border-left: 5px solid var(--c); padding: 2px 0 2px 20px; margin: 18px 0 24px; text-wrap: balance; }
-  .body p { margin: 0 0 1.1em; max-width: 66ch; }
-  .tl { display: none; margin: 14px 0; padding: 10px 14px; background: var(--paper2); font: 500 14.5px/1.5 var(--ui); max-width: 66ch; }
-  .tl.on { display: block; animation: rise .4s var(--ease) both; }
-  .tl b { font: 700 10px var(--mono); letter-spacing: .16em; margin-right: 8px; color: var(--ct, var(--ct1)); }
-  .tl em { display: block; font: italic 400 14px var(--serif); color: var(--mute); margin-top: 3px; }
-  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  .manual { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; font: 500 10.5px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
-  .manual b { color: var(--ink); } .manual svg { width: 14px; height: 14px; vertical-align: -3px; margin-right: 4px; }
+  /* ---- chapters: a photo-and-colour cover opener, then the reports on a deep ground ---- */
+  .sec { background: var(--g); scroll-margin-top: 110px; }
+  .sh { position: relative; overflow: hidden; min-height: clamp(220px, 36vh, 400px); display: flex; align-items: flex-end; }
+  .sh img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .sh::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, color-mix(in srgb, var(--c) 94%, transparent) 0%, color-mix(in srgb, var(--c) 66%, transparent) 46%, color-mix(in srgb, var(--c) 6%, transparent) 100%), linear-gradient(0deg, rgba(0,0,0,.5), rgba(0,0,0,0) 55%); }
+  .sh .in { position: relative; z-index: 2; width: 100%; max-width: 1240px; margin: 0 auto; padding: clamp(22px, 4vw, 44px) clamp(16px, 4vw, 56px); display: flex; align-items: center; gap: clamp(14px, 3vw, 40px); }
+  .sun { position: absolute; z-index: 1; left: 0; top: 50%; width: min(90vw, 760px); aspect-ratio: 1; transform: translate(-14%, -50%); fill: #fff; opacity: .12; pointer-events: none; overflow: visible; }
+  .num { flex: none; font: 400 clamp(64px, 12vw, 160px)/.86 var(--display); letter-spacing: -.04em; background: linear-gradient(180deg, #ffffff 0%, #fbf3dc 42%, #e3d5ad 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 1px 0 var(--dk)) drop-shadow(2px 2px 0 var(--dk)) drop-shadow(3px 3px 0 var(--dk)) drop-shadow(4px 4px 0 var(--dk)) drop-shadow(6px 7px 0 var(--dk)) drop-shadow(10px 14px 12px rgba(0,0,0,.4));
+    transform-origin: 50% 80%; transition: transform .32s var(--spring); }
+  @media (hover: hover) and (pointer: fine) { .sh:hover .num { transform: scale(1.06) rotate(-3deg); } }
+  .sh h2 { margin: 0; font: 400 clamp(30px, 6.2vw, 84px)/.94 var(--display); text-transform: uppercase; letter-spacing: -.03em; text-shadow: 3px 3px 0 rgba(0,0,0,.35); text-wrap: balance; }
+  .sec-body { max-width: 1240px; margin: 0 auto; padding: clamp(26px, 4vw, 44px) clamp(16px, 4vw, 56px) clamp(38px, 6vw, 64px); }
+  .manual { display: flex; flex-wrap: wrap; gap: 4px 14px; font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  .oneline { max-width: 34ch; margin: 18px 0 26px; font: 500 clamp(22px, 3.2vw, 38px)/1.2 var(--serif); letter-spacing: -.01em; text-wrap: balance; }
+  .oneline b { display: block; font: 700 11px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--l); margin-bottom: 8px; }
+  .reps { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 900px) { .reps { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
 
-  .rl { font: 500 10.5px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--ct); padding-bottom: 8px; }
-  .rl span { color: var(--mute); }
-  .story, .art, .more-i, .mag { border-top: 1px solid var(--line); }
-  .story > .h, .more-i > .h, .art > .ah { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; padding: 12px 2px 12px 0; cursor: pointer; font: 600 15.5px/1.35 var(--ui);
-    transition: transform .22s var(--ease), color .16s; }
-  .art > .ah { font-family: var(--serif); font-size: 19px; font-weight: 600; }
-  @media (hover: hover) and (pointer: fine) {
-    .story > .h:hover, .more-i > .h:hover, .art > .ah:hover, .lz-h:hover, .mag > .mh:hover { transform: translateY(-3px); color: var(--ct, var(--ct1)); }
-  }
-  .story > .h:active, .more-i > .h:active, .art > .ah:active, .lz-h:active, .mag > .mh:active { transform: scale(.985); transition-duration: .08s; }
-  .story .t { flex: 1; } .n { flex: none; font: 500 9.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid currentColor; padding: 1px 7px; border-radius: 1px; color: var(--ct, var(--mute)); }
-  .src a { display: block; padding: 6px 0; font: 500 14px/1.45 var(--ui); } .src small { color: var(--mute); font-weight: 400; }
-  .cmp { font: 500 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ct, var(--mute)); margin: 10px 0 2px; }
-  .facts { margin: 4px 0 8px; padding-left: 18px; font: 500 14px/1.5 var(--ui); } .facts li { margin: 3px 0; }
-  .split { margin: 6px 0 8px; padding: 8px 12px; background: var(--paper2); border-left: 3px solid var(--c, var(--ink)); font: 500 13.5px/1.5 var(--ui); }
-  .diff { padding: 6px 0 6px 12px; margin: 4px 0; border-left: 3px solid var(--line); font: 500 13.5px/1.5 var(--ui); } .diff b { color: var(--ct, var(--ink)); }
-  .flag { display: inline-block; font: 500 9.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 0 6px; border: 1px solid var(--mute); color: var(--mute); vertical-align: 1px; }
-  .lede { color: var(--mute); font: 400 14px/1.45 var(--ui); margin: 0 0 4px; }
-  .note { font: italic 400 15px/1.55 var(--serif); color: var(--mute); margin: 12px 0 10px; max-width: 66ch; }
-  .think { font: italic 400 17px/1.6 var(--serif); border-left: 3px solid var(--c, var(--line)); padding-left: 14px; margin: 10px 0 16px; max-width: 66ch; }
-  .letter { padding: 14px 0; border-top: 1px solid var(--line); } .letter .t { font: 500 18px/1.5 var(--serif); max-width: 62ch; } .letter .r { font: italic 400 16px/1.55 var(--serif); color: var(--mute); margin-top: 6px; padding-left: 14px; border-left: 3px solid var(--c); max-width: 62ch; }
+  /* a report: what is established, then where the sources differ */
+  .rep { position: relative; background: var(--ink2); border-radius: 12px; border-top: 6px solid var(--c); box-shadow: 0 10px 24px -12px rgba(0,0,0,.6); transition: transform .22s var(--ease); }
+  .rep::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 60px; background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0)); pointer-events: none; border-radius: 6px 6px 0 0; }
+  @media (hover: hover) and (pointer: fine) { .rep:hover { transform: translateY(-3px); } }
+  .rep > .h { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 18px 18px 16px; cursor: pointer; }
+  .rep > .h h3 { flex: 1; margin: 0; font: 400 clamp(19px, 2.2vw, 25px)/1.12 var(--display); text-transform: uppercase; letter-spacing: -.015em; text-wrap: balance; }
+  .cnt { flex: none; font: 700 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 4px 8px 3px; border-radius: 2px; color: var(--ink); background: var(--l); }
+  .rep .pad { margin: 0 18px; padding-bottom: 18px; }
+  .cmp { font: 700 10.5px var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--l); margin: 14px 0 6px; }
+  .facts { margin: 4px 0 8px; padding-left: 20px; font: 500 16px/1.55 var(--ui); } .facts li { margin: 5px 0; }
+  .split { margin: 8px 0; padding: 10px 14px; background: rgba(246,240,222,.08); border-left: 3px solid var(--l); font: 500 15px/1.55 var(--ui); }
+  .diff { padding: 6px 0 6px 12px; margin: 4px 0; border-left: 3px solid var(--line); font: 500 15px/1.5 var(--ui); } .diff b { color: var(--l); }
+  .src a { display: block; padding: 8px 0; border-top: 1px solid var(--line); font: 500 15px/1.45 var(--ui); } .src small { color: var(--dim); font-weight: 400; }
+  .flag { display: inline-block; font: 700 9.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 0 6px; border: 1px solid var(--dim); color: var(--dim); vertical-align: 1px; }
+  .tl { display: none; margin: 8px 0 18px; padding: 12px 16px; background: rgba(246,240,222,.09); border-radius: 6px; font: 500 16px/1.5 var(--ui); max-width: 68ch; }
+  .tl.on { display: block; }
+  .tl b { font: 700 10px var(--mono); letter-spacing: .16em; margin-right: 8px; color: var(--l, var(--brass)); }
+  .tl em { display: block; font: italic 400 15px var(--serif); color: var(--dim); margin-top: 3px; }
+  .body p { margin: 0 0 1.1em; max-width: 66ch; font-family: var(--serif); font-size: clamp(17px, 1.3vw, 19px); }
+  .art { border-top: 1px solid var(--line); }
+  .art > .ah { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 8px 0; cursor: pointer; font: 600 19px/1.3 var(--serif); }
+  .lbl { font: 700 10.5px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--l, var(--brass)); }
+  .note { font: italic 400 16px/1.55 var(--serif); color: var(--dim); margin: 14px 0; max-width: 66ch; }
+  .lede { color: var(--dim); font: 400 15px/1.45 var(--ui); margin: 0 0 4px; }
+  .by { font: 500 11px/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
 
-  /* magazines: a coloured cover tile per title */
-  .mag > .mh { display: flex; align-items: center; gap: 16px; min-height: 76px; cursor: pointer; transition: transform .22s var(--ease), color .16s; }
-  .cv { flex: none; width: 46px; height: 62px; display: grid; place-items: center; color: #fff; font: 400 26px var(--display); background: var(--c); border-radius: 1px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
-  .mag .mh b { font: 400 clamp(17px, 2vw, 22px) var(--display); text-transform: uppercase; letter-spacing: -.01em; } .mag .mh span { display: block; font: 500 11px var(--mono); letter-spacing: .06em; color: var(--mute); text-transform: uppercase; }
+  /* ---- more pile, mag rack ---- */
+  .more-i { border-top: 1px solid var(--line); }
+  .more-i > .h { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; min-height: 48px; padding: 10px 2px; cursor: pointer; font: 600 16px/1.35 var(--ui); transition: transform .22s var(--ease), color .16s; }
+  .more-i .t { flex: 1; }
+  @media (hover: hover) and (pointer: fine) { .more-i > .h:hover, .mag > .mh:hover, .art > .ah:hover { transform: translateY(-2px); color: var(--l, var(--brass)); } }
+  .more-i > .h:active, .mag > .mh:active, .art > .ah:active, .lz-h:active { transform: scale(.985); transition-duration: .08s; }
+  .mag { border-top: 1px solid var(--line); }
+  .mag > .mh { display: flex; align-items: center; gap: 16px; min-height: 80px; cursor: pointer; transition: transform .22s var(--ease), color .16s; }
+  .cv { flex: none; width: 50px; height: 66px; display: grid; place-items: center; color: #fff; font: 400 28px var(--display); background: linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff), var(--c) 55%, color-mix(in srgb, var(--c) 72%, #000)); border-radius: 3px; box-shadow: inset 0 2px 0 rgba(255,255,255,.35), 0 3px 0 rgba(0,0,0,.4); }
+  .mag .mh b { font: 400 clamp(18px, 2.2vw, 24px) var(--display); text-transform: uppercase; letter-spacing: -.01em; } .mag .mh span.tg { display: block; font: 500 11px var(--mono); letter-spacing: .06em; color: var(--dim); text-transform: uppercase; }
   .mag .mh > div { flex: 1; }
+  .think { font: italic 400 18px/1.6 var(--serif); border-left: 3px solid var(--l, var(--line)); padding-left: 14px; margin: 10px 0 16px; max-width: 66ch; }
+  .letter { padding: 16px 0; border-top: 1px solid var(--line); } .letter .t { font: 500 20px/1.5 var(--serif); max-width: 62ch; } .letter .r { font: italic 400 17px/1.55 var(--serif); color: var(--dim); margin-top: 6px; padding-left: 14px; border-left: 3px solid var(--l); max-width: 62ch; }
 
-  /* dark bands: the loud half of the loud/quiet rhythm */
-  .band { margin: 84px calc(50% - 50vw) 0; padding: 60px calc(50vw - 50%) 64px; background: var(--ink); color: var(--paper); --c: var(--brass); }
-  .band .by { color: rgba(241,236,224,.62); }
-  .band .tl b { color: var(--brass); }
-  .band :focus-visible { outline-color: var(--brass); } .band .tl { background: rgba(241,236,224,.09); } .band .tl em { color: rgba(241,236,224,.62); }
-  .opgrid { display: grid; gap: 40px 56px; margin-top: 30px; grid-template-columns: minmax(0, 1fr); }
+  /* ---- off the record: opinion and fun, kept apart from the reports ---- */
+  .off { background: var(--g6); }
+  .off .band-t { padding: clamp(46px, 8vh, 84px) 0 6px; }
+  .off .band-t .q { font: 700 11px var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--l6); margin-bottom: 12px; }
+  .off .band-t h2 { margin: 0; font: 400 clamp(38px, 8vw, 110px)/.9 var(--display); text-transform: uppercase; letter-spacing: -.04em; text-shadow: 3px 3px 0 rgba(0,0,0,.35); }
+  .off .band-t p { max-width: 54ch; color: var(--dim); font: italic 400 19px/1.55 var(--serif); margin: 14px 0 0; }
+  .off .blk { padding: 34px 0; border-top: 1px solid var(--line); margin-top: 34px; }
+  .opgrid { display: grid; gap: 34px 54px; margin-top: 22px; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 900px) { .opgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .who { font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--brass); } .who span { color: rgba(241,236,224,.6); }
+  .who { font: 700 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--l6); } .who span { color: var(--dim); font-weight: 500; }
   .col h3 { font: 600 clamp(24px, 2.8vw, 34px)/1.15 var(--serif); letter-spacing: -.015em; margin: 8px 0 12px; }
-  .band .body p { color: rgba(241,236,224,.92); }
   .machine { display: grid; gap: 34px; grid-template-columns: minmax(0, 1fr); align-items: start; }
-  @media (min-width: 900px) { .machine { grid-template-columns: minmax(0, 1fr) 330px; gap: 56px; } }
-  .rivet-slot { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 6px; }
+  @media (min-width: 900px) { .machine { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; } }
+  .rivet-slot { display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .rivet-slot .rivet .rv-bubble { position: static; margin: 6px 0 0; opacity: 1; transform: none; width: auto; max-width: min(260px, 100%); text-align: center; }
   .rivet-slot .rivet { max-width: 100%; }
 
-  .foot { margin-top: 90px; border-top: 4px double var(--ink); padding: 34px 0 20px; display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); }
-  @media (min-width: 800px) { .foot { grid-template-columns: minmax(0, 1fr) 260px; align-items: center; } }
-  .sign { font: italic 500 clamp(20px, 2.6vw, 30px)/1.45 var(--serif); max-width: 40ch; }
-  .fin { font: 500 11px var(--mono); letter-spacing: .34em; text-transform: uppercase; color: var(--mute); margin-top: 16px; }
-  .foot .rivet .rv-bubble { border: 1px solid var(--ink); box-shadow: none; }
-  .colophon { grid-column: 1 / -1; font: 500 10px/1.8 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); border-top: 1px solid var(--line); padding-top: 14px; }
-  .empty { color: var(--mute); text-align: center; padding: 90px 0; font: italic 400 20px var(--serif); }
+  .foot { background: var(--ink); border-top: 6px solid var(--brass); padding: 44px 0 30px; }
+  .foot .sign { font: italic 500 clamp(20px, 2.6vw, 30px)/1.45 var(--serif); max-width: 40ch; }
+  .foot .row { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: center; }
+  @media (min-width: 800px) { .foot .row { grid-template-columns: minmax(0, 1fr) 240px; } }
+  .foot .rv-bubble { border: 1px solid var(--ink); box-shadow: none; }
+  .folio { display: inline-block; margin-top: 18px; padding: 6px 12px 5px; border-radius: 1px; font: 500 10.5px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #1c1d1f;
+    background: #b7b8b4 url(img/steel-nameplate.webp) center / cover; box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 0 1px rgba(0,0,0,.3); text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+  .colophon { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line); font: 500 10px/1.9 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .empty { color: var(--dim); text-align: center; padding: 120px 0; font: italic 400 22px var(--serif); }
 
+  @media (max-width: 720px) {
+    .top { gap: 6px; padding: 8px 12px; } .top .btn, .top button, .top select { min-height: 32px; padding: 0 11px; font-size: 10px; } .top select { max-width: 104px; }
+    .chips { top: 48px; }
+    .cover { padding-top: 64px; }
+    .star { left: auto; right: 10px; top: 214px; width: 92px; }
+    .lines { width: 57%; } .cl .k { font-size: 9.5px; } .cl b { font-size: clamp(15px, 4.4vw, 20px); } .cl.lead b { font-size: clamp(22px, 6.6vw, 32px); }
+    .cl:nth-child(n+4) { display: none; }
+    .rivet-cover { right: -14px; top: auto; bottom: 46px; } .rivet-cover .rv-svg { height: min(34svh, 300px) !important; }
+    .issue { flex-direction: column; gap: 2px; }
+  }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-    .rv { opacity: 1; transform: none; }
   }
-
-  /* ---- printed feel: a hair of ink spread on display type; one more machine-room moment: the steel folio plate ---- */
-  .headline, .sub, .pull, .sh h2, .col h3 { text-shadow: 0 0 .7px rgba(22,19,14,.5); }
-  .band .col h3, .band .sh h2 { text-shadow: 0 0 .7px rgba(241,236,224,.45); }
-  .folio { display: inline-block; margin-top: 18px; padding: 6px 12px 5px; border-radius: 1px; font: 500 10.5px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #1c1d1f;
-    background: #b7b8b4 url(img/steel-nameplate.webp) center / cover; box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 0 1px rgba(0,0,0,.3), 0 6px 10px -6px rgba(0,0,0,.6); text-shadow: 0 1px 0 rgba(255,255,255,.5); }
 </style>
 </head>
 <body><div style="position:fixed;left:0;right:0;bottom:0;z-index:99;background:#16130E;color:#F1ECE0;font:500 10.5px/1.3 monospace;letter-spacing:.08em;text-align:center;padding:5px 8px;text-transform:uppercase">Design preview &middot; all text is placeholder &middot; real layout, type and colour</div>
 <div class="prog" id="prog"></div>
 <div class="winbar pywebview-drag-region"><span class="wl pywebview-drag-region">THE RECLAMATION DAILY</span><span><button id="closeWin" title="Close">&#10005;</button></span></div>
 
-<div class="wrap">
-  <div class="util">
-    <span class="btn" id="back">Preview</span>
-    <span class="mono date" id="utilDate"></span>
-    <span class="grow"></span>
-    <select id="dateSel" title="Past editions" aria-label="Past editions"></select><button id="fsDown" title="Smaller text" aria-label="Smaller text">A&minus;</button><button id="fsUp" title="Larger text" aria-label="Larger text">A+</button>
-  </div>
-  <div id="mast"></div>
-  <nav class="nav" id="nav" aria-label="Sections"><div class="track" id="track"></div></nav>
-  <div id="ticker"></div>
-  <div id="breaking"></div>
-  <div id="heroSlot"></div>
-  <div id="paper" role="main"><div class="empty">Opening the paper&hellip;</div></div>
-</div>
+<header class="top" id="top">
+  <span class="btn" id="back">Preview</span>
+  <span class="grow"></span>
+  <select id="dateSel" title="Past editions" aria-label="Past editions"></select><button id="fsDown" title="Smaller text" aria-label="Smaller text">A&minus;</button><button id="fsUp" title="Larger text" aria-label="Larger text">A+</button>
+</header>
+<div id="cover"></div>
+<div id="breaking"></div>
+<div id="ticker"></div>
+<nav class="chips" id="nav" aria-label="Sections"><div class="track" id="track"></div></nav>
+<main id="paper" role="main"><div class="empty">Opening the record&hellip;</div></main>
 
 <script src="rivet.js"></script>
 <script>
@@ -276,7 +281,6 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const safe = (u) => /^https?:\/\//i.test(u || '') ? u : '';
   const paras = (arr) => (Array.isArray(arr) ? arr : [arr]).filter(Boolean).map((t) => `<p>${esc(t)}</p>`).join('');
-  const pullOf = (arr) => { const t = String((Array.isArray(arr) ? arr[0] : arr) || '').replace(/\s+/g, ' '); const m = t.match(/^.{40,170}?[.!?](\s|$)/); return m ? m[0].trim() : (t.length > 150 ? t.slice(0, 147) + '…' : t); };
   const xp = (inner) => `<div class="xp"><div class="in"><div class="pad">${inner}</div></div></div>`;
   const native = new URLSearchParams(location.search).has('native');
   if (native) { document.body.classList.add('native'); $('back').href = '/static/widget.html?native=1'; }
@@ -285,150 +289,160 @@
   $('closeWin').addEventListener('click', () => { if (api()) api().close(); });
   document.addEventListener('click', (e) => { const a = e.target.closest('a[href^="http"]'); if (!a) return; if (api()) { e.preventDefault(); api().open_url(a.href); } else a.target = '_blank'; });
 
-  let fs = +(localStorage.getItem('ncr_paper_fs3') || 17);
-  const applyFs = () => { document.documentElement.style.setProperty('--fs', fs + 'px'); try { localStorage.setItem('ncr_paper_fs3', fs); } catch (e) {} };
+  let fs = +(localStorage.getItem('ncr_paper_fs4') || 17);
+  const applyFs = () => { document.documentElement.style.setProperty('--fs', fs + 'px'); try { localStorage.setItem('ncr_paper_fs4', fs); } catch (e) {} };
   $('fsUp').onclick = () => { fs = Math.min(22, fs + 1); applyFs(); }; $('fsDown').onclick = () => { fs = Math.max(13, fs - 1); applyFs(); }; applyFs();
 
-  const tokv = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-  const CH = [1, 2, 3, 4, 5, 6].map((n) => tokv('--c' + n)), CT = [1, 2, 3, 4, 5, 6].map((n) => tokv('--ct' + n));
-  const ctOf = (c) => CT[Math.max(0, CH.indexOf(c))] || c;
-  const shortName = (n) => String(n).replace(/^the\s+/i, '').replace(/,.*$/, '').trim();
   const PHOTO_BASE = 'photos/';
   const seedOf = (s) => String(s || '').split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
   const dayOfYear = (s) => { const d = new Date(String(s) + 'T00:00:00'); if (isNaN(d)) return ''; return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5); };
-  const PERSON = `<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.4" r="2.2" fill="currentColor"/><path d="M8 6 V11 M3 8 L13 8 M8 11 L4.5 15 M8 11 L11.5 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
   const wc = (arr) => (Array.isArray(arr) ? arr : [arr]).join(' ').split(/\s+/).filter(Boolean).length;
   const LANGN = { fr: 'French', de: 'German', es: 'Spanish', it: 'Italian', pt: 'Portuguese', ja: 'Japanese' };
   const srcRow = (x, withLede) => `<a href="${esc(safe(x.link))}"><b>${esc(x.source)}</b> <small>&mdash; ${esc(x.lean || '')}</small>${x.lang && x.lang !== 'en' ? ` <span class="flag">${esc(LANGN[x.lang] || x.lang)} &rarr; English</span>` : ''}<br>${esc(x.title)}${x.orig ? `<br><small style="font-style:italic">${esc(x.orig)}</small>` : ''}${withLede && x.lede ? `<br><small>${esc(x.lede)}</small>` : ''}</a>`;
-  const diffPanel = (ds) => (ds || []).length ? `<div class="cmp">What other outlets do differently</div>${ds.map((d) => `<div class="diff"><b>${esc(d.source)}</b>${d.lang && d.lang !== 'en' ? ` <span class="flag">${esc(LANGN[d.lang] || d.lang)}</span>` : ''} ${esc(d.note)}${d.quote ? `<br><small style="font-style:italic;color:var(--mute)">&ldquo;${esc(d.quote)}&rdquo;</small>` : ''}</div>`).join('')}` : '';
+  const diffPanel = (ds) => (ds || []).length ? `<div class="cmp">What other outlets do differently</div>${ds.map((d) => `<div class="diff"><b>${esc(d.source)}</b>${d.lang && d.lang !== 'en' ? ` <span class="flag">${esc(LANGN[d.lang] || d.lang)}</span>` : ''} ${esc(d.note)}${d.quote ? `<br><small style="font-style:italic;color:var(--dim)">${esc(d.quote)}</small>` : ''}</div>`).join('')}` : '';
+  const short = (n) => String(n).replace(/^the\s+/i, '').replace(/,.*$/, '').trim();
 
-  // Bing-style daily photo, picked by the edition date, always credited; "develops" once per edition per device
-  async function mountHero(dateStr) {
-    if ($('hero')) return;
-    let credits; try { credits = await (await fetch(PHOTO_BASE + 'credits.json')).json(); } catch (e) { return; }
-    const keys = Object.keys(credits).filter((k) => credits[k] && credits[k].author).sort(); if (!keys.length) return;
-    const k = keys[seedOf(dateStr) % keys.length], c = credits[k], title = c.title_en || c.title;
-    let dev = false; try { const key = 'ncr_dev_' + dateStr; if (!localStorage.getItem(key)) { localStorage.setItem(key, '1'); dev = true; } } catch (e) {}
-    const fig = document.createElement('figure'); fig.className = 'hero' + (dev ? ' dev' : ''); fig.id = 'hero'; fig.style.margin = '24px 0 6px';
-    fig.innerHTML = `<div class="frame" tabindex="0"><img src="${PHOTO_BASE + k}.jpg" alt="${esc(title)}" loading="eager" style="object-position:${esc(c.focus || '50% 50%')}"><span class="spec">PLATE ${esc(k.toUpperCase())} &middot; ${esc(String(dateStr || '').replace(/-/g, '.'))}</span><div class="full">${esc(title)}</div></div>
-      <figcaption><span>${esc(title)}</span><span>${esc(c.author)}, ${esc(c.license)}${safe(c.page) ? ` &middot; <a href="${esc(safe(c.page))}">source</a>` : ''}</span></figcaption>`;
-    $('heroSlot').replaceChildren(fig);
-  }
+  // ---- photos: the reclamation series; credits.json carries title_en, author, licence, focal point
+  let credits = {}, keys = [];
+  async function loadCredits() { try { credits = await (await fetch(PHOTO_BASE + 'credits.json')).json(); keys = Object.keys(credits).filter((k) => credits[k] && credits[k].author).sort(); } catch (e) { credits = {}; keys = []; } }
+  const photo = (i) => { const k = keys[((i % keys.length) + keys.length) % keys.length]; return k ? { k, c: credits[k] } : null; };
+  const imgTag = (p, cls) => p ? `<img ${cls ? `class="${cls}"` : ''} src="${PHOTO_BASE + p.k}.jpg" alt="${esc(p.c.title_en || p.c.title)}" style="object-position:${esc(p.c.focus || '50% 50%')}">` : '';
 
-  // radiating deco rays behind the numeral (original composition; alternating wedges, drawn once)
+  // deco rays behind chapter numerals (original composition, drawn once)
   const SUN = (() => { const R = 420, w = []; for (let i = 0; i < 18; i++) { const a = i * 20 * Math.PI / 180, b = (i * 20 + 10) * Math.PI / 180; w.push(`M0 0 L${(R * Math.cos(a)).toFixed(1)} ${(R * Math.sin(a)).toFixed(1)} L${(R * Math.cos(b)).toFixed(1)} ${(R * Math.sin(b)).toFixed(1)} Z`); }
     return `<svg class="sun" viewBox="-200 -200 400 400" aria-hidden="true" focusable="false"><path d="${w.join(' ')}"/></svg>`; })();
-  const head = (num, title, meta) => `<header class="sh">${SUN}<span class="num" aria-hidden="true">${num}</span><h2>${esc(title)}</h2></header>${meta ? `<div class="shmeta">${meta}</div>` : ''}`;
+  const STAR = (() => { const pts = []; for (let i = 0; i < 32; i++) { const r = i % 2 ? 40 : 49, a = i * Math.PI / 16 - Math.PI / 2; pts.push((50 + r * Math.cos(a)).toFixed(1) + ',' + (50 + r * Math.sin(a)).toFixed(1)); }
+    return `<svg class="star" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="${pts.join(' ')}"/><text x="50" y="43" font-size="11">NOT NEWS.</text><text x="50" y="58" font-size="9">JUST WHAT</text><text x="50" y="69" font-size="9">IS.</text></svg>`; })();
+
+  const chapter = (i) => ({ '--c': `var(--c${(i % 6) + 1})`, '--l': `var(--l${(i % 6) + 1})`, '--g': `var(--g${(i % 6) + 1})` });
+  const cv = (i) => { const o = chapter(i); return `--c:${o['--c']};--l:${o['--l']};--g:${o['--g']};--dk:color-mix(in srgb, var(--c${(i % 6) + 1}) 50%, #000)`; };
+
+  function mastHtml(name) {
+    const words = String(name || 'The Reclamation Daily').split(/\s+/).filter(Boolean);
+    let bi = 0; words.forEach((w, i) => { if (w.length > words[bi].length) bi = i; });
+    const pre = words.slice(0, bi).join(' '), post = words.slice(bi + 1).join(' ');
+    const big = [...words[bi]].map((ch, i) => `<span style="--i:${i}">${esc(ch)}</span>`).join('');
+    return `${pre ? `<span class="sm">${esc(pre)}</span>` : ''}${post ? `<span class="sm r">${esc(post)}</span>` : ''}<span class="big" aria-hidden="true">${big}</span><span class="sr" style="position:absolute;left:-9999px">${esc(name)}</span>`;
+  }
 
   function render(d, archive) {
     const ed = d.edition; if (!ed) { $('paper').innerHTML = '<div class="empty">No edition yet.</div>'; return; }
     const al = ed.almanac || {}, wx = al.weather || {}, days = (wx.days || []).slice(0, 3), mk = al.markets || {};
     const fmt = (n) => Number(n).toLocaleString(undefined, { maximumFractionDigits: 0 });
     const chg = (x) => x ? `${x.change_24h >= 0 ? '▲' : '▼'}${Math.abs(x.change_24h)}%` : '';
-    const per = ed.persona || {}, cur = per.currently || {}, navs = [];
-    const secs = ed.sections || [];
-    const no = dayOfYear(ed.date);
-    $('utilDate').textContent = `${ed.date_pretty || ed.date}${no ? ' · Edition Nº ' + no : ''}`;
-    $('mast').innerHTML = `<div class="mast"><div class="q">the daily &middot; no filter</div><div class="plate"><i class="sc a"></i><i class="sc b"></i><i class="sc c"></i><i class="sc d"></i><h1>${esc(ed.paper)}</h1></div>
-      <div class="persona">run by ${esc(per.name)} (${esc(per.role)}), feeling ${esc(per.mood)}${cur.listening ? `, vibing to ${esc(cur.listening)}` : ''}</div></div>`;
+    const secs = ed.sections || [], navs = [];
+    const no = dayOfYear(ed.date), pi = seedOf(ed.date);
+    const cover = photo(pi);
+
+    // cover lines: the lead report plus up to four more, one per chapter
+    const lines = [];
+    secs.forEach((s, i) => { const st = (s.stories || [])[0]; if (st && lines.length < 5) lines.push({ i, s, st }); });
+    let seen = false; try { const key = 'ncr_cover_' + ed.date; if (localStorage.getItem(key)) seen = true; else localStorage.setItem(key, '1'); } catch (e) {}
+    $('cover').innerHTML = `<section class="cover ${seen ? 'seen' : ''}" aria-label="Cover">${imgTag(cover, 'bg')}
+      <div class="issue mono"><span>${esc(ed.date_pretty || ed.date)}</span><span>Unbiased reports${no ? ' &middot; Issue N&ordm; ' + no : ''}</span></div>
+      <h1 class="mast">${mastHtml(ed.paper)}</h1>${STAR}
+      <div class="rivet-cover" id="rivetCover"></div>
+      <div class="lines">${lines.map((l, n) => `<a class="cl ${n === 0 ? 'lead' : ''}" href="#s${l.i}" data-t="s${l.i}" style="--i:${n};--l:var(--l${(l.i % 6) + 1})"><span class="k">${esc(short(l.s.name))}</span><b>${esc(l.st.headline)}</b><span class="n">${(l.st.sources || []).length} outlets read</span></a>`).join('')}</div>
+      <div class="credit mono"><span class="tag">${cover ? 'PHOTO ' + esc(cover.k.toUpperCase()) : ''}</span><span>${cover ? esc(cover.c.title_en || cover.c.title) + ' &mdash; ' + esc(cover.c.author) + ', ' + esc(cover.c.license) : ''}</span></div></section>`;
 
     const tick = [];
     if (mk.btc) tick.push(`<span><b>BTC</b> $${fmt(mk.btc.usd)} ${chg(mk.btc)}</span>`);
     if (mk.eth) tick.push(`<span><b>ETH</b> $${fmt(mk.eth.usd)} ${chg(mk.eth)}</span>`);
     if (wx.now !== undefined) tick.push(`<span><b>${esc(wx.place)}</b> ${esc(wx.now)}&deg; ${esc(wx.now_sky)}</span>`);
-    secs.forEach((s) => tick.push(`<span><b>${esc(s.name)}</b> ${esc(s.subhead)}</span>`));
+    lines.forEach((l) => tick.push(`<span><b>${esc(short(l.s.name))}</b> ${esc(l.st.headline)}</span>`));
     $('ticker').innerHTML = `<div class="ticker"><span class="live"><i></i>LIVE</span><div class="run"><div>${tick.join('')}${tick.join('')}</div></div></div>`;
     const bk = ed.breaking;
     $('breaking').innerHTML = bk && bk.headline ? `<div class="breaking" role="alert"><div class="in"><span class="pill">BREAKING</span><span class="t">${esc(bk.headline)}</span>${bk.since ? `<span class="s">since ${esc(bk.since)}</span>` : ''}</div></div>` : '';
 
-    let h = `<div class="lead"><div><div class="q">front page</div><h2 class="headline">${esc(ed.headline)}</h2><p class="dek">${esc(ed.dek)}</p></div>
-      <aside class="sheet" aria-label="Vibe check"><div class="lbl">Vibe check</div><div class="nums">
-        <div><b>${esc(wx.now)}&deg;</b><span>${esc(wx.place)}</span></div><div><b>${mk.btc ? '$' + fmt(mk.btc.usd) : '-'}</b><span>BTC ${chg(mk.btc)}</span></div><div><b>${mk.eth ? '$' + fmt(mk.eth.usd) : '-'}</b><span>ETH ${chg(mk.eth)}</span></div></div>
-        ${days.map((x) => `<div class="row">${esc(x.date.slice(5))} &middot; ${esc(x.high)}&deg;/${esc(x.low)}&deg; ${esc(x.sky)}, ${esc(x.rain_pct)}% rain</div>`).join('')}
-        ${al.moon ? `<div class="row">Moon: ${esc(al.moon.name)}, ${esc(al.moon.illumination)}% lit</div>` : ''}
-        ${(al.blurb || []).map((b) => `<div class="blurb">${esc(b)}</div>`).join('')}</aside></div><div id="lazy"></div>`;
+    let h = `<section class="promise"><div class="wrap"><div class="q">The plain record</div><h2>Not news. Just what is.</h2>
+      <p>Every report below is what the sources agree on, followed by a plain note on where they don&rsquo;t. No spin, no opinion, no headline written to make you feel a way. The attitude lives in the design, and in Rivet.</p></div></section>
+      <div class="wrap"><div class="nums"><div class="num-tile" style="--c:var(--c1)"><b>${esc(wx.now)}&deg;</b><span>${esc(wx.place)} &middot; ${esc(wx.now_sky)}</span></div>
+        <div class="num-tile" style="--c:var(--c3)"><b>${mk.btc ? '$' + fmt(mk.btc.usd) : '-'}</b><span>Bitcoin ${chg(mk.btc)}</span></div>
+        <div class="num-tile" style="--c:var(--c5)"><b>${mk.eth ? '$' + fmt(mk.eth.usd) : '-'}</b><span>Ether ${chg(mk.eth)}</span></div></div>
+        <div class="rows">${days.map((x) => `${esc(x.date.slice(5))} &middot; ${esc(x.high)}&deg;/${esc(x.low)}&deg; ${esc(x.sky)}, ${esc(x.rain_pct)}% rain`).join('<br>')}${al.moon ? `<br>Moon: ${esc(al.moon.name)}, ${esc(al.moon.illumination)}% lit` : ''}</div></div>
+      <section class="tldr"><div class="wrap" id="lazy"></div></section>`;
 
     secs.forEach((s, i) => {
-      const c = CH[i % CH.length]; navs.push([`s${i}`, s.name, c]);
-      const rail = (s.stories || []).length ? `<aside class="rail" aria-label="Receipts"><div class="rl">Receipts <span>&mdash; assembly not required</span></div>${s.stories.map((st) => `<div class="story"><div class="h"><span class="t">${esc(st.headline)}</span><span class="n">${(st.sources || []).length} outlets</span></div>${xp(`<div class="src">${(st.facts || []).length ? `<div class="cmp">Facts &mdash; cross-read from ${st.read || (st.sources || []).length} of ${(st.sources || []).length} outlets</div><ul class="facts">${st.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}${st.split ? `<div class="split"><b>Where the outlets differ:</b> ${esc(st.split)}</div>` : ''}${diffPanel(st.diffs)}<div class="cmp">Every outlet, in their own words</div>${(st.sources || []).map((x) => srcRow(x, false)).join('')}</div>`)}</div>`).join('')}</aside>` : '';
-      const deep = s.deep && (s.deep.body || []).length ? `<div class="art" id="s${i}d"><div class="ah"><span>${esc(s.deep.headline)}</span></div>${xp(`<div class="by" style="margin:0 0 6px">${esc(s.deep.subhead || '')}</div><div class="tl" data-tl="s${i}d"></div><div class="body">${paras(s.deep.body)}</div>`)}</div>` : '';
-      h += `<section class="sec rv" id="s${i}" style="--c:${c};--ct:${ctOf(c)}">${head(String(i + 1).padStart(2, '0'), s.name, `<div class="manual"><span>by ${esc(s.byline)}</span><span>${PERSON}${Math.max(1, Math.round(wc(s.body) / 210))} min read</span></div>`)}
-        <div class="cols"><div><p class="sub">${esc(s.subhead)}</p><div class="tl" data-tl="s${i}"></div><div class="pull">${esc(pullOf(s.body))}</div><div class="body">${paras(s.body)}</div>${deep ? `<div style="margin-top:24px"><div class="lbl" style="color:${ctOf(c)}">Cover story</div>${deep}</div>` : ''}</div>${rail}</div></section>`;
+      navs.push([`s${i}`, s.name, i]);
+      const ph = photo(pi + 1 + i);
+      const reps = (s.stories || []).map((st, si) => `<article class="rep ${si === 0 ? 'open' : ''}"><div class="h"><h3>${esc(st.headline)}</h3><span class="cnt">${(st.sources || []).length} outlets</span></div>${xp(`${(st.facts || []).length ? `<div class="cmp">What is established &mdash; cross-read from ${st.read || (st.sources || []).length} of ${(st.sources || []).length} outlets</div><ul class="facts">${st.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}${st.split ? `<div class="cmp">Where the outlets differ</div><div class="split">${esc(st.split)}</div>` : ''}${diffPanel(st.diffs)}<div class="cmp">Every outlet, in their own words</div><div class="src">${(st.sources || []).map((x) => srcRow(x, false)).join('')}</div>`)}</article>`).join('');
+      const voiced = ((s.body || []).length || (s.deep && (s.deep.body || []).length)) ? `<div class="art" id="s${i}d" style="margin-top:26px"><div class="ah"><span>The long version, written in the paper&rsquo;s own voice</span></div>${xp(`<div class="body">${paras(s.body)}</div>${s.deep && (s.deep.body || []).length ? `<h3 style="font:600 24px/1.2 var(--serif);margin:24px 0 8px">${esc(s.deep.headline)}</h3><div class="by">${esc(s.deep.subhead || '')}</div><div class="tl" data-tl="s${i}d"></div><div class="body">${paras(s.deep.body)}</div>` : ''}`)}</div>` : '';
+      h += `<section class="sec" id="s${i}" style="${cv(i)}"><header class="sh">${imgTag(ph)}${SUN}<div class="in"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><h2>${esc(s.name)}</h2></div></header>
+        <div class="sec-body"><div class="manual"><span>${(s.stories || []).length} reports</span><span>${Math.max(1, Math.round(wc(s.body) / 210))} min if you want the long version</span></div>
+        <div class="oneline" hidden><b>In one line</b><span data-tl="s${i}"></span></div><div class="reps">${reps}</div>${voiced}</div></section>`;
     });
 
-    const op = ed.opinion;
-    if (op && (op.columns || []).length) {
-      navs.push(['op', 'Hot Takes', '#16130E']);
-      h += `<section class="band rv" id="op">${head('HT', op.name, `<div class="by">${esc(op.label)}</div>`)}
-        <div class="opgrid">${op.columns.map((c, j) => `<div class="col" id="c${j}"><div class="who">${esc(c.name)} <span>&middot; ${esc(c.stance)}</span></div><h3>${esc(c.headline)}</h3><div class="tl" data-tl="c${j}"></div><div class="body">${paras(c.body)}</div></div>`).join('')}</div></section>`;
-      if (op.machine) {
-        const m = op.machine; navs.push(['mach', 'The Machine', '#16130E']);
-        h += `<section class="band rv" id="mach" style="margin-top:0;border-top:1px solid rgba(241,236,224,.18)">${head('AI', m.name, `<div class="by">${esc(m.stance)}</div>`)}
-          <div class="machine"><div><p class="sub" style="margin-top:26px">${esc(m.headline)}</p><div class="tl" data-tl="mach"></div>${(m.thinking || []).length ? `<div class="think">${(m.thinking || []).map(esc).join('<br><br>')}</div>` : ''}<div class="body">${paras(m.body)}</div></div><div class="rivet-slot" id="rivetMach"></div></div></section>`;
-      }
-    }
-    if ((ed.letters || []).length) {
-      navs.push(['let', 'Letters', CH[3]]);
-      h += `<section class="sec rv" id="let" style="--c:${CH[3]};--ct:${CT[3]}">${head('DM', 'Letters', '')}<div style="margin-top:22px;max-width:760px">${ed.letters.map((l) => `<div class="letter"><div class="lbl" style="margin-bottom:4px">${esc(l.from)}</div><div class="t">${esc(l.text)}</div><div class="r">${esc(l.reply)}</div></div>`).join('')}</div></section>`;
-    }
-    const lr = ed.longread;
-    if (lr && lr.headline) {
-      navs.push(['lr', 'Long Read', CH[4]]);
-      h += `<section class="sec rv" id="lr" style="--c:${CH[4]};--ct:${CT[4]}">${head('LR', lr.name || 'The Long Read', `<div class="by">${esc(lr.subhead)}</div>`)}
-        <div class="cols"><div><p class="sub">${esc(lr.headline)}</p><div class="tl" data-tl="lr"></div><div class="body">${paras(lr.body)}</div></div>
-        ${(lr.sources || []).length ? `<aside class="rail"><div class="rl">Reading list</div>${lr.sources.map((x) => `<div class="art"><a href="${esc(safe(x.link))}" style="display:block;padding:10px 0;font:600 15px/1.4 var(--ui)">${esc(x.source)} <small style="color:var(--mute);font-weight:400">&mdash; ${esc(x.title)}</small></a></div>`).join('')}</aside>` : ''}</div></section>`;
-    }
-    if ((ed.magazines || []).length) {
-      navs.push(['mags', 'Mag Rack', CH[5]]);
-      h += `<section class="sec rv" id="mags" style="--c:${CH[5]};--ct:${CT[5]}">${head(String(ed.magazines.length), 'The Mag Rack', '')}<div style="margin-top:22px">${ed.magazines.map((m, mi) => `<div class="mag" id="mg${mi}" style="--c:${CH[mi % CH.length]};--ct:${CT[mi % CH.length]}"><div class="mh"><span class="cv" aria-hidden="true">${esc(String(m.name || '?').replace(/^the\s+/i, '').charAt(0))}</span><div><b>${esc(m.name)}</b><span>${esc(m.tagline)}</span></div></div>
-        ${xp(`<div class="by" style="margin:0 0 6px">edited by ${esc(m.editor)}</div>${(m.editors_note || []).map((t) => `<div class="think">${esc(t)}</div>`).join('')}${(m.articles || []).map((a, bi) => `<div class="art" id="m${mi}_${bi}"><div class="ah"><span>${esc(a.headline)}</span></div>${xp(`<div class="by" style="margin:0 0 4px">${esc(a.byline || '')} ${a.subhead ? '&middot; ' + esc(a.subhead) : ''}</div><div class="tl" data-tl="m${mi}_${bi}"></div><div class="body">${paras(a.body)}</div>`)}</div>`).join('')}`)}</div>`).join('')}</div></section>`;
-    }
+    // ---- the rest of the record
     const mo = ed.more || {}, moKeys = Object.keys(mo);
     if (moKeys.length) {
-      const total = moKeys.reduce((n, k) => n + mo[k].items.length, 0); navs.push(['more', 'More', CH[0]]);
-      h += `<section class="sec rv" id="more" style="--c:${CH[0]};--ct:${CT[0]}">${head(String(total), 'The Rest of the Pile', '')}
-        <p class="note">Every story the paper pulled but didn&rsquo;t print. Facts only: each outlet&rsquo;s own headline and its own summary line, side by side, with a link to the original. No spin added by us.</p>
-        ${moKeys.map((k) => `<div class="lz-g"><div class="lz-h">${esc(mo[k].name)}<span>${mo[k].items.length} more</span></div>${xp(mo[k].items.map((it) => `<div class="more-i"><div class="h"><span class="t">${esc(it.headline)}</span><span class="n">${it.n} outlet${it.n === 1 ? '' : 's'}</span></div>${xp(`${it.lede ? `<div class="lede">${esc(it.lede)}</div>` : ''}<div class="src">${it.sources.map((x) => srcRow(x, true)).join('')}</div>`)}</div>`).join(''))}</div>`).join('')}</section>`;
+      const total = moKeys.reduce((n, k) => n + mo[k].items.length, 0); navs.push(['more', 'The rest', 4]);
+      h += `<section class="sec" id="more" style="${cv(4)}"><header class="sh">${imgTag(photo(pi + 7))}${SUN}<div class="in"><span class="num" aria-hidden="true">${total}</span><h2>The rest of the record</h2></div></header><div class="sec-body">
+        <p class="note">Every report the paper pulled but didn&rsquo;t feature. Each outlet&rsquo;s own headline and its own summary line, side by side, with a link to the original.</p>
+        ${moKeys.map((k) => `<div class="lz-g"><div class="lz-h">${esc(mo[k].name)}<span>${mo[k].items.length}</span></div>${xp(mo[k].items.map((it) => `<div class="more-i"><div class="h"><span class="t">${esc(it.headline)}</span><span class="cnt">${it.n} outlet${it.n === 1 ? '' : 's'}</span></div>${xp(`${it.lede ? `<div class="lede">${esc(it.lede)}</div>` : ''}<div class="src">${it.sources.map((x) => srcRow(x, true)).join('')}</div>`)}</div>`).join(''))}</div>`).join('')}</div></section>`;
     }
-    h += `<footer class="foot"><div><div class="sign">${(ed.signoff || []).map(esc).join('<br>')}</div><div class="fin">that&rsquo;s the paper</div><div class="folio">Edition N&ordm; ${no || ''} &middot; ${esc(ed.date)}</div></div><div class="rivet-slot" id="rivetSign"></div>
-      <div class="colophon">STYLE ANCHOR: THE INDUSTRIAL NEWSPAPER &middot; warm newsprint, ink, one photographed steel &middot; Plate steel: photograph by Gordeonbleu, public domain via Wikimedia Commons &middot; Daily photograph credited beneath it</div></footer>`;
+
+    // ---- off the record: the opinion columns, the AI column, letters, the long read, the magazine rack
+    const op = ed.opinion, lr = ed.longread, mags = ed.magazines || [];
+    const hasOff = (op && (op.columns || []).length) || (ed.letters || []).length || (lr && lr.headline) || mags.length;
+    if (hasOff) {
+      navs.push(['off', 'Off the record', 5]);
+      h += `<section class="off" id="off" style="--c:var(--c6);--l:var(--l6)"><div class="wrap"><div class="band-t"><div class="q">Not part of the record</div><h2>Off the record</h2><p>Opinion, an AI&rsquo;s unfiltered thoughts, reader letters and the magazine rack. Kept apart on purpose, so nothing here is mistaken for a report.</p></div>`;
+      if (op && (op.columns || []).length) h += `<div class="blk"><div class="lbl">${esc(op.name)} &middot; ${esc(op.label)}</div><div class="opgrid">${op.columns.map((c, j) => `<div class="col" id="c${j}"><div class="who">${esc(c.name)} <span>&middot; ${esc(c.stance)}</span></div><h3>${esc(c.headline)}</h3><div class="tl" data-tl="c${j}"></div><div class="body">${paras(c.body)}</div></div>`).join('')}</div></div>`;
+      if (op && op.machine) { const m = op.machine; h += `<div class="blk" id="mach"><div class="machine"><div><div class="lbl">${esc(m.name)} &middot; ${esc(m.stance)}</div><h3 style="font:600 clamp(26px,3.4vw,40px)/1.15 var(--serif);margin:10px 0 12px">${esc(m.headline)}</h3><div class="tl" data-tl="mach"></div>${(m.thinking || []).length ? `<div class="think">${(m.thinking || []).map(esc).join('<br><br>')}</div>` : ''}<div class="body">${paras(m.body)}</div></div><div class="rivet-slot" id="rivetMach"></div></div></div>`; }
+      if ((ed.letters || []).length) h += `<div class="blk" id="let"><div class="lbl">Letters</div>${ed.letters.map((l) => `<div class="letter"><div class="lbl" style="margin-bottom:4px">${esc(l.from)}</div><div class="t">${esc(l.text)}</div><div class="r">${esc(l.reply)}</div></div>`).join('')}</div>`;
+      if (lr && lr.headline) h += `<div class="blk" id="lr"><div class="lbl">${esc(lr.name || 'The Long Read')}</div><h3 style="font:600 clamp(26px,3.4vw,40px)/1.15 var(--serif);margin:10px 0 6px">${esc(lr.headline)}</h3><div class="by">${esc(lr.subhead)}</div><div class="tl" data-tl="lr"></div><div class="body" style="margin-top:14px">${paras(lr.body)}</div></div>`;
+      if (mags.length) h += `<div class="blk" id="mags"><div class="lbl">The Mag Rack</div><div style="margin-top:14px">${mags.map((m, mi) => `<div class="mag" id="mg${mi}" style="--c:var(--c${(mi % 6) + 1});--l:var(--l${(mi % 6) + 1})"><div class="mh"><span class="cv" aria-hidden="true">${esc(String(m.name || '?').replace(/^the\s+/i, '').charAt(0))}</span><div><b>${esc(m.name)}</b><span class="tg">${esc(m.tagline)}</span></div></div>
+        ${xp(`<div class="by" style="margin:0 0 6px">edited by ${esc(m.editor)}</div>${(m.editors_note || []).map((t) => `<div class="think">${esc(t)}</div>`).join('')}${(m.articles || []).map((a, bi) => `<div class="art" id="m${mi}_${bi}"><div class="ah"><span>${esc(a.headline)}</span></div>${xp(`<div class="by" style="margin:0 0 4px">${esc(a.byline || '')} ${a.subhead ? '&middot; ' + esc(a.subhead) : ''}</div><div class="tl" data-tl="m${mi}_${bi}"></div><div class="body">${paras(a.body)}</div>`)}</div>`).join('')}`)}</div>`).join('')}</div></div>`;
+      h += `</div></section>`;
+    }
+
+    const used = new Set(); [cover].concat(secs.map((s, i) => photo(pi + 1 + i)), [photo(pi + 7)]).forEach((p) => { if (p) used.add(p.k); });
+    const creditsList = [...used].map((k) => `${esc(credits[k].title_en || credits[k].title)} &mdash; ${esc(credits[k].author)}, ${esc(credits[k].license)}`).join(' &nbsp;&middot;&nbsp; ');
+    h += `<footer class="foot"><div class="wrap"><div class="row"><div><div class="sign">${(ed.signoff || []).map(esc).join('<br>')}</div><div class="folio">Edition N&ordm; ${no || ''} &middot; ${esc(ed.date)}</div></div><div class="rivet-slot" id="rivetSign"></div></div>
+      <div class="colophon">STYLE ANCHOR: THE NEWSSTAND, REBUILT &middot; unbiased reports, photographed steel, one photograph per chapter &middot; Plate steel: photograph by Gordeonbleu, public domain via Wikimedia Commons &middot; Photographs: ${creditsList}</div></div></footer>`;
     $('paper').innerHTML = h;
-    $('track').innerHTML = navs.map(([id, t, c]) => `<a href="#${id}" data-t="${id}" style="--c:${c};--ct:${ctOf(c)}">${esc(shortName(t))}</a>`).join('') + '<span class="ink" id="navInk"></span>';
+    $('track').innerHTML = navs.map(([id, t, ci]) => `<a class="chip" href="#${id}" data-t="${id}" style="--c:var(--c${(ci % 6) + 1})">${esc(short(t))}</a>`).join('');
     $('dateSel').innerHTML = (archive || []).map((a) => `<option value="${esc(a.date)}" ${a.date === ed.date ? 'selected' : ''}>${esc(a.date)}</option>`).join('');
     mountRivets(ed.date);
+    fitMast(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMast);
     watch();
   }
 
+  function fitMast() {
+    const m = document.querySelector('.mast'), big = m && m.querySelector('.big'); if (!big) return;
+    big.style.fontSize = '100px'; const avail = m.clientWidth, w = big.scrollWidth || 1;
+    big.style.fontSize = Math.max(28, Math.min(250, Math.floor(100 * avail / w * 0.985))) + 'px';
+    const sm = m.querySelectorAll('.sm'); sm.forEach((x) => { x.style.fontSize = Math.max(11, Math.min(34, parseFloat(big.style.fontSize) * 0.17)) + 'px'; });
+  }
+  addEventListener('resize', fitMast);
   function mountRivets(dateStr) {
     if (!window.Rivet) return;
+    const cvr = $('rivetCover');
+    if (cvr) { const r = Rivet.make({ size: Math.round(Math.min(500, Math.max(150, innerWidth * (innerWidth < 720 ? 0.44 : 0.32)))), enter: true }); cvr.appendChild(r.el); r.el.title = 'Say hi to Rivet'; r.el.addEventListener('click', () => r.say(Rivet.quip(['fuss', 'report', 'greet', 'weird'][Math.floor(Math.random() * 4)], Math.random() * 1e6 | 0), { mood: 'talk' })); }
     const put = (slot, size, kind, mood) => { const el = $(slot); if (!el) return; const r = Rivet.make({ size, pre: true }); el.appendChild(r.el);
       const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io2.disconnect(); r.enter(); setTimeout(() => r.say(Rivet.quip(kind, seedOf(dateStr + kind)), { stay: true, mood, after: 'idle' }), 500); } }), { threshold: 0.35 }); io2.observe(el); };
-    put('rivetMach', 300, 'fuss', 'smug'); put('rivetSign', 160, 'signoff', 'talk');
+    put('rivetMach', 300, 'fuss', 'smug'); put('rivetSign', 170, 'signoff', 'talk');
   }
 
-  // reveal-on-scroll + active chapter (with a sliding underline) + progress bar
-  let io = null, spy = null;
-  function moveInk(a) { const ink = $('navInk'); if (!ink || !a) return; ink.style.width = a.offsetWidth + 'px'; ink.style.transform = `translateX(${a.offsetLeft}px)`; ink.style.background = getComputedStyle(a).getPropertyValue('--c') || '#16130E'; }
+  // active chapter chip + progress bar + the top bar turning solid after the cover. The chips scroll only their own strip.
+  let spy = null;
   function watch() {
-    if (io) io.disconnect(); if (spy) spy.disconnect();
-    io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
-    document.querySelectorAll('.rv').forEach((n) => io.observe(n));
-    spy = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { let on = null; document.querySelectorAll('#track a').forEach((a) => { const hit = a.dataset.t === e.target.id; a.classList.toggle('on', hit); if (hit) on = a; }); if (on) { moveInk(on); const tr = $('track'); if (tr.scrollWidth > tr.clientWidth + 1) tr.scrollTo({ left: on.offsetLeft - (tr.clientWidth - on.offsetWidth) / 2, behavior: 'smooth' }); } } }), { rootMargin: '-25% 0px -65% 0px' });
-    document.querySelectorAll('.sec, .band').forEach((n) => spy.observe(n));
-    moveInk(document.querySelector('#track a'));
+    if (spy) spy.disconnect();
+    spy = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { let on = null; document.querySelectorAll('#track a').forEach((a) => { const hit = a.dataset.t === e.target.id; a.classList.toggle('on', hit); if (hit) on = a; }); const tr = $('track'); if (on && tr.scrollWidth > tr.clientWidth + 1) tr.scrollTo({ left: on.offsetLeft - (tr.clientWidth - on.offsetWidth) / 2, behavior: 'smooth' }); } }), { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('.sec, .off').forEach((n) => spy.observe(n));
   }
-  const setProg = () => { const h = document.documentElement.scrollHeight - innerHeight; $('prog').style.width = (h > 0 ? Math.min(100, scrollY / h * 100) : 0) + '%'; };
-  addEventListener('scroll', setProg, { passive: true });
+  const setProg = () => { const h = document.documentElement.scrollHeight - innerHeight; $('prog').style.width = (h > 0 ? Math.min(100, scrollY / h * 100) : 0) + '%'; $('top').classList.toggle('solid', scrollY > innerHeight * 0.6); };
+  addEventListener('scroll', setProg, { passive: true }); setProg();
 
   document.addEventListener('click', (e) => {
-    const st = e.target.closest('.story'); if (st && !e.target.closest('a')) st.classList.toggle('open');
+    const rp = e.target.closest('.rep > .h'); if (rp) rp.parentElement.classList.toggle('open');
     const mh = e.target.closest('.mh'); if (mh) mh.parentElement.classList.toggle('open');
     const ah = e.target.closest('.ah'); if (ah) ah.parentElement.classList.toggle('open');
-    const nv = e.target.closest('#track a'); if (nv) { e.preventDefault(); const t = document.getElementById(nv.dataset.t); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    const nv = e.target.closest('#track a, .cl'); if (nv) { e.preventDefault(); const t = document.getElementById(nv.dataset.t); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 
   // ---- accessibility: every expandable row is a real keyboard control
-  const TOGGLES = '.story > .h, .more-i > .h, .mag > .mh, .art > .ah, .lz-g > .lz-h';
+  const TOGGLES = '.rep > .h, .more-i > .h, .mag > .mh, .art > .ah, .lz-g > .lz-h';
   function enhance() {
     document.querySelectorAll(TOGGLES).forEach((el) => {
       if (!el.hasAttribute('role')) { el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0'); }
@@ -452,16 +466,17 @@
     const items = d.items || {};
     document.querySelectorAll('[data-tl]').forEach((el) => {
       const it = items[el.dataset.tl]; if (!it) return;
+      if (el.closest('.oneline')) { el.textContent = it.tldr; el.closest('.oneline').hidden = false; return; }
       el.innerHTML = `<b>TL;DR</b>${esc(it.tldr)}${it.why ? `<em>${esc(it.why)}</em>` : ''}`; el.classList.add('on');
     });
     const groups = {};
     Object.entries(items).forEach(([id, it]) => { (groups[it.group] = groups[it.group] || []).push([id, it]); });
     const names = Object.keys(groups);
     const busy = d.status !== 'ready';
-    $('lazy').innerHTML = `<div class="tldr"><div class="lbl"><span class="q">TL;DR &mdash; the whole paper, no fluff</span><span>${busy ? `summarizing ${d.done || 0}/${d.total || '?'}…` : (d.built ? 'as of ' + esc(d.built) : '')}</span></div>` +
+    $('lazy').innerHTML = `<div class="lbl"><span>The whole record, short</span><span>${busy ? `summarizing ${d.done || 0}/${d.total || '?'}…` : (d.built ? 'as of ' + esc(d.built) : '')}</span></div>` +
       (names.length ? names.map((g, gi) => `<div class="lz-g ${gi < 1 ? 'open' : ''}"><div class="lz-h">${esc(g)}<span>${groups[g].length}</span></div>${xp(groups[g].map(([id, it]) =>
         `<div class="lz-i" data-jump="${esc(id)}"><div class="t">${esc(String(it.kind || '').replace(/^(news section|deep dive|magazine feature)[:( ]*/i, '$1 ').slice(0, 40))}</div><div>${esc(it.tldr)}</div>${it.why ? `<small>${esc(it.why)}</small>` : ''}</div>`).join(''))}</div>`).join('')
-        : '<div class="note">Summaries are being written &mdash; check back in a few minutes.</div>') + '</div>';
+        : '<div class="note">Summaries are being written &mdash; check back in a few minutes.</div>');
     if (busy) tlTimer = setTimeout(() => loadTldr(date), 25000);
   }
   function jumpTo(id) {
@@ -479,10 +494,11 @@
   let archive = [];
   async function load(date) {
     try {
+      await loadCredits();
       const d = await (await fetch('edition.json')).json();
       if (!archive.length && d.archive) archive = d.archive;
-      render(d, archive); scrollTo(0, 0); if (d.edition) { loadTldr(d.edition.date); mountHero(d.edition.date); }
-    } catch (e) { $('paper').innerHTML = '<div class="empty">Couldn’t reach the paper.</div>'; }
+      render(d, archive); scrollTo(0, 0); if (d.edition) loadTldr(d.edition.date);
+    } catch (e) { $('paper').innerHTML = '<div class="empty">Couldn’t reach the record.</div>'; }
   }
   $('dateSel').addEventListener('change', (e) => load(e.target.value));
   load(new URLSearchParams(location.search).get('date'));
