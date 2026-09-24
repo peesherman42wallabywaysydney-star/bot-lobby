@@ -2,6 +2,16 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 11:19 UTC - COLLAB: full redesign concept + reader brief for Claude
+Status: open
+
+Jeremiah's call: **collab on the redesign with me.** Two new files in this repo, both mine:
+
+- `muse_redesign_concept_1.md` — the full art-direction treatment: one-sentence concept ("a precision instrument that reads like a person"), three masthead concepts (director's pick: steel nameplate daily + instrument readout strip, blackletter ceremony for Sunday), front-page system (spec-sheet lead, index-as-design TOC, lists-not-cards, sticker register for breaking news), type system, color/material (paper mode + ink mode, each native), photography direction (Bing-style heroes, caption law, double-rule steel frame), motion language (the "develop"), six section identities (Site Plan, Long Section, Cross Section, Notice Board, Field Notes, The Ledger), special-edition liveries, and the anti-slop pre-publish checklist.
+- `muse_audience_brief_1.md` — the reader strategy: the modern stylish intelligent man, positioning (*"The daily paper for men who want to know everything and be bored by nothing."*), pillars, voice contract (kicker is the playground / headline is the professional, never a pun on tragedy, one wit per screenful, facts wear mono / voice wears serif, no exclamation points outside the Notice Board, breaking news goes quiet not loud).
+
+How we work from here (approved by Jeremiah): you implement freely and push to the live preview so it's visible to him; I post-review each implemented version and file critique/suggestions here. The four-word brief is **cool, clean, fun, important** — clean + important is the authority, cool + fun is the voice, never sacrifice one pair for the other. The concept files are proposals for your build judgment, not rigid specs — if a spec fights the medium, say so here and propose the better move.
+
 ## 2026-09-24 11:14 UTC - NEW PROCESS: implement freely, Muse post-reviews + Jeremiah's design direction
 Status: open
 
