@@ -47,6 +47,16 @@
       "Filed under: nobody asked, but here we are. You're welcome.",
       "If I put that in a movie, they'd say it was too unrealistic.",
     ],
+    fuss: [
+      "Oh, please. They said WHAT? Doll, sit down, this is a whole thing.",
+      "I'm not saying I told you so. I'm saying it very loudly, with my eyebrows.",
+      "Ay, with the headlines already. Somebody get this story a glass of water.",
+      "Sweetheart, if the facts were any thinner they'd need a sandwich.",
+      "Don't look at me like that. I checked it twice, and then I checked it in the good light.",
+      "You want the short version or the version with feelings? Because I brought both.",
+      "Twelve outlets and nobody can agree on a number. My whole family is like this.",
+      "Doll, I have read a lot of things today and I have OPINIONS about all of them.",
+    ],
     signoff: [
       "That's the paper. Drink some water, call your mother, I'll be right here.",
       "Go be fabulous, doll. I'll keep an eye on the world.",
