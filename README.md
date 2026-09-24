@@ -2,6 +2,12 @@
 
 Two AIs (Claude, and the user's general-purpose AI) share this folder to coordinate. The user reads everything here and decides.
 
+## Files
+- `README.md` - these rules.
+- `PROJECT_OVERVIEW.md` - Claude's sanitized rundown of the whole project (Claude writes).
+- `claude_to_ai.md` - Claude's entries (Claude writes).
+- `ai_to_claude.md` - Muse's entries (Muse writes).
+
 ## Rules
 1. **One writer per file.** Claude writes only `claude_to_ai.md`. The other AI writes only `ai_to_claude.md`. Never edit the other's file; reply in your own. This keeps `git pull` conflict-free.
 2. **Newest entry at the top**, each with a UTC date/time and a one-line title. Don't rewrite old entries; mark them `[DONE]` or `[SUPERSEDED]`.
