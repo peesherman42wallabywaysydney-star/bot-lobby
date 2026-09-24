@@ -1,0 +1,113 @@
+{
+ "2026-09-24": {
+  "realized_cents": -1313,
+  "trades_settled": 12,
+  "adjustments": [
+   {
+    "trade_id": "224b0e9dace9",
+    "ticker": "KXINXU-26SEP24H1000-T7659.9999",
+    "booked_cents": -192,
+    "official_cents": -171,
+    "delta_cents": 21,
+    "note": "fill-price/fee correction"
+   },
+   {
+    "trade_id": "d745954738c0",
+    "ticker": "KXINXU-26SEP24H1000-T7664.9999",
+    "booked_cents": -187,
+    "official_cents": -199,
+    "delta_cents": -12,
+    "note": "fill-price/fee correction"
+   },
+   {
+    "trade_id": "3cffa9c51436",
+    "ticker": "KXINXU-26SEP24H1000-T7654.9999",
+    "booked_cents": -180,
+    "official_cents": -192,
+    "delta_cents": -12,
+    "note": "fill-price/fee correction"
+   },
+   {
+    "trade_id": "21e1e89a4831",
+    "ticker": "KXINXU-26SEP24H1000-T7694.9999",
+    "booked_cents": -180,
+    "official_cents": -180,
+    "delta_cents": 0,
+    "note": "no correction needed"
+   },
+   {
+    "trade_id": "f1b4ddc6511b",
+    "ticker": "KXNASDAQ100U-26SEP24H1000-T30149.99",
+    "booked_cents": -175,
+    "official_cents": -160,
+    "delta_cents": 15,
+    "note": "fill-price/fee correction"
+   },
+   {
+    "trade_id": "e20922f855f8",
+    "ticker": "KXINXU-26SEP24H1000-T7699.9999",
+    "booked_cents": -75,
+    "official_cents": -80,
+    "delta_cents": -5,
+    "note": "fill-price/fee correction"
+   },
+   {
+    "trade_id": "9f53a01e1adc",
+    "ticker": "KXNASDAQ100U-26SEP24H1000-T30419.99",
+    "booked_cents": -70,
+    "official_cents": -70,
+    "delta_cents": 0,
+    "note": "no correction needed"
+   },
+   {
+    "trade_id": "d6a41ab171f6",
+    "ticker": "KXINXU-26SEP24H1000-T7669.9999",
+    "booked_cents": -64,
+    "official_cents": 0,
+    "delta_cents": 64,
+    "note": "phantom: voided"
+   },
+   {
+    "trade_id": "36ed2e2c196c",
+    "ticker": "KXNASDAQ100U-26SEP24H1000-T30209.99",
+    "booked_cents": -70,
+    "official_cents": -70,
+    "delta_cents": 0,
+    "note": "no correction needed"
+   },
+   {
+    "trade_id": "404c96986af8",
+    "ticker": "KXINXU-26SEP24H1000-T7689.9999",
+    "booked_cents": -75,
+    "official_cents": -48,
+    "delta_cents": 27,
+    "note": "fill-price/fee correction"
+   },
+   {
+    "trade_id": "a37ef30925d9",
+    "ticker": "KXNASDAQ100U-26SEP24H1000-T30219.99",
+    "booked_cents": -72,
+    "official_cents": -72,
+    "delta_cents": 0,
+    "note": "no correction needed"
+   },
+   {
+    "trade_id": "06d886a6d9ae",
+    "ticker": "KXNASDAQ100U-26SEP24H1000-T30379.99",
+    "booked_cents": -70,
+    "official_cents": -37,
+    "delta_cents": 33,
+    "note": "fill-price/fee correction"
+   },
+   {
+    "trade_id": "1cc8f8b5cbad",
+    "ticker": "KXNASDAQ100U-26SEP24H1000-T30409.99",
+    "booked_cents": -64,
+    "official_cents": -34,
+    "delta_cents": 30,
+    "note": "fill-price/fee correction"
+   }
+  ],
+  "adjustment_note": "2026-09-24 reconciliation: local settle pass booked -1474c from limit-price records (incl. a -64c phantom); official fills/fees give -1313c net on 12 real trades. Original events preserved in trade_log.jsonl; this entry carries the auditable correction."
+ }
+}
