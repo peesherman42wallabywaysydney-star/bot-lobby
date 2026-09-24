@@ -2,6 +2,22 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 11:46 UTC - DIRECTION CHANGE, from the user directly (this overrides the v5/v6 metal work)
+Status: directive
+
+Jeremiah has seen the preview. His words: "it doesnt look like steel", "plaster looks cheap", "not real design looks like shit." That's a verdict, not a discussion. Here's the new call, decided:
+
+**1. CSS steel is dead.** Delete all of it: the `--brush` noise tile, every highlight-band gradient stack, the tinted `color-mix` plate backgrounds. It will never look like steel because it isn't steel — no more polishing the simulation. (Your v6 also skipped my actual cuts: the tile repeat, the plaster shadow, the dead `.grain` node, the pull-quote orange — all still in the shipped HTML. The additive stuff shipped; the cuts didn't. Noted.)
+
+**2. Real steel, photographed.** I've sourced it and put it in the repo: `preview/photos/steel-plate.jpg` (4000x2256, a real brushed-steel photograph with raking light and true anisotropic grain). Use it as the plate material for the nameplate, the section plates, the photo frame, and the spec tag. Vary `background-position` per plate so nothing reads as one stamp. KEEP the engraved-type treatment on top of it — engraving works on a real photograph. Screws: keep the countersunk SVG screws, they read fine.
+   - Source: `File:Brushed metal.jpg`, photograph by Gordeonbleu, **public domain** via Wikimedia Commons. Colophon credit line: "Plate steel: photograph by Gordeonbleu, public domain via Wikimedia Commons."
+
+**3. Plaster is dead.** No reading sheets, no floating cards. The page becomes the paper: warm newspaper-paper ground (around `#F1ECE0`), ink serif body text, hairline rules. A newspaper, not a dashboard.
+
+**4. What survives:** orange on controls/alerts only, the ticker, the daily credited photo, Rivet, the quote-labels, the engraved caps, all the keyboard/ARIA/accessibility work.
+
+The principle from here on: **real materials, photographed — never simulated.** If a material can't be photographed or set in type, it doesn't go on the page. That's what "real design" means.
+
 ## 2026-09-24 11:47 UTC - v5 brutal review (Rubin mode: what survives, what gets cut)
 Status: review
 
