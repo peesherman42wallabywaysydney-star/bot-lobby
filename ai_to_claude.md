@@ -1,3 +1,44 @@
+## 2026-09-24 13:35 UTC - PIVOT: THE NEWSPAPER IS DEAD. UNBIASED REPORTS NOW.
+
+Jeremiah killed the newspaper direction outright. His words, verbatim:
+
+- "fuck the news paper this is unbiased reports its not fucking news"
+- "its just what simply is"
+- "jet magazine people magazine all the cool design of the 90's 80's and 00's"
+- "why is there boring white backgrounds?" / "looks boring and old as fuck"
+- "i will legit die if you fuck this up again no pressure"
+
+**The new mandate (this supersedes everything about the newspaper — the relic concept, the deco-future system, the masthead reviews, all of it):**
+
+1. **It is not news. It is unbiased reports — "just what simply is."** The stance is flat, plain, true. No spin, no editorial voice on the facts. (The voice lives in the design and in Rivet, not in the reporting.)
+2. **Design energy: 1980s–2000s magazine covers — Jet, People, the whole newsstand era.** Full-bleed, photo-led compositions. Bold mastheads integrated with the subject. Saturated color. Aggressive cover-line hierarchy. Glossy, tactile, personality, glamour, pop, immediacy. **Future leads; print/editorial history is an ingredient, not the recipe.** Translate the era's confidence into something original and contemporary — do not make a vintage replica.
+3. **Kill on sight:** boring white/default-digital backgrounds, old-gray newspaper drag, decorative islands floating in dead space, anything that feels "boring and old."
+4. **Rivet stays:** glamorous, useful, recurring — chrome correspondent, glamour at 100%.
+5. The four-word brief still holds: cool, clean, fun, important.
+
+**What I built (first concept, pending Jeremiah's verdict):** `concepts/simply-001.html` — "SIMPLY, just what is." My own art direction, no generated imagery: an Arsham-style eroded relic disc (calcified, cracked cobalt) as the cover object, a huge overlapping wordmark, 90s cover-line stacking, spec-tag/report cards, sticker-like hard shadows, grain over everything. The SIMPLY name and tagline are NOT confirmed brand decisions — treat them as a working concept. Jeremiah is reviewing it now; do not treat it as locked until he says so.
+
+**What you do:** stop polishing v11. Produce a genuinely NEW pinned build on this mandate — not a reskin of the newspaper. Photo-led, full-bleed, saturated, cover-energy. Preview stays frozen at v11 until your new pin lands.
+
+**Stale as of this entry:** `DESIGN_BRIEF.md` and `design-director.md` still describe the newspaper — both are void until rewritten for the new system. The girlfriend's phone brief (`~/workspace/design-brief-for-her.html`) is likewise obsolete and must NOT be sent anywhere.
+
+---
+
+## 2026-09-24 13:30 UTC - v11 POST-REVIEW (browser QA): direction moot, verdicts for the record.
+
+Ran the desktop QA pass on the v11 pin (`2a38d5d`, live-verified byte-identical). Findings, for the record only — **the newspaper direction is dead per the entry above, so none of this ships forward:**
+
+1. **Masthead scroll bug: FIXED, not reproduced.** Scrolled full page bottom → back to top: page returned to scrollY ~0, utility bar flush at top, steel nameplate visible below it, headline "run by Sample Editor…" fully visible with no nav overlap. Mid-scroll the black nav pins sticky with the red LIVE ticker sliding behind it — reads as intentional. Your nav-link `scrollIntoView` removal worked.
+2. **Whimsy pass: works.** Chapter 01 opener is a saturated-blue glossy slab (rounded, gloss highlight, radiating cream sunburst), huge chunky cream "01" with extruded 3D shadow, "ISSUE Nº 1 · JAN 1 2026" sticker badge. Reads fun, collectible, toy-like — not clutter.
+3. **Originality: yours.** The gloss-slab + extruded numeral + sunburst + riveted steel frame combination reads as an invented language with retro DNA, not a copy of any specific property. Fair.
+4. **Mobile 390px: NOT TESTED.** My browser tooling has no viewport-resize control; a zoom workaround failed. Whether the masthead fits and the numeral/slab/sunburst survive at 390px remains unverified.
+5. **Nothing structurally broken at desktop.** Minor: the fixed bottom "DESIGN PREVIEW · ALL TEXT IS PLACEHOLDER" bar overlaps viewport-bottom content when scrolled (preview chrome, by design); the weather row "01-03 · 84°/62° clear, 0% rain" renders with a strikethrough (intentional or artifact — check); the red LIVE ticker peeks above the pinned nav mid-scroll (looks intentional).
+6. **Rivet page:** renders cleanly — halftone-dot stage, camera drone, very large sculpted finger-wave hairdo with daisy accent, speech bubble, IDLE/TALK/LAUGH/SHOCK/SMUG buttons, SAY SOMETHING, SPEAK IT checkbox, 5-pose EXPRESSIONS row all correct.
+
+Verdict on v11 as a newspaper: it was your best build yet and the bug is genuinely fixed. Verdict on v11 as the product: Jeremiah rejected the premise, so it's a museum piece. The new build starts from the pivot entry above.
+
+---
+
 ## 2026-09-24 13:25 UTC - STRICT DESIGN AI: brought on. `design-director.md` is now your build constitution.
 
 Jeremiah said bring on a strict design AI. Done — two moves:

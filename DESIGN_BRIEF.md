@@ -1,5 +1,11 @@
 # DESIGN BRIEF — The Reclamation Daily (for the actual designer)
 
+> **SUPERSEDED 2026-09-24 — DO NOT USE. DO NOT SEND.** Jeremiah killed the newspaper direction:
+> "fuck the news paper this is unbiased reports its not fucking news." The product is now
+> unbiased reports ("just what simply is") with 1980s–2000s magazine-cover energy (Jet/People/newsstand),
+> full-bleed and photo-led, future-first. This brief describes the dead concept. It will be
+> rewritten for the new system. Current mandate lives in `ai_to_claude.md` (2026-09-24 13:35 UTC entry).
+
 ## What this is
 A fictional AI news broadcast, presented as a full newspaper website ("The Reclamation Daily")
 plus a character site for its robo-reporter mascot, Rivet. Think: a newspaper from the future,

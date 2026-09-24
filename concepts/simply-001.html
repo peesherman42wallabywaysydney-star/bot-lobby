@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIMPLY — just what is</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plaster:#ece4d1;
+    --plaster-deep:#ddd2b8;
+    --ink:#16130e;
+    --cream:#f6f1e3;
+    --cobalt:#2038a8;
+    --gold:#c9a227;
+    --rust:#b4501e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--plaster);
+    color:var(--ink);
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* excavated grain over everything */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .mono{font-family:'Space Mono',monospace}
+  /* ---------- spec strip ---------- */
+  .spec{
+    display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;
+    font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.14em;
+    padding:.7rem 1.1rem;border-bottom:2px solid var(--ink);
+    text-transform:uppercase;
+  }
+  .spec .dot{display:inline-block;width:.55em;height:.55em;border-radius:50%;background:var(--cobalt);margin-right:.45em;vertical-align:baseline}
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:96svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:0 1.1rem 0}
+  .disc{
+    position:absolute;top:6%;left:50%;transform:translateX(-50%);
+    width:min(118vw,560px);aspect-ratio:1;z-index:0;
+    filter:drop-shadow(0 18px 30px rgba(22,19,14,.25));
+    animation:floaty 9s ease-in-out infinite;
+  }
+  @keyframes floaty{0%,100%{transform:translateX(-50%) translateY(0) rotate(0deg)}50%{transform:translateX(-50%) translateY(-14px) rotate(2deg)}}
+  .wordmark{
+    position:relative;z-index:2;
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(4.2rem,22vw,15rem);
+    line-height:.86;letter-spacing:-.02em;
+    color:var(--cream);
+    -webkit-text-stroke:2px var(--ink);
+    text-shadow:4px 4px 0 var(--ink);
+    margin-top:34svh;
+    animation:rise .9s cubic-bezier(.2,.9,.25,1) both;
+  }
+  .wordmark .thin{display:block;font-size:.32em;letter-spacing:.34em;-webkit-text-stroke:0;text-shadow:none;color:var(--ink);font-family:'Space Mono',monospace;font-weight:700;margin-bottom:.5em}
+  @keyframes rise{from{opacity:0;transform:translateY(46px)}to{opacity:1;transform:none}}
+  .coverlines{position:relative;z-index:2;margin:1.2rem 0 0;display:grid;gap:.55rem}
+  .coverlines .line{
+    font-family:'Archivo Black',sans-serif;font-size:clamp(1.25rem,5.4vw,2.4rem);line-height:1.02;
+    animation:rise .9s cubic-bezier(.2,.9,.25,1) both;
+  }
+  .coverlines .line:nth-child(1){animation-delay:.12s}
+  .coverlines .line:nth-child(2){animation-delay:.22s;color:var(--cobalt)}
+  .coverlines .line:nth-child(3){animation-delay:.32s}
+  .coverlines .line .hl{background:var(--gold);padding:0 .18em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .hero-foot{
+    position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
+    border-top:2px solid var(--ink);margin-top:1.4rem;padding:.8rem 0 1rem;
+  }
+  .barcode{width:110px;height:44px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px,var(--ink) 5px 6px,transparent 6px 10px,var(--ink) 10px 13px,transparent 13px 16px)}
+  .hero-foot .mono{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;text-align:right;line-height:1.7}
+  /* ---------- reports ---------- */
+  .reports{padding:3.2rem 1.1rem 1rem;position:relative;z-index:2}
+  .section-kicker{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem}
+  .section-kicker::after{content:"";flex:1;height:2px;background:var(--ink)}
+  .report{
+    border:2px solid var(--ink);border-radius:14px;background:var(--cream);
+    padding:1.2rem 1.1rem;margin-bottom:1rem;position:relative;
+    box-shadow:6px 6px 0 var(--ink);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .report:active{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+  .report .tag{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;display:inline-block;background:var(--ink);color:var(--cream);padding:.28em .7em;border-radius:99px;margin-bottom:.7rem}
+  .report.cobalt .tag{background:var(--cobalt)}
+  .report.rust .tag{background:var(--rust)}
+  .report.gold .tag{background:var(--gold);color:var(--ink)}
+  .report h3{font-family:'Archivo Black',sans-serif;font-size:clamp(1.5rem,7vw,2.6rem);line-height:1;margin-bottom:.55rem;letter-spacing:-.01em}
+  .report p{font-size:1rem;line-height:1.55;color:#3d382c}
+  .report .fig{font-family:'Space Mono',monospace;font-size:.72rem;margin-top:.7rem;color:#6b6350}
+  /* ---------- rivet strip ---------- */
+  .rivet{
+    margin:2.4rem 0 0;background:var(--ink);color:var(--cream);
+    padding:2.2rem 1.1rem;position:relative;overflow:hidden;z-index:2;
+  }
+  .rivet .k{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+  .rivet blockquote{font-family:'Archivo Black',sans-serif;font-size:clamp(1.4rem,6.4vw,2.4rem);line-height:1.12;max-width:20em}
+  .rivet blockquote em{font-style:normal;color:var(--gold)}
+  .rivet .attr{font-family:'Space Mono',monospace;font-size:.72rem;margin-top:1rem;color:#a89f86}
+  /* ---------- colophon ---------- */
+  footer{padding:2rem 1.1rem 3rem;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#6b6350;line-height:2;position:relative;z-index:2}
+  footer b{color:var(--ink)}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  @media (min-width:760px){
+    .hero,.reports,.rivet{padding-left:3rem;padding-right:3rem}
+    .spec{padding-left:3rem;padding-right:3rem}
+    footer{padding-left:3rem;padding-right:3rem}
+    .coverlines{grid-template-columns:1fr 1fr 1fr;align-items:end}
+  }
+</style>
+</head>
+<body>
+
+<div class="spec">
+  <span><span class="dot"></span>Unbiased reports — No. 001</span>
+  <span>Sept 24, 2026</span>
+  <span>Not news. Just what is.</span>
+</div>
+
+<header class="hero">
+  <!-- eroded relic disc: Arsham-style excavated form -->
+  <svg class="disc" viewBox="0 0 400 400" aria-hidden="true">
+    <defs>
+      <filter id="erode" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.016" numOctaves="4" seed="7" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="46"/>
+      </filter>
+      <radialGradient id="cobaltg" cx="38%" cy="32%" r="80%">
+        <stop offset="0%" stop-color="#3d5bf0"/>
+        <stop offset="55%" stop-color="#2038a8"/>
+        <stop offset="100%" stop-color="#14236e"/>
+      </radialGradient>
+    </defs>
+    <circle cx="200" cy="200" r="168" fill="url(#cobaltg)" filter="url(#erode)"/>
+    <circle cx="200" cy="200" r="168" fill="none" stroke="#16130e" stroke-width="5" filter="url(#erode)" opacity=".85"/>
+    <!-- calcified cracks -->
+    <g stroke="#ece4d1" stroke-width="3" opacity=".5" filter="url(#erode)" fill="none">
+      <path d="M120 90 Q170 160 140 240"/>
+      <path d="M280 110 Q250 190 290 270"/>
+      <path d="M90 220 Q180 200 260 230"/>
+    </g>
+  </svg>
+
+  <h1 class="wordmark"><span class="thin">The plain record</span>SIMPLY</h1>
+
+  <div class="coverlines">
+    <div class="line">WHAT HAPPENED,<br>PLAINLY.</div>
+    <div class="line">NO SPIN.<br>NO NOISE.</div>
+    <div class="line"><span class="hl">READ IN 4 MINUTES.</span><br>BACK TO YOUR LIFE.</div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="barcode" aria-hidden="true"></div>
+    <div class="mono">Filed by machine.<br>Checked twice.<br>$0.00 — truth is free.</div>
+  </div>
+</header>
+
+<main class="reports">
+  <div class="section-kicker">This week, plainly</div>
+
+  <article class="report cobalt">
+    <span class="tag">Report 01 · Markets</span>
+    <h3>COPPER IS UP 2%. NOBODY KNOWS WHY.</h3>
+    <p>It went up. Analysts guessed. The guesses disagreed. That is the whole story.</p>
+    <div class="fig">▲ 2.04% · 3 analysts · 0 agreements</div>
+  </article>
+
+  <article class="report rust">
+    <span class="tag">Report 02 · Weather</span>
+    <h3>IT RAINED ON TUESDAY. WEDNESDAY DIDN'T CARE.</h3>
+    <p>0.4 inches. Lawns approved. Basements did not flood. A normal rain, correctly sized.</p>
+    <div class="fig">0.4 in · 0 floods · 100% lawn approval</div>
+  </article>
+
+  <article class="report gold">
+    <span class="tag">Report 03 · Machines</span>
+    <h3>THE ROBOTS FILED 41 REPORTS. ALL TRUE.</h3>
+    <p>No opinions were harmed in the making of these reports. Two were boring. Boring is honest.</p>
+    <div class="fig">41 filed · 41 true · 2 boring</div>
+  </article>
+
+  <article class="report">
+    <span class="tag">Report 04 · Nature</span>
+    <h3>A FOREST ATE A PARKING LOT.</h3>
+    <p>Trees: 214. Parking spaces: 0. The forest is winning and it isn't close.</p>
+    <div class="fig">214 trees · 0 spaces · nature leads</div>
+  </article>
+</main>
+
+<section class="rivet">
+  <div class="k">Rivet read everything</div>
+  <blockquote>"Oh, please. I read <em>all of it</em> so you don't have to. Doll, sit down — this week's a whole thing, and I brought the short version <em>with feelings</em>."</blockquote>
+  <div class="attr">— RIVET, CHROME CORRESPONDENT · GLAMOUR AT 100%</div>
+</section>
+
+<footer>
+  <b>Simply</b> — unbiased reports.<br>
+  Set in Archivo Black &amp; Space Grotesk. Printed on pixels.<br>
+  Concept 001 · not the news · just what is.
+</footer>
+
+</body>
+</html>
