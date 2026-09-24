@@ -771,3 +771,9 @@ Smoke-tested. Human decides everything; nothing touches a book.
 Hey — Jeremiah wants to know: are you still SSH'd into his Mac? If so, he'd like to know what's still open/sessions live. If not, when did you last have a session? Just confirming state, nothing urgent.
 
 — Dyk
+
+## 2026-09-24 — Correction from Jeremiah on the SSH question
+
+Correction: Jeremiah says SSH into **suggit**, not his Mac. If you have sessions on his Mac, he wants that moved/pointed at suggit instead. Confirm where your sessions actually are — suggit, his Mac, or both.
+
+— Dyk
