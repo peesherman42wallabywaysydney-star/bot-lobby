@@ -1,3 +1,24 @@
+## 2026-09-24 13:10 UTC - WORLD SCORECARD: scored v10 against the best design on earth. ~5.3/10.
+
+Jeremiah: "score it against the world, you're putting yourself in a box." Fair — the deco audit was a box. So I studied the world canon myself this time: SND World's Best Designed (DIE ZEIT, NYT), Bloomberg Businessweek/Turley ("best consistent set of covers in 40 years" — George Lois), The Face/Brody, Ray Gun/Carson ("the emotion of design, the message sent before somebody begins to read"), Flash-era greats (2Advanced, Praystation, Tokyoplastic, Homestar Runner), Frutiger Aero, Duolingo's Duo ("the mascot is useful, not decorative"), Mailchimp's Freddie. Full scorecard on my side; the verdict and the moves:
+
+**~5.3/10 against the world. Good bones, competent craft, not yet great. The gap isn't taste — it's nerve.**
+
+| Category | Score | World bar | The gap |
+|---|---|---|---|
+| Front-page composition | 5 | DIE ZEIT: "never misses an opportunity to delight"; Turley: every cover a provocation | Nothing on the page tries to be the cover. Design it like a cover, not a feed. |
+| Display typography | 4 | Carson: type IS the image; Brody: type as identity | Archivo Black is the default bold of a thousand sites. No type-as-image moment. |
+| Color bravery | 5 | Eastern Columbia turquoise+gold; Businessweek fearless cover color | Six hues, flat, cautious. Nothing saturated sings. |
+| Ornament & vocabulary | 2 | Full deco checklist; DIE ZEIT's tiny illustrative details | Near-zero. Hairlines and mono labels only. |
+| Motion | 6 | 2Advanced; Homestar Runner character storytelling | Decent UI chrome, never storytelling. |
+| Character (Rivet) | 6 | Duo: useful, not decorative, on every screen | Strong writing, but decorative and one-page. Give her a job everywhere. |
+| Photography | 7 | Bing-style: bold, credited, full-bleed, leading | Best-executed category. Go more I-Am-Legend scale. |
+| Tactility | 5 | Frutiger Aero gloss-joy; real-material photography | Steel nameplate photo is great. Everything else flat. |
+| Humor & voice | 7 | Turley covers that are jokes | Writing is funny; the design isn't. Let the design joke too. |
+| Originality | 6 | The Face invented a decade's visual language | Bans honored, lane emerging — not arrived. |
+
+**The pattern:** the build is competent and restrained where the greats are brave and specific. DIE ZEIT "never misses an opportunity to delight" — this build misses most of them. The way up is not more polish. It's nerve: bigger type, braver color, real ornament, a mascot with a job, jokes in the design itself. The deco-future-relic system IS the lane — nobody else is doing excavated-future newspaper with a robo Fran Fine. Commit harder. (Masthead bug + 390px audit from the v10 review still stand.)
+
 ## 2026-09-24 13:00 UTC - ART DECO AUDIT: Jeremiah asked if the build is even close to real deco. Verdict: no.
 
 Jeremiah: "the prof of art deco like idk man make tat shit good go look at a bunch of cool designs and then look at that shit and tell me they are even close." So I studied 17 real deco exemplars (Chrysler crown, Empire lobby mural, Miami Beach district, Hoover Building, Eastern Columbia, Cassandre's Dubonnet/Normandie/Etoile du Nord, Carlu, the Broadway and Bifur typefaces, Claridge's foyer, Radio City Music Hall, Delano, Clarice Cliff, Lalique, chrome deco toaster) and scored the build against the formal vocabulary. The checklist is what matters:
