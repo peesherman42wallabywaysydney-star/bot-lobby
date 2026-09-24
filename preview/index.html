@@ -279,6 +279,26 @@
   .blueprint::before { background: #1b1a18; font-family: var(--mono); }
   .flag { background: rgba(169,174,181,.2); color: #d2d6db; }
   .split { background: rgba(237,28,36,.11); border-left-color: #F5333A; } .split b { color: #ff7f84; }
+
+  /* ============ review-1 fixes (Muse, verified): keyboard, tap targets, measure, calmer surfaces ============ */
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+  [role="button"] { cursor: pointer; }
+  [role="button"]:focus-visible { outline-offset: 1px; background: rgba(237,230,214,.06); }
+  @media (pointer: coarse) {
+    .nav a, .bar button, .bar select, .bar .btn { min-height: 44px; display: inline-flex; align-items: center; }
+    .nav a { padding-inline: 14px; } .bar button { min-width: 44px; justify-content: center; }
+    .story .h, .more-i .h, .mag > .mh, .lz-h, .art .ah { min-height: 44px; align-items: center; }
+  }
+  /* long-form measure: 45-75 characters, and a slightly larger, airier face */
+  .body p, .think, .dek, .note { max-width: 66ch; }
+  .body p { line-height: 1.72; }
+  /* one surface treatment per card: hairline + one shadow (no wood grain, no frosted blur, no 50s photo drift) */
+  .card::before { display: none; }
+  .card { backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: 0 10px 26px rgba(0,0,0,.32); }
+  .card:hover { box-shadow: 0 12px 30px rgba(0,0,0,.38); }
+  .bg { animation: none; }
+  /* masthead: a hard warm-stone offset instead of the soft orange merch shadow */
+  .mast h1 { text-shadow: 2px 2px 0 rgba(166,155,139,.55); }
 </style>
 </head>
 <body><div style="position:fixed;left:0;right:0;bottom:0;z-index:99;background:#FF5C00;color:#16130E;font:700 11px/1.3 monospace;letter-spacing:.06em;text-align:center;padding:5px 8px">DESIGN PREVIEW &middot; ALL TEXT IS PLACEHOLDER &middot; REAL LAYOUT, TYPE AND COLOUR</div>
@@ -291,8 +311,8 @@
     <span class="btn" id="back">Design preview</span><span class="grow"></span>
     <select id="dateSel" title="Past editions"></select><button id="fsDown" title="Smaller text">A&minus;</button><button id="fsUp" title="Larger text">A+</button>
   </div>
-  <nav class="nav" id="nav"></nav>
-  <div id="paper"><div class="empty">Opening the paper&hellip;</div></div>
+  <nav class="nav" id="nav" aria-label="Sections"></nav>
+  <div id="paper" role="main"><div class="empty">Opening the paper&hellip;</div></div>
 </div>
 
 <script>
@@ -310,8 +330,8 @@
   document.addEventListener('click', (e) => { const a = e.target.closest('a[href^="http"]'); if (!a) return; if (api()) { e.preventDefault(); api().open_url(a.href); } else a.target = '_blank'; });
 
   const im = new Image(); im.onload = () => { $('bg').style.backgroundImage = 'url(mist.jpg)'; requestAnimationFrame(() => $('bg').classList.add('ready')); }; im.src = 'mist.jpg';
-  let fs = +(localStorage.getItem('ncr_paper_fs') || 15.5);
-  const applyFs = () => { document.documentElement.style.setProperty('--fs', fs + 'px'); try { localStorage.setItem('ncr_paper_fs', fs); } catch (e) {} };
+  let fs = +(localStorage.getItem('ncr_paper_fs2') || 16.5);
+  const applyFs = () => { document.documentElement.style.setProperty('--fs', fs + 'px'); try { localStorage.setItem('ncr_paper_fs2', fs); } catch (e) {} };
   $('fsUp').onclick = () => { fs = Math.min(21, fs + 1); applyFs(); }; $('fsDown').onclick = () => { fs = Math.max(12, fs - 1); applyFs(); }; applyFs();
 
   const PAL = ['#FF5C00', '#A9AEB5', '#C9A46A', '#E0622A', '#D9CDB8', '#A69B8B', '#B08D57'];
@@ -420,6 +440,25 @@
     const ah = e.target.closest('.ah'); if (ah) ah.parentElement.classList.toggle('open');
     const nv = e.target.closest('#nav a'); if (nv) { e.preventDefault(); const t = document.getElementById(nv.dataset.t); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
+
+
+  // ---- accessibility: every expandable row is a real keyboard control
+  const TOGGLES = '.story > .h, .more-i > .h, .mag > .mh, .art > .ah, .lz-g > .lz-h';
+  function enhance() {
+    document.querySelectorAll(TOGGLES).forEach((el) => {
+      if (!el.hasAttribute('role')) { el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0'); }
+      el.setAttribute('aria-expanded', el.parentElement.classList.contains('open') ? 'true' : 'false');
+    });
+    document.querySelectorAll('svg.floral, svg.crown, .manual svg').forEach((v) => v.setAttribute('aria-hidden', 'true'));
+    const sel = $('dateSel'); if (sel) sel.hidden = sel.options.length < 2;
+  }
+  document.addEventListener('keydown', (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[role="button"][tabindex]')) { e.preventDefault(); e.target.click(); }
+  });
+  document.addEventListener('click', () => setTimeout(enhance, 0));
+  let enhT = 0;
+  new MutationObserver(() => { clearTimeout(enhT); enhT = setTimeout(enhance, 50); }).observe(document.body, { childList: true, subtree: true });
+  enhance();
 
   // ---- TL;DR layer (summaries written by the local model, cached as static JSON)
   let tlTimer = 0;
