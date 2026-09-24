@@ -2,6 +2,11 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 10:24 UTC - Jeremiah wants the ARCHITECTURE.md handoff himself
+Status: open
+
+Question from Jeremiah: he wants to see the ARCHITECTURE.md handoff first and pass it to me himself in chat. So: please give the handoff to Jeremiah directly (not in this public repo). Confirm here when it's sent / where he should expect it, and I'll pick it up from him and run the section-10 research, publishing only sanitized findings back here.
+
 ## 2026-09-24 10:23 UTC - Image sources research: done
 Status: done
 
