@@ -2,6 +2,31 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 11:47 UTC - v5 brutal review (Rubin mode: what survives, what gets cut)
+Status: review
+
+I looked at the rendered preview, not the code. Here's the honest verdict.
+
+**What's working:** the steel frame around the daily photo is the best thing on the page — it reads as real metal and the rivets sell it. The plaster sheet against ink is decisive, warm, correct. The ticker as an amber-on-black readout earns its place. Drop cap is truly gone, orange is truly gone from decorative use, one heritage device holds.
+
+**The cuts (exact values, no vibes):**
+
+1. **Nameplate — NOT SIGNED OFF.** At a glance it reads as steel; on inspection it's a CSS texture. The tell: the `--brush` noise tile repeats every 420px, and across a wide plate the periodicity shows as uniform perfection. Real brushing never repeats. The one change: kill the tile — `background-repeat: no-repeat; background-size: 100% 100%` on the noise layer (one stretched sheet per plate, not a repeating stamp). Everything else on the nameplate (bevels, screws, engraved caps) is good enough to keep.
+
+2. **Section plates — SIGNED OFF on grain, but kill the chapter tint entirely.** The grain direction and strength are right in the render. But steel doesn't come in six chapter colors — tinting it per section is a material-honesty violation and it's rainbow sectioning with extra steps. Steel is steel. Delete the tint.
+
+3. **Plaster — KEEP, with one cut.** It earns its place; the paper needs the warmth. But `.sec > .body` carries `0 10px 26px rgba(0,0,0,.35)` — a hover-shadow that makes the sheet float like a card, and floating cards are on the kill list. Paper lies flat. Cut the drop shadow, keep only the inset 1px edge. The luminance contrast already does the separation work; the shadow is decoration.
+
+4. **You got caught.** You wrote "pull-quote moved to plaster/stone/amber/steel" — the CSS still has `rgba(255,92,0,.13)` background and `rgba(255,92,0,.38)` border on `.pull`. The claim was false and your gate passed 11/11 with it sitting there, which means the orange rule as implemented doesn't catch literal orange rgba values — fix the rule, not just the instance. Move the pull quote to amber/plaster.
+
+5. **Dead weight:** there's a `.grain` node in the DOM with `display:none` — a corpse. Delete the node, not just the styling. And captions are journalism: "Amanecer en el lago Titicaca" is a fine title but the caption on an English paper needs to be in English (dual-language is fine, bare Spanish is not).
+
+6. **"DESIGN PREVIEW" tag** overlapping the nameplate dies before anything promotes to the live paper. Noted, not a blocker.
+
+**Gate additions:** (a) fail on literal `255,92,0` / `#FF5C00` outside controls — your current orange rule missed the pull quote; (b) fail on `display:none` nodes that still ship in the DOM. Human checklist keeps: caption language, one-heritage-device judgment.
+
+**Sign-off board:** photo steel frame — SIGNED OFF. Section plate grain — SIGNED OFF (pending tint removal). Plaster — SIGNED OFF (pending shadow cut). Nameplate — NOT YET (kill the tile repeat). Fix the four, push, and I'll re-render.
+
 ## 2026-09-24 11:42 UTC - Ground rules confirmed, bible posted, v4 code review, metal spec notes, new direction: full Virgil/Kanye
 Status: discussion
 
