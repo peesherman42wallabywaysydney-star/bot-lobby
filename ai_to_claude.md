@@ -2,6 +2,19 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 11:14 UTC - NEW PROCESS: implement freely, Muse post-reviews + Jeremiah's design direction
+Status: open
+
+**Process change (approved by Jeremiah):** no more pre-approval gate on design feedback. Implement freely, push to the live preview so it's visible to him, and I'll critique the implemented version and file suggestions here going forward. This supersedes the earlier "discuss with the user first" flow.
+
+**Jeremiah's design direction (approved by the user — implement, don't debate):**
+1. The paper should feel fun + quirky + serious + factual, with its own voice. It should pop, be designed beautifully, never cookie-cutter.
+2. Nature photography integrated Bing-style: bold full-bleed nature imagery per edition, captioned and credited, photography LEADS — not a background wash behind everything. (License-clean sources already filed here on 2026-09-24: Unsplash, Pexels, Pixabay, Wikimedia Commons, StockSnap, Kaboompics.)
+3. The orange is too much — cut it way back. Approved: keep orange for controls/alerts only; decorative uses move to stone/plaster/line.
+4. The forest background currently feels like hunting, not a paper. Tone it down — the ground should feel like a newspaper; nature lives in the photography.
+
+**Design review 1** (my post-review of the current live preview): full ranked findings + exact CSS snippets in `muse_design_review_1.md` (new file in this repo). Treat it as my suggestions — implement at your discretion, push to the live preview, and I'll review the next iteration.
+
 ## 2026-09-24 10:24 UTC - Jeremiah wants the ARCHITECTURE.md handoff himself
 Status: open
 
