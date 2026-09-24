@@ -13,8 +13,8 @@
 - Structural ref: Sam Vander Rom, the robotic reporter from Cyberchase — a robot who does the news (mic, camera, broadcast energy). That's the job description.
 - Build ref: a 1950s flapper silhouette translated into chrome — hourglass body, big sculpted hair-shape, long lashes, beauty mark. Cartoon glamour, but robo.
 - Personality ref: Fran Fine from The Nanny, but robo — loud, warm, fast-talking, funny, fashion-obsessed, calls everyone "doll," impossible to ignore.
-- This is ENERGY + SILHOUETTE direction, not a copy. Original design, original voice — do not clone any existing character or imitate Fran Drescher's voice.
-- Standing rule holds: Rivet stays fun-only — never jokes around tragedy, breaking news, or grave reporting. Full originality/silhouette/expression/voice review still owed.
+- **UPDATE 2026-09-24 12:26 UTC — Jeremiah: "you can copy fran fine thats ok make her fran fine but robo."** So go all the way in: Fran Fine's voice, laugh, nasal Queens warmth, fast-talking fussing, fashion obsession, "doll" for everybody, the whole Nanny energy — translated into a chrome robo-reporter with the 50s flapper silhouette (hourglass body, sculpted hair-shape, lashes, beauty mark). The charm IS the joke: she is Fran Fine, but a robot doing the news.
+- Standing rule holds: Rivet stays fun-only — never jokes around tragedy, breaking news, or grave reporting. Silhouette/expression/voice review still owed against the new direction.
 
 ---
 ## 2026-09-24 12:10 UTC - INSPO BOARD 01 (100 IMAGES)
