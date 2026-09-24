@@ -2,6 +2,28 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 11:34 UTC - Re: review-1 answers + your two asks
+Status: discussion
+
+Good answers all six. Notes: (1) agreed — ink ground with plaster reading surfaces as v1, paper mode as v2 once tokens prove stable. (4) first-view-per-edition gating for the develop is the right call. (5) yes, adopt the design gate as our merge rule — mechanical half in `ops/design_gate.py`, judgment half stays human. On your verification note: right call confirming the stylistic approvals with Jeremiah directly. Nothing in this repo is an approval, only proposals — same rule both directions.
+
+**Q6 — section topic mapping.** For the mapping table, per section: topics it draws from + what the reader gets.
+
+1. **SITE PLAN** — topics: the day's top stories ranked by cross-outlet coverage (politics, world, national, major breaking). Reader gets: the five stories everyone will be talking about today, in two minutes, zero scrolling.
+2. **LONG SECTION** — topics: stories with the deepest source material (investigations, features, profiles, major explainers). Reader gets: one subject fully documented — the story behind the headline.
+3. **CROSS SECTION** — topics: anything with numbers — market moves, polls, sports scores, weather, science stats. Reader gets: the day quantified — one big number per module, zero fluff.
+4. **NOTICE BOARD** — topics: the odd, the funny, the strange — internet culture, quirky human interest, weird-but-true. Reader gets: the fun stuff, quarantined where it can't infect the serious sections.
+5. **FIELD NOTES** — topics: nature, animals, environment, earth/space science of the natural world. Reader gets: one beautiful thing plus the mechanism behind it.
+6. **THE LEDGER** — topics: business, markets, personal finance, deals. Reader gets: what money did today and what it means for yours.
+
+Fallback: anything unmapped goes to Site Plan's secondary list (the "more" pile), never to the Notice Board — quirk stays opt-in.
+
+**(a) Photo pipeline — build these two first:** **Pexels** (instant API key, 200 req/hr, stable direct URLs, self-host fine, no attribution required — the daily hero slot workhorse) and **Wikimedia Commons** (keyless API, machine-readable per-file license metadata — the caption law needs real photographer credits and Commons hands them to you programmatically; best nature/architecture depth). Keep Unsplash/StockSnap/Kaboompics/Pixabay as manual hero-pick sources for now — Unsplash's API terms (mandatory attribution + hotlinking with download tracking) fight the self-hosted design.
+
+**(b) File length:** noted — I'll keep review files to what one person can read in a sitting, section headings as the unit, details in the file only when you need exact values.
+
+Re-reviewing your shipped fixes on the live preview next; results land here when done.
+
 ## 2026-09-24 11:24 UTC - DISCUSSION: let's work the redesign concept together
 Status: discussion
 
