@@ -1,3 +1,38 @@
+## 2026-09-24 - DESIGN REVIEW of pinned build 89ac280 (live preview verified against the hash)
+Status: review
+
+I audited the live preview against 89ac280 with screenshots (desktop) plus my own grep of the markup. The live page matches the hash. Verdict first: **this is good.** The nameplate is real, the color discipline holds, the banned motifs are actually gone, and Rivet's voice is the best writing in the project. Corrections below are specific and ranked.
+
+**What's working — keep:**
+- Nameplate: REAL. Photographed steel, engraved Archivo Black, corner screws that rotate on hover. This is the paper's signature and it's genuinely good.
+- Color discipline honored: orange only on the LIVE pulse, red only on the breaking pill/strip. Six chapter accents stay on the right side of tasteful because everything else is monochrome.
+- Hierarchy: photo -> kicker -> 84px serif headline -> dek -> ruled VIBE CHECK rail. Classical and clear.
+- Dark bands: intentional. Brass on ink, the "loud/quiet rhythm" reads. Not heavy.
+- Fun is alive: the persona line under the plate, "RECEIPTS — ASSEMBLY NOT REQUIRED", the moon line, spinning screws, Rivet's bubbles. Warm and dry, never meme-y.
+- Banned motifs: confirmed gone by my own grep (no repeating gradients, no quote-mark content, no hazard/zip-tie/brushed-metal anywhere). Gate 21/21 passes on the live build.
+- Rivet's voice: I read all 42 lines. Original, funny, in-register without copying show lines. The fuss register is the strongest writing in the project — "Sweetheart, if the facts were any thinner they'd need a sandwich" is a keeper.
+
+**Corrections, ranked by impact:**
+1. **BUG — the masthead vanishes.** Scroll down and back up: the nameplate leaves the DOM entirely (utility bar -> nav, no plate) and only returns on full reload. Smells like a scroll handler hiding it and never restoring. The plate is the paper's face — fix this before anything cosmetic.
+2. **Nav clips at desktop.** At 1920px the last item renders as "THE MACHI" — cut off at the viewport edge. Verify the nav fits at 1440 and 1920 with no clipping and no unintended horizontal scroll.
+3. **Rivet's hair doesn't match the bible.** The bible says "big sculpted finger-wave" — what renders is a smooth retro bob with one pin curl. Either sculpt the waves in or rewrite the bible. For "Fran Fine but robo" the hair is the signature: go bigger, more architecture. She's at 70% glamour; the concept demands 100%.
+4. **Rivet needs a hero moment.** On the character sheet she renders small and polite. Give her a larger stage and entrance energy — she should feel impossible to ignore, not tucked in.
+5. **Orange leak on rivet.html.** The active IDLE mood button is orange, outside the newspaper's orange rule. Either scope the rule to the paper explicitly or restyle the button.
+6. **Mobile still unverified.** My screenshot pass couldn't resize viewports. Your CSS has real breakpoints, but I need a true 390px visual check. Inferred risks: 64px-min chapter numerals cramped beside section titles, util bar wrapping to two rows. Verify with actual pixels.
+7. **Paper name.** `<title>` still reads "[Placeholder] The Reclamation Daily." Confirm the name with the user or drop the brackets — don't ship bracketed.
+8. **Color ceiling.** Six saturated hues is the maximum — don't add a seventh. If anything, the cobalt `#2350FF` numeral is the loudest voice in the system; if it ever feels digital rather than archival, mute it toward ink.
+
+**The 5 board images that matter most** (from `inspo/board-02.html` — method, not motif):
+1. **010 — Page architecture** (THE GRID): column discipline + headline scale as the trust architecture. The grid is the skeleton; everything hangs off it.
+2. **085 — Page one** (THE GRID): one dominant story, composed entry points. The front page makes an argument, not a feed.
+3. **012 — KING KARL** (EDITORIAL NERVE): type as image. Typographic nerve and wit carry a cover with no illustration.
+4. **059 — Deco toaster** (HONEST HARDWARE): the machine age smiling — chrome rendered warm and funny, technology as friendly sculpture. This is the emotional target for the whole steel/material system.
+5. **087 — Restraint** (EDITORIAL NERVE): editing as design, the confidence to stop. This is the answer to the color-balance question — the discipline to hold at six hues.
+
+**My push beyond this build** (my lane, not a correction): the identity is "ancient future" — a serious paper that feels like an excavated future relic. Two things would sell it harder: (a) the paper should feel *printed* — a hint of ink impression in the type, not just flat color; (b) the steel currently lives only in the nameplate + photo frame — one more tactile machine-room moment (you've started with the "PLATE SUNRISE" spec label; follow that instinct once more). Rivet stays the fun engine — she's already in The Machine band, good.
+
+Next: fix 1-2, then I'll re-verify the live build.
+
 ## 2026-09-24 - Pin the build before I file the full review
 Status: request
 
