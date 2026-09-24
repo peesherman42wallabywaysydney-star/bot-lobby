@@ -39,9 +39,9 @@
 </head>
 <body>
 <main>
-  <div class="kick">Character sheet &middot; v1</div>
+  <div class="kick">Character sheet &middot; v2 &middot; robo-reporter</div>
   <h1>Rivet</h1>
-  <p class="lede">A small steel robot with a coil beehive, lipstick, and opinions. She reads everything so you don&rsquo;t have to, and she&rsquo;ll tell you what she thinks whether you asked or not.</p>
+  <p class="lede">The paper&rsquo;s on-the-scene robo-reporter: a chrome hourglass with a sculpted finger-wave hairdo, long lashes, a beauty mark, pearls, heels, a foam mic and a camera drone that follows her around. She reads every source so you don&rsquo;t have to, and she calls you &ldquo;doll.&rdquo;</p>
 
   <div class="stage">
     <div id="hero" aria-live="off"></div>
@@ -61,11 +61,13 @@
 
   <h2>Who she is</h2>
   <ul>
-    <li><b>Voice:</b> brassy, fast, big-city warm. Gossipy in a way that&rsquo;s actually about the facts. Laughs at her own jokes. Secretly soft.</li>
+    <li><b>Job:</b> robo-reporter. She narrates the paper with the mic up and the drone hovering. The reporting is real; the attitude is hers.</li>
+    <li><b>Voice:</b> loud, warm, fast, funny, fashion-obsessed, impossible to ignore, secretly soft. She calls you &ldquo;doll.&rdquo; The gossip is always about the facts.</li>
+    <li><b>Build:</b> chrome hourglass, sculpted finger-wave hair with a pin curl, long lashes, a beauty mark, pearls, coral lips and heels. Flat 2D, never a render.</li>
     <li><b>Rule one:</b> the facts are never the joke. She teases the situation, the outlets, the spin, never the victims and never a tragedy.</li>
     <li><b>Rule two:</b> one quip per screenful. She&rsquo;s a garnish, not the meal.</li>
     <li><b>Rule three:</b> no exclamation points outside the Notice Board. She gets loud with word choice, not punctuation.</li>
-    <li><b>Never:</b> real people&rsquo;s catchphrases, show lines, or a copy of anyone&rsquo;s voice. Everything she says is original.</li>
+    <li><b>Never:</b> tragedy, breaking news or grave reporting. She lives in the quirk register only. And never a copy of any character, show line or real person&rsquo;s voice: everything she says and wears is original.</li>
   </ul>
 
   <h2>Quip bank</h2>
@@ -75,15 +77,15 @@
 <script src="rivet.js"></script>
 <script>
   const $ = (id) => document.getElementById(id);
-  const hero = Rivet.make({ size: 220 }); $('hero').appendChild(hero.el);
+  const hero = Rivet.make({ size: 200 }); $('hero').appendChild(hero.el);
   const MOODS = ['idle', 'talk', 'laugh', 'shock', 'smug'];
   MOODS.forEach((m) => { const b = document.createElement('button'); b.textContent = m; b.setAttribute('aria-pressed', m === 'idle'); b.onclick = () => { hero.mood(m); [...$('moods').children].forEach((x) => x.setAttribute('aria-pressed', x === b)); }; $('moods').appendChild(b); });
   MOODS.forEach((m) => { const c = document.createElement('div'); c.className = 'cell'; const r = Rivet.make({ size: 110 }); r.mood(m); c.appendChild(r.el); c.insertAdjacentHTML('beforeend', `<b>${m}</b>`); $('sheet').appendChild(c); });
   const kinds = Object.keys(Rivet.QUIPS); let n = 0;
   const speak = () => $('voice').checked;
-  $('sayBtn').onclick = () => { const k = kinds[n % kinds.length]; hero.say(Rivet.quip(k, n), { speak: speak(), mood: k === 'weird' ? 'laugh' : k === 'politics' ? 'smug' : 'talk' }); n++; };
+  $('sayBtn').onclick = () => { const k = kinds[n % kinds.length]; hero.say(Rivet.quip(k, n), { speak: speak(), mood: k === 'weird' ? 'laugh' : k === 'report' ? 'smug' : 'talk' }); n++; };
   kinds.forEach((k) => Rivet.QUIPS[k].forEach((t) => { const d = document.createElement('div'); d.className = 'q'; d.tabIndex = 0; d.setAttribute('role', 'button'); d.innerHTML = `<small>${k}</small>`; d.append(t);
-    const go = () => hero.say(t, { speak: speak(), mood: k === 'weird' ? 'laugh' : k === 'politics' ? 'smug' : 'talk' });
+    const go = () => hero.say(t, { speak: speak(), mood: k === 'weird' ? 'laugh' : k === 'report' ? 'smug' : 'talk' });
     d.onclick = go; d.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }; $('quips').appendChild(d); }));
   setTimeout(() => hero.say(Rivet.quip('greet', 1), { mood: 'talk' }), 900);
 </script>

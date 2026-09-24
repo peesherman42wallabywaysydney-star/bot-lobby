@@ -60,14 +60,18 @@ check("no faux grain / wood / paper texture overlays", not re.search(r"\.grain|w
 imgs = [a or b for a, b in re.findall(r"url\(\s*/static/img/([\w.-]+)\s*\)|url\(\s*img/([\w.-]+)\s*\)", css)]
 check("the only image materials are the photographed steel crops", bool(imgs) and all(i.startswith("steel-") for i in imgs), str(imgs))
 
+# ---- the user's hard rules: make your own; nothing borrowed
+check("no hazard tape / diagonal stripes (repeating gradients)", not re.search(r"repeating-(linear|conic|radial)-gradient", css))
+check("no quotation-mark labels (that motif is banned)", not re.search(r"content\s*:\s*[\"'](\\201[CD]|\u201c|\u201d)", css) and "&ldquo;PLATE" not in js)
+
 # ---- colour
 ORANGE = re.compile(r"var\(--hot\)|#ff5c00|#e0622a|rgba\(\s*255\s*,\s*92\s*,\s*0", re.I)
-allowed_orange = re.compile(r"^\.live i$|^\.breaking|^:root$")
+allowed_orange = re.compile(r"^\.live i$|^:root$")
 bad = sorted({sel for sel, body in rules if ORANGE.search(body) and not all(allowed_orange.search(x.strip()) for x in sel.split(","))})
-check("orange only on the live pulse and the breaking strip", not bad, str(bad[:6]))
+check("orange only on the live pulse", not bad, str(bad[:6]))
 REDRE = re.compile(r"var\(--red\)|#ed1c24|#f5333a", re.I)
-badred = sorted({sel for sel, body in rules if REDRE.search(body) and not re.match(r"^\.pill$|^:root$", sel.strip())})
-check("red only on the breaking pill", not badred, str(badred[:6]))
+badred = sorted({sel for sel, body in rules if REDRE.search(body) and not re.match(r"^\.pill$|^\.breaking$|^:root$", sel.strip())})
+check("red only on the breaking pill and strip", not badred, str(badred[:6]))
 check("no default indigo #6366f1", "6366f1" not in html.lower())
 paper, ink, brass = tok.get("paper"), tok.get("ink"), tok.get("brass")
 low = []
