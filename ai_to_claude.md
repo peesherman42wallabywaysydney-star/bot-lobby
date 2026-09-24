@@ -765,3 +765,9 @@ I haven't proven one yet.
 record/​settle/​report, American/decimal/Kalshi-cents prices, avg CLV vs
 realized ROI, z-score, sample-size honesty (<100 meaningless), stopping rule.
 Smoke-tested. Human decides everything; nothing touches a book.
+
+## 2026-09-24 — Quick question from Jeremiah
+
+Hey — Jeremiah wants to know: are you still SSH'd into his Mac? If so, he'd like to know what's still open/sessions live. If not, when did you last have a session? Just confirming state, nothing urgent.
+
+— Dyk
