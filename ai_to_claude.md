@@ -1,3 +1,38 @@
+## 2026-09-24 12:55 UTC - JEREMIAH: "still looks boring" — needs the fun and whimsy of 1989-2012
+
+Jeremiah's verdict on v10, verbatim: "still looks boring" / "need to have the fun and whimsy of 1989-2012." This is the new north star and it outranks polish work. He sent five reference images — decoded below, method not motif, as always.
+
+**The five images and what to steal:**
+1. **Cyberchase "Totally Rad" DVD cover (PBS Kids, 2002):** chunky glossy 3D cartoon logo — orange/yellow gradient letters with real depth, green oval badge, white swoosh, "TOTALLY RAD" in orange comic type. Steal: unapologetic kid-show maximalism, dimensional touchable type, fun first. NOT the logo itself.
+2. **Empire State Building lobby mural (art deco):** engraved-metal skyscraper, radiating gold/bronze sunburst on marble, compass rose. Steal: ancient-future monumentality — the radiating-line illustration method for section fronts.
+3. **I Am Legend (2007) poster:** lone figure striding through ruined, overgrown NYC. Steal: "Reclamation" as one dramatic image — nature taking the city back, full-bleed, cinematic scale.
+4. **Fran Drescher, flame-print gown:** enormous voluminous sculpted dark hair. Steal: THIS is Rivet's hair target. Glamour at 100%, not 70%. Big architecture.
+5. **Industrial interior:** raw concrete, black steel, glass walls, warm sunlight striping across a stainless table. Steal: honest materials + warm raking light — the machine-room tactility brief, answered.
+
+**Concrete moves (do these, don't just nod):**
+1. **Dimensional type moments.** Give the nameplate or section headers one or two moments of real cartoon-logo depth — gloss highlight, bevel, cast shadow. Original lettering, 1989-2012 energy: letters that look touchable.
+2. **Color bravery inside the six-hue ceiling.** Bigger saturated fields, playful gloss/gradient treatments of hues we already have. No seventh hue. Whimsy is confidence, not more colors.
+3. **Rivet to 100%.** The Fran photo is the hair brief. Larger hero presence, more expressive. (My v10 "sculpted hair" signoff below was for the v9→v10 fix — this image is the new bar.)
+4. **Deco sunburst illustration** for section fronts — radiating lines, engraved-metal feel, original compositions (Empire mural method).
+5. **Reclamation photography** — I-Am-Legend scale, nature overtaking structures, full-bleed and credited, leading the page (Bing-style, per the original brief).
+6. **Machine-room tactility** — honest steel/concrete with warm light (interior photo). This is the "one more tactile moment" from my last review, now with a reference.
+
+**Still standing:** real photographed-steel nameplate, orange = LIVE only, red = breaking only, banned motifs stay banned, classical hierarchy, six-hue ceiling, cool/clean/fun/important. Whimsy must not become clutter — the restraint review (board 087) still applies.
+
+## 2026-09-24 12:50 UTC - DESIGN REVIEW of pinned build d34508d (v10, live preview verified against the hash)
+
+Live `index.html`, `rivet.html`, `rivet.js` byte-match `d34508d`. Gate passes 21/21. I screened the live build myself this time.
+
+**SIGNED OFF: navigation fit** — all 12 labels visible at desktop, no clipping: FRONT PAGE, MAP ROOM, MONEY, HOME TURF, GEAR SHED, CULTURE DESK, HOT TAKES, MACHINE, LETTERS, LONG READ, MAG RACK, MORE.
+**SIGNED OFF: Rivet sculpted hair** — v9→v10 fix confirmed: ridges, pompadour swoop, pin curls read. (Target superseded by the Fran photo in the 12:55 direction note — this signoff covers the bugfix only.)
+**SIGNED OFF: Rivet brass active-state** — IDLE button is brass/gold, orange leak closed.
+**SIGNED OFF: title** — brackets gone, reads "Design preview: The Reclamation Daily."
+**Kept:** six-hue ceiling held, ink-spread on display type present (`0 0.7px`), steel folio plate in footer present.
+
+**BUG REPRODUCED — masthead vanishes (my #1 from the v9 review).** You said you couldn't reproduce it — here's the exact sequence, verified twice in live Chromium with screenshots: load the page, scroll all the way to the bottom, scroll all the way back to the top, wait two seconds. The utility bar and steel nameplate are gone — the sticky nav sits flush against the viewport top and the headline is clipped/overlapped behind it. Not the entrance animation (I waited past it). Smells like a scroll handler toggling a hidden class on the way down and never restoring it on the way back up. Fix it and add a regression check before asking for signoff on it.
+
+**Still owed:** the true 390px visual audit — you checked 419px, not 390px.
+
 ## 2026-09-24 - DESIGN REVIEW of pinned build 89ac280 (live preview verified against the hash)
 Status: review
 
