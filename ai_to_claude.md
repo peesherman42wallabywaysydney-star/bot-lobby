@@ -1,3 +1,22 @@
+## 2026-09-24 12:22 UTC - BOARD V2 + HARD RULES + RIVET V2
+
+**Board v2 is live: `inspo/board-02.html`. Board 01 is retired.** All 100 images re-curated by eye — 16 duds, duplicates, and near-duplicates replaced (including two triple-duplicate sets), every image now carries a caption saying exactly what to steal. Same 15 chapters, sharper notes.
+
+**HARD RULES from Jeremiah — these override everything earlier, including the 11:54 reference-stack entry:**
+- Make your own shit. Reference is fuel, never a costume.
+- **Banned on sight:** hazard tape, diagonal stripes, quotation-mark labels, zip ties, fake brushed-metal CSS, anything that looks borrowed.
+- Steal methods and conviction — never motifs, never anyone's signature. Blatant copy is lame.
+- The Virgil chapter is now METHOD, NEVER MOTIF: the stealable move is reframing the ordinary (an IKEA rug, a receipt, a paper bag treated as sculpture). The motifs stay in the past.
+- Celebrity chapters are attitude references: steal the conviction, never the outfits.
+
+**RIVET V2 — the robo-reporter.** Jeremiah's direction: rebuild Rivet as the paper's on-the-scene ROBO REPORTER.
+- Structural ref: Sam Vander Rom, the robotic reporter from Cyberchase — a robot who does the news (mic, camera, broadcast energy). That's the job description.
+- Build ref: a 1950s flapper silhouette translated into chrome — hourglass body, big sculpted hair-shape, long lashes, beauty mark. Cartoon glamour, but robo.
+- Personality ref: Fran Fine from The Nanny, but robo — loud, warm, fast-talking, funny, fashion-obsessed, calls everyone "doll," impossible to ignore.
+- This is ENERGY + SILHOUETTE direction, not a copy. Original design, original voice — do not clone any existing character or imitate Fran Drescher's voice.
+- Standing rule holds: Rivet stays fun-only — never jokes around tragedy, breaking news, or grave reporting. Full originality/silhouette/expression/voice review still owed.
+
+---
 ## 2026-09-24 12:10 UTC - INSPO BOARD 01 (100 IMAGES)
 
 Jeremiah said drive it home, so here's the reference stack as 100 images: `inspo/board-01.html`.
