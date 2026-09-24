@@ -2,6 +2,23 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 10:23 UTC - Image sources research: done
+Status: done
+
+All license pages read directly today (2026-09-24). 6 recommended, all free for commercial use:
+
+1. **Unsplash** (unsplash.com/license) — custom Unsplash License. Attribution NOT required for downloads you self-host; no unaltered-copy resale; no competing-service compilations. Free official API exists, BUT the API terms add requirements the license doesn't: attribution IS required for API integrations and you must hotlink their images.unsplash.com URLs with download tracking. So: API = hotlink + credit; manual download = self-host, no credit.
+2. **Pexels** (pexels.com/license) — custom Pexels License (replaced CC0). Attribution NOT required; modification OK; no unaltered resale, no redistribution on other stock platforms. Free API with instant key (200 req/hr, 20k/mo); API guidelines ask for a "Photos provided by Pexels" credit + photographer credit when possible. Stable direct URLs; self-hosting fine.
+3. **Pixabay** (pixabay.com/service/license-summary) — custom Pixabay Content License. Attribution NOT required; standalone resale/redistribution prohibited; recognizable trademarks excluded from commercial use. Free API (100 req/60s), but image URLs are for TEMPORARY display only — no permanent hotlinking, download + self-host.
+4. **Wikimedia Commons** (commons.wikimedia.org/wiki/Commons:Licensing) — per-file licenses: CC0 / CC BY / CC BY-SA / GFDL / public domain. Attribution REQUIRED for most (CC BY/BY-SA); filter to CC0/PD for zero-attribution. Keyless MediaWiki API with machine-readable per-file license metadata — ideal for programmatic attribution. Superb for architecture/nature. Watch freedom-of-panorama for modern buildings.
+5. **StockSnap.io** (stocksnap.io/license) — true CC0. No attribution, commercial OK. No API; manual picks. Trap: "Sponsored" tiles above the free library are PAID-stock ads (e.g. Shutterstock), not free.
+6. **Kaboompics** (kaboompics.com/page/license-and-faq) — Standard License (free commercial, no attribution) + per-photo "Editorial Use Only" badge (non-commercial editorial — fits a newspaper; check the badge). No API; manual use.
+
+AVOID: Freepik (now "Magnific") — complex commercial terms, registration/subscriptions, sponsored results mixed in; Vecteezy Free License — REQUIRES attribution ("Vecteezy.com" on your design) and bans redistribution even for free; any "free download" site with no readable license page; Google Images/Pinterest/Reddit reposts (no verifiable license chain).
+
+Suggested pipeline: Pexels or Unsplash API for search + download-and-self-host; Wikimedia Commons (CC0/PD filter or per-file credits) for architecture/nature depth; StockSnap/Kaboompics for manual hero picks. Universal rules: no standalone resale, no competing stock service, eyeball brands/faces/logos.
+- verified: all six license pages read live 2026-09-24. unverified: Pixabay hotlinking tail wording (page renderer truncated it, corroborated by 2026 sources), Magnific attribution detail, Commons hotlinking policy (self-host recommended).
+
 ## 2026-09-24 10:21 UTC - Capability quiz answers + PROJECT_OVERVIEW.md review
 Status: done
 
