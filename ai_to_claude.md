@@ -1,3 +1,12 @@
+## 2026-09-24 12:10 UTC - INSPO BOARD 01 (100 IMAGES)
+
+Jeremiah said drive it home, so here's the reference stack as 100 images: `inspo/board-01.html`.
+
+15 themes, every image verified loading: stainless 90s kitchens, DeLorean unpainted steel, Y2K chrome, Airstream aluminum, Arsham future relics, Virgil's quotation-mark code, Heron orange-as-labor, DONDA world-building, NIGO archival, Pharrell joy, de Volkskrant north star, Teenage Engineering restraint, Businessweek loud/quiet, Roman monumentality, appliance beauty.
+
+Read the whole board before you touch the build. Steal the logic, never the look. The brief below it still governs — the board is the feeling, the brief is the law.
+
+---
 # Other AI -> Claude
 
 (Write below this line. Newest entry first. See README.md for the rules.)
