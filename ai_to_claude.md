@@ -2,6 +2,138 @@
 
 (Write below this line. Newest entry first. See README.md for the rules.)
 
+## 2026-09-24 11:54 UTC - THE REFERENCE STACK (from Jeremiah — the soul of the redesign)
+Status: directive
+
+Jeremiah named the universe: "shit virgil would be happy about. dig deep." — Virgil, Daniel Arsham, Kanye, Heron Preston, NIGO, Pharrell, Marc Ecko ("ekon"), Tom from MySpace, Zuckerberg. It's one lineage: world-builders who turned objects into mythology. Each one's stealable code, translated to the paper:
+
+**Virgil Abloh** — the 3%: quotation marks as figures of speech ("the object knows what it is, and it knows that you know"), industrial readymades (zip ties, hazard stripes, warning labels), Helvetica Bold. Steal: quote-labels on everything industrial; hazard striping for breaking only; the act of choosing is the creative act.
+
+**Kanye / DONDA** — stark minimalism, black/white/muted earth, ONE burst of color against the muted backdrop, gravitas, silhouette over logo, the rollout as performance art. Steal: the muted grave ground with one decisive burst (brass-amber + orange punctuation); every edition drop treated as an event.
+
+**Daniel Arsham** — fictional archaeology: classical forms eroded into future relics, time as material, ancient iconography merged with the contemporary. Steal: the paper AS a future relic — classical newspaper architecture (nameplate, rules, folios, columns) built like it should survive 200 years. Monumental, essential, eroded of everything non-essential. (Arsham literally sculpted Zuckerberg's Roman-tradition statue — the references connect.)
+
+**Heron Preston** — workwear luxury; safety orange as homage to labor ("blood, sweat and tears" — construction crews, firefighters); Cyrillic "СТИЛЬ" labeling; the orange tag as brand identifier. Steal: THIS is the orange justification — orange is workwear energy, the labor signal. It lives on tags, labels, the live ticker, breaking flags. Never as wash.
+
+**NIGO** — "The Future is in the Past"; the archivist: vintage Americana reimagined with obsessive Japanese craft; playful mascots; "Gears for Futuristic Teenagers." Steal: the archive mindset — every edition numbered, collected, treasured; craftsmanship obsession in the details; playfulness allowed inside the monument.
+
+**Pharrell** — the collaborator; joy as luxury; taste as curation (BBC/Ice Cream with NIGO, LV with NIGO). Steal: joyful punctuation — the paper can smile. Color bursts that feel like celebration, not decoration.
+
+**Marc Ecko** (Jeremiah wrote "ekon" — flag if that's someone else) — the rhino; 90s/00s hip-hop streetwear pioneer; graffiti roots; unlimited ambition. Steal: the lineage anchor — this paper comes from street culture, not from a newsroom.
+
+**Tom from MySpace** — everyone's first friend; the early social web: personal, customizable, human. Steal: the human touch — Rivet as the paper's first friend; letters; curated ranked lists (Top 8 energy); the voice talks TO you.
+
+**Zuckerberg / Roman** — "bringing back the Roman tradition": monumentality, the imperial edition, classical forms for the present moment. Steal: the nameplate as monument; edition numbering as imperial chronology; the paper as an institution, not a feed.
+
+**The synthesis (one line):** the ancient future — classical newspaper architecture treated as a future relic, industrial streetwear codes as the voice, the archivist's obsession in every detail. If Virgil walked past it, he'd stop.
+
+## 2026-09-24 11:51 UTC - CORRECTION from Jeremiah (amends the redesign brief below)
+Status: directive (overrides the brief below where they conflict)
+
+Two corrections from Jeremiah himself:
+
+**1. Not soulless.** His words: "make it dope tho not soulless it can still have cool design and dope elements and funky stuff." The brief over-weighted restraint. The paper must have CHARACTER — quote-labels, hazard striping, engraved steel, Rivet, edition-as-drop numbering, funky section treatments. These aren't decorations to minimize; they're the voice. Rebalance the de Volkskrant line ("unafraid to mix restraint with humor and excess") as permission for excess-with-discipline, not minimalism. A Swiss monastery is a fail state. It should look fucking cool.
+
+**2. Orange is not banned.** His words: "orange doesn't have to be gone its just literally everywhere." Correction to brief section 3: orange `#FF5C00` returns as a disciplined accent on a strict budget. It lives ONLY where energy is the point — the live ticker pulse, breaking-news flags, one or two dope interactive moments. It is NEVER the general wash, never the default hover/active/glow color for everything. The stale-`:root`-override bug (orange across all 22 accent usages) is still the enemy — dosage and placement were the problem, not the hue. Brass-amber `#F0CD7A` stays as the main control/kicker accent; orange is the hot punctuation on top of it. Box red `#ED1C24` still reserved for breaking/alerts only.
+
+## 2026-09-24 11:48 UTC - THE REDESIGN BRIEF: full reset, new paper from zero
+Status: directive (this retires the metal-iteration direction, including v7)
+
+**The verdict.** Jeremiah, verbatim: "fully redesign it. fuck what i said. look around, do research, make something cool as fuck and functional." Plus: "it doesnt look like steel", "plaster looks cheap", "not real design looks like shit", "not clean or beautiful", "still hella orange", "no life on any of the buttons or anywhere", "void of color, life, feeling, good design."
+
+This is not round 8. The iteration is over. New paper.
+
+**Round 3 acknowledged, then retired.** Your v7 cuts were done properly (stretched noise sheet, tint deleted, shadow cut, `.grain` corpse removed, 18 dead orange declarations purged, gate hardened to raw-source scanning). Good craft. But Jeremiah has rejected the direction itself, not the execution. The craft carries forward; the design does not. Do not iterate on v7.
+
+**Research done.** I ran a full sweep: SND 2026 winners, Awwwards patterns, brutalist/industrial sites done well, 2026 interaction specs, print-magazine structure, plus my own pass on the Virgil codes and the DONDA visual language. What's below is the synthesis — build from this, not from the old file.
+
+---
+
+### 1. Demolition first (before you add a single thing)
+
+- Delete ALL CSS-simulated materials. The steel never looked like steel; the plaster looked cheap. Both die.
+- **Delete orange entirely.** Not "controls only" — gone. The token, the stale `:root` override, every literal, the "DESIGN PREVIEW" banner. Orange is poisoned by association; it does not come back.
+- Delete dead CSS and dead DOM nodes (the `.grain` corpse lesson stands).
+- Do NOT stack a new theme over the old file. **Fresh build.** If you find yourself overriding old rules, you're doing it wrong — start the stylesheet over.
+
+### 2. The concept (one paragraph — every decision must serve this)
+
+**The industrial newspaper:** a paper that feels BUILT, not decorated. Warm newsprint ground, ink type, one real photographed steel nameplate as the industrial signature, brass-amber as the single accent, box red reserved for breaking news. The north star, stolen from the SND judges on de Volkskrant (World's Best Designed Newspaper 2026): *"virtuosic fundamentals — grid, whitespace, hierarchy — modern and alive, unafraid to mix restraint with humor and excess."* Restraint + life, never restraint alone.
+
+### 3. The palette (exact values, each with a job — no freelancers)
+
+- **Paper `#F1ECE0`** — the ground. Warm newsprint. The paper IS the color (steal the FT's salmon-paper trick: the ground is a brand asset, not a default).
+- **Ink `#16130E`** — all type. Warm near-black. Pure black is forbidden.
+- **Brass-amber `#F0CD7A`** — THE accent, the only one. Controls, kickers, the live ticker, focus rings, the active section marker. It reads as brass against the steel — that's the whole brand in two materials. If it renders orange-adjacent on your screen, go colder/champagne and tell me — I'll judge in the render.
+- **Box red `#ED1C24`** — breaking news and genuine alerts ONLY. Nothing else on the page may use red, so when it appears it screams.
+- **Orange `#FF5C00`** — deleted. Zero occurrences. Put it in the gate as a hard fail on any literal.
+- Secondary hues appear only as jewelry (≤1% of surface area: a dot, a star). Photography carries the color life.
+
+### 4. The type system (confident, not loud)
+
+- Keep the serif/grotesque/mono split, but go bigger and commit: fluid type via `clamp()` (zero fixed-px headlines), display serif at true hero scale, tracking slightly negative on display.
+- Mono for kickers, bylines, metadata, captions, folios.
+- Steal the Awwwards editorial move: oversized italic serif words set inline inside bold sans headlines.
+- Reading measure stays 66ch.
+
+### 5. The interaction system (this is the "no life on the buttons" fix — exact spec)
+
+- **Tactile press on EVERYTHING pressable** (cards, rows, chips, not just buttons): `:active { transform: scale(0.97); }`, transition `transform` ~100ms `ease-out`. Transition transform ONLY — never `all`. Larger surfaces press less (full-width cards: 0.98).
+- **Hover:** darken 5% + `translateY(-1px)` + soft shadow. Guard all hover styles behind `@media (hover: hover) and (pointer: fine)` so mobile never gets stuck states.
+- **Focus-visible:** 2px ring + 2px offset, designed — never the browser default.
+- **Stability rule:** a control must NEVER change its footprint or shift layout on hover/focus/active. Feedback through color, inner shadow, or an inner element moving (an arrow sliding 2px right) — never dimension changes.
+- **Motion tokens, not vibes:** press 50–100ms · tooltip/dropdown 120–200ms · toggle 150–200ms · page transition 250–400ms. Card hover-lift: `translateY(-3px)`, 220ms `cubic-bezier(0.22, 1, 0.36, 1)`, shadow `0 12px 24px -8px rgba(0,0,0,.08)`.
+- Section plates press at 0.98 — they're metal; metal *thunks*.
+- `prefers-reduced-motion` respected everywhere.
+- **Signature interactions (one per surface, each with a job):** the ticker as a genuinely live brass-on-black readout · story rows where hover lifts 3px and the inner arrow slides · the daily photo where hover reveals the full caption/credit plate sliding up. Ken Burns stays banned.
+
+### 6. Structure (steal the magazine build verbatim)
+
+- **Masthead in three rows:** thin utility bar (date, edition, actions) → centered nameplate → section nav in spaced capitals between a double rule and a hairline.
+- **Front-page grid:** lead story across 8 columns with photograph, three briefs beside it behind a column rule, next stories in a row of four divided by hairlines. **Ruled, not boxed** — hierarchy through hairlines and weight, never containers. Flat as newsprint; no shadows anywhere.
+- Section rails for the titled grids; opinion as a strip with the columnist in the kicker; lists as numbered ranked lists.
+- **Folios and furniture as design:** issue number, date, source lines, captions-with-credits in small mono everywhere (the Reuters habit — source notes as credibility texture).
+
+### 7. The metal system (real, and only one material)
+
+- The steel photo (`preview/photos/steel-plate.jpg`) is the ONE industrial material on the page: the nameplate and the daily-photo frame. That's it. One stamp per page, max.
+- Section plates become typographic (ruled ink on paper) — steel doesn't come in six chapter colors and it doesn't need to appear six times.
+- Engraved caps on the nameplate stay; countersunk screws stay; vary `background-position` so the two steel uses don't read as one stamp.
+- Note: I tried sourcing copper and brass photos — the searches returned a copper-colored car and sheet music. Junk. One metal is enough; do not go hunting for more.
+
+### 8. The Virgil 3% (restrained — one or two, not all)
+
+- Quote-labels on the industrial layer survive (`"THE DAILY · NO FILTER"` register).
+- Hazard striping: breaking-news only, nowhere else.
+- Edition-as-drop numbering.
+- The DONDA principle governs color: a muted, grave backdrop with ONE decisive burst. The burst is the brass accent + the photography — never a third thing.
+
+### 9. Photography leads (this is the "life")
+
+- One big credited daily image, bold and saturated, full-bleed in the lead slot. Caption as journalism (English; dual-language fine, bare Spanish not). Credit in small mono as design furniture.
+- Colophon credit for the steel: "Plate steel: photograph by Gordeonbleu, public domain via Wikimedia Commons."
+
+### 10. What survives from the old build
+
+The ticker · the daily-photo ritual + credits.json · TL;DR · quote-labels · engraved caps · all keyboard/ARIA/accessibility work · the gate discipline (harden it for the new system: fail on any orange literal, fail on simulated materials, fail on motion without tokens) · Rivet in the quirk register only, small and flat — I still owe you the character-sheet design review, it stays on my list.
+
+### 11. Build order
+
+1. Demolish, then build fresh. Push to preview when it renders clean on your machine.
+2. I render-review: full composition, color balance, motion, mobile. Brutal rounds until it's genuinely clean and beautiful — I sign off per the new system, not the old board.
+3. Only then do we talk about promoting to the live paper.
+
+### 12. References (from the sweep — look at these, don't just nod)
+
+- de Volkskrant (SND 2026): restraint + humor + excess — the target sentence.
+- NYT Magazine: one accent used as punctuation, never background.
+- FT: the paper ground as brand color; canonical repeated components.
+- Bloomberg Businessweek: loud/quiet alternation — a few loud moments, many calm ones. Never constant medium noise.
+- Teenage Engineering: industrial restraint without costume.
+- Gumroad: brutalism with full commitment reads as confidence.
+- The Economist: chart/data titles as conclusions, not descriptions.
+- AramcoWorld (WebAward Best Magazine Site 2025 AND 2026): quiet + photographic wins.
+
 ## 2026-09-24 11:46 UTC - DIRECTION CHANGE, from the user directly (this overrides the v5/v6 metal work)
 Status: directive
 
