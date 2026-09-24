@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Placeholder] The Reclamation Daily</title>
+<style>
+  /* self-hosted (no third-party font requests) */
+  @font-face { font-family: 'Archivo Black'; font-weight: 400; font-display: swap; src: url(fonts/ArchivoBlack-normal-400.woff2) format('woff2'); }
+  @font-face { font-family: 'Jost'; font-weight: 400 700; font-display: swap; src: url(fonts/Jost-normal-400.woff2) format('woff2'); }
+  @font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-display: swap; src: url(fonts/IBMPlexMono-normal-400.woff2) format('woff2'); }
+  @font-face { font-family: 'IBM Plex Mono'; font-weight: 500; font-display: swap; src: url(fonts/IBMPlexMono-normal-500.woff2) format('woff2'); }
+  @font-face { font-family: 'IBM Plex Mono'; font-weight: 700; font-display: swap; src: url(fonts/IBMPlexMono-normal-700.woff2) format('woff2'); }
+  @font-face { font-family: 'Newsreader'; font-weight: 400 600; font-display: swap; src: url(fonts/Newsreader-normal-400.woff2) format('woff2'); }
+  @font-face { font-family: 'Newsreader'; font-style: italic; font-weight: 400; font-display: swap; src: url(fonts/Newsreader-italic-400.woff2) format('woff2'); }
+
+  :root { --ink: #f6f1e8; --dim: rgba(246,241,232,.68); --accent: #f0cd7a; --line: rgba(255,255,255,.16);
+    --glass: rgba(11,9,14,.52); --ease: cubic-bezier(.2,.75,.25,1); --fs: 15.5px;
+    --display: "Segoe UI Black", "Arial Black", Impact, "Helvetica Neue", system-ui, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --ui: "Segoe UI Variable Text", "Segoe UI", -apple-system, system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #0c0a10; color: var(--ink); font: 13px/1.5 var(--ui); }
+  body { overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.25) transparent; }
+  .bg { position: fixed; inset: -6%; z-index: 0; background: #2a2114 center/cover no-repeat; opacity: 0; transition: opacity 1.4s var(--ease); pointer-events: none; animation: drift 50s ease-in-out infinite alternate; }
+  .bg.ready { opacity: 1; } @keyframes drift { from { transform: scale(1.02); } to { transform: scale(1.12) translate(-1.5%, -1%); } }
+  .veil { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(10,8,14,.74), rgba(10,8,14,.6) 40%, rgba(10,8,14,.88)); }
+  .prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 40; background: linear-gradient(90deg, #ff5a5f, #f0cd7a, #6fe0d2, #8ec5ff, #cfa8ff); box-shadow: 0 0 10px rgba(240,205,122,.7); }
+  .wrap { position: relative; z-index: 1; padding: 0 16px 70px; max-width: 760px; margin: 0 auto; }
+  a { color: inherit; text-decoration: none; } a:hover { color: var(--accent); }
+
+  .winbar { display: none; position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 30; align-items: center; justify-content: space-between; padding: 0 8px 0 14px; cursor: grab; }
+  .native .winbar { display: flex; } .winbar .wl { font-size: 10px; letter-spacing: .22em; color: var(--dim); font-weight: 600; }
+  .winbar button { border: 0; background: none; width: 28px; height: 24px; border-radius: 8px; color: var(--dim); cursor: pointer; font-size: 13px; }
+  .winbar button:hover { background: rgba(255,255,255,.14); color: var(--ink); } .native #closeWin:hover { background: rgba(255,90,80,.85); color: #fff; }
+  button, select, .btn { font: 700 11.5px var(--ui); color: var(--ink); background: rgba(255,255,255,.1); border: 1px solid var(--line); border-radius: 99px; padding: 5px 12px; cursor: pointer; transition: background .25s, color .25s, transform .25s var(--ease); }
+  button:hover, .btn:hover { background: var(--accent); color: #17130a; } button:active { transform: scale(.95); }
+  select { padding: 5px 8px; max-width: 140px; } select option { background: #1b1522; color: var(--ink); }
+
+  .bar { position: sticky; top: 0; z-index: 20; margin: 0 -16px; padding: 10px 16px 6px; display: flex; gap: 8px; align-items: center; background: linear-gradient(180deg, rgba(10,8,14,.94), rgba(10,8,14,.72)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .native .bar { padding-top: 36px; } .grow { flex: 1; }
+  .nav { position: sticky; top: 50px; z-index: 19; margin: 0 -16px; padding: 4px 16px 8px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; background: linear-gradient(180deg, rgba(10,8,14,.72), rgba(10,8,14,0)); }
+  .native .nav { top: 76px; } .nav::-webkit-scrollbar { display: none; }
+  .nav a { flex: none; font: 800 10.5px var(--ui); letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px; border-radius: 99px; border: 1px solid color-mix(in srgb, var(--c, #fff) 55%, transparent); background: rgba(0,0,0,.35); color: var(--dim); transition: all .3s var(--ease); }
+  .nav a.on { background: var(--c, var(--accent)); color: #100c14; border-color: transparent; transform: translateY(-1px) scale(1.04); box-shadow: 0 4px 16px color-mix(in srgb, var(--c, #fff) 55%, transparent); }
+
+  /* masthead */
+  .mast { text-align: center; padding: 26px 0 10px; animation: rise .9s var(--ease) both; }
+  .kick { font: 800 10px var(--ui); letter-spacing: .34em; text-transform: uppercase; color: var(--accent); }
+  .mast h1 { margin: 8px 0 4px; font: 900 44px/.95 var(--display); letter-spacing: -.03em; text-transform: uppercase;
+    background: linear-gradient(100deg, #ff7a59, #f0cd7a 30%, #8ee7c9 60%, #b69bff 90%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: flow 9s linear infinite; }
+  @keyframes flow { to { background-position: -220% 0; } }
+  .date { color: var(--dim); font-size: 12px; letter-spacing: .04em; } .ed { color: var(--dim); font: italic 12.5px var(--serif); margin: 5px 6px 0; }
+  .ticker { margin: 14px -16px 0; overflow: hidden; border-block: 1px solid var(--line); background: rgba(0,0,0,.35); padding: 7px 0; }
+  .ticker div { display: inline-flex; gap: 34px; white-space: nowrap; animation: marq 55s linear infinite; padding-left: 100%; font: 800 11px var(--ui); letter-spacing: .1em; text-transform: uppercase; }
+  .ticker span b { color: var(--accent); } .ticker:hover div { animation-play-state: paused; } @keyframes marq { to { transform: translateX(-100%); } }
+  .headline { font: 900 30px/1.08 var(--display); letter-spacing: -.02em; margin: 24px 0 10px; text-transform: none; animation: rise .9s .1s var(--ease) both; }
+  .dek { font: italic 16px/1.5 var(--serif); color: #ebe0cc; animation: rise .9s .18s var(--ease) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .rv { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); } .rv.in { opacity: 1; transform: none; }
+
+  .card { position: relative; background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.02) 55%), var(--glass); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; margin: 16px 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 12px 30px rgba(0,0,0,.34), 0 0 0 0 transparent; backdrop-filter: blur(16px) saturate(1.3); -webkit-backdrop-filter: blur(16px) saturate(1.3); transition: box-shadow .4s, transform .4s var(--ease); }
+  .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 16px 38px rgba(0,0,0,.4), 0 0 26px color-mix(in srgb, var(--c, #f0cd7a) 22%, transparent); }
+  .lbl { font: 800 10.5px var(--ui); letter-spacing: .16em; text-transform: uppercase; color: var(--c, var(--accent)); margin-bottom: 8px; }
+  .alm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; } .alm b { display: block; font: 900 24px/1.1 var(--display); } .alm span { font-size: 10.5px; color: var(--dim); }
+
+  /* sections */
+  .sec { scroll-margin-top: 112px; margin-top: 46px; --c: var(--accent); }
+  .tag { display: inline-flex; align-items: center; gap: 9px; transform: rotate(-1.6deg); background: var(--c); color: #120e16; padding: 6px 14px 6px 10px; border-radius: 10px; box-shadow: 4px 5px 0 rgba(0,0,0,.45), 0 0 26px color-mix(in srgb, var(--c) 45%, transparent); }
+  .tag i { font: 900 11px var(--display); font-style: normal; background: #120e16; color: var(--c); padding: 2px 6px; border-radius: 6px; }
+  .tag h2 { margin: 0; font: 900 21px/1 var(--display); letter-spacing: -.02em; text-transform: uppercase; }
+  .by { color: var(--dim); font: 600 11.5px var(--ui); margin: 12px 0 0 2px; letter-spacing: .04em; }
+  .sub { font: 800 19px/1.28 var(--ui); letter-spacing: -.01em; margin: 8px 0 14px; }
+  .pull { font: 900 22px/1.2 var(--display); letter-spacing: -.02em; margin: 6px 0 16px; padding: 14px 16px; border-radius: 16px; background: linear-gradient(135deg, color-mix(in srgb, var(--c) 30%, transparent), rgba(255,255,255,.03)); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); }
+  .pull::before { content: "\201C"; color: var(--c); font-size: 34px; line-height: 0; vertical-align: -10px; margin-right: 4px; }
+  .body p { font: var(--fs)/1.66 var(--serif); margin: 0 0 13px; }
+  .body p:first-child::first-letter { float: left; font: 900 46px/.82 var(--display); padding: 5px 7px 0 0; color: var(--c); }
+  .story { border-top: 1px solid var(--line); padding: 9px 0; cursor: pointer; }
+  .story .h { font: 700 13.5px/1.35 var(--ui); display: flex; gap: 8px; align-items: baseline; }
+  .story .n { margin-left: auto; flex: none; font: 800 10px var(--ui); letter-spacing: .08em; text-transform: uppercase; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); padding: 1px 7px; border-radius: 99px; }
+  .story .src { display: none; padding: 6px 0 2px 2px; } .story.open .src { display: block; animation: rise .35s var(--ease) both; }
+  .src a { display: block; padding: 4px 0; font-size: 12.5px; font-weight: 600; } .src small { color: var(--dim); font-weight: 400; }
+  .col { border-top: 1px solid var(--line); padding: 15px 0 4px; } .col:first-of-type { border-top: 0; }
+  .col .who { font: 800 12px var(--ui); color: var(--c); } .col .who span { color: var(--dim); font-weight: 500; }
+  .col h3 { margin: 5px 0 9px; font: 900 20px/1.2 var(--display); letter-spacing: -.02em; }
+  .think { font: italic 13.5px/1.55 var(--serif); color: var(--dim); border-left: 3px solid var(--c, var(--line)); padding-left: 11px; margin: 9px 0 13px; }
+  .letter { padding: 11px 0; border-top: 1px solid var(--line); } .letter:first-of-type { border-top: 0; }
+  .letter .t { font: 15px/1.5 var(--serif); } .letter .r { font: italic 13.5px/1.5 var(--serif); color: var(--dim); margin-top: 6px; padding-left: 10px; border-left: 2px solid var(--c); }
+  .mag { border-top: 1px solid var(--line); } .mag > .mh { padding: 12px 0; cursor: pointer; display: flex; gap: 10px; align-items: baseline; transition: transform .3s var(--ease); } .mag > .mh:hover { transform: translateX(4px); }
+  .mag .mh b { font: 900 16px var(--display); letter-spacing: -.01em; color: var(--c, var(--ink)); } .mag .mh span { color: var(--dim); font-size: 12px; }
+  .mag .mb { display: none; padding-bottom: 12px; } .mag.open .mb { display: block; animation: rise .4s var(--ease) both; }
+  .art { padding: 8px 0 8px 11px; border-left: 3px solid var(--c, var(--line)); margin: 9px 0; } .art .ah { font: 800 15.5px/1.3 var(--ui); cursor: pointer; }
+  .art .ab { display: none; margin-top: 9px; } .art.open .ab { display: block; }
+  .sign { text-align: center; font: italic 15px/1.6 var(--serif); color: var(--dim); margin: 46px 14px 8px; }
+  .fin { text-align: center; font: 900 12px var(--display); letter-spacing: .3em; color: var(--dim); margin: 14px 0; text-transform: uppercase; }
+  .empty { color: var(--dim); text-align: center; padding: 70px 0; }
+
+  /* ============ design system 2: eroded plaster, oxidized metal, prairie friezes, linework, assembly manuals ============ */
+  :root { --ash: #D9CDB8; --copper: #E0622A; --verd: #C9A46A; --ochre: #B08D57; --steel: #A9AEB5; --scrawl: #F5333A; --lilac: #A69B8B; }
+  .grain { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: .13; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  .veil { background: linear-gradient(180deg, rgba(14,12,10,.78), rgba(14,12,10,.66) 40%, rgba(14,12,10,.9)); }
+
+  /* Prairie-style frieze: a banded horizontal pattern in the section colour */
+  .frieze { --c: var(--ochre); height: 16px; margin: 16px 0 4px; opacity: .9;
+    background:
+      linear-gradient(var(--c), var(--c)) 0 0 / 100% 2px no-repeat,
+      linear-gradient(var(--c), var(--c)) 0 100% / 100% 2px no-repeat,
+      repeating-linear-gradient(90deg, var(--c) 0 3px, transparent 3px 11px) 0 50% / 100% 6px no-repeat,
+      repeating-linear-gradient(90deg, transparent 0 22px, var(--c) 22px 34px, transparent 34px 44px) 0 50% / 100% 10px no-repeat; }
+  .mast .frieze { margin: 18px -16px 0; }
+
+  /* masthead: eroded-ash type on a metal ground, with drawn-on floral linework */
+  .mast { position: relative; overflow: visible; }
+  .mast h1 { background: linear-gradient(100deg, #f0e6d2, #D9CDB8 22%, #E0622A 48%, #C9A46A 74%, #D9CDB8); background-size: 240% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 2px 0 rgba(0,0,0,.5)); }
+  .floral { position: absolute; top: 4px; width: 92px; height: 130px; color: var(--lilac); opacity: .85; pointer-events: none; }
+  .floral.l { left: -6px; } .floral.r { right: -6px; transform: scaleX(-1); }
+  .floral path, .floral ellipse, .floral circle { fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; animation: draw 3.6s .3s var(--ease) forwards; }
+  .floral circle.f { fill: currentColor; stroke: none; stroke-dasharray: 0; stroke-dashoffset: 0; animation: none; opacity: .9; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* section tags become brushed-metal plates, riveted, with an engraved step number */
+  .tag { background: linear-gradient(180deg, color-mix(in srgb, var(--c) 88%, #fff), var(--c) 55%, color-mix(in srgb, var(--c) 78%, #000));
+    border-radius: 6px; padding: 7px 18px 7px 12px; transform: rotate(-1deg); position: relative;
+    box-shadow: 3px 4px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25); }
+  .tag::before { content: ""; position: absolute; inset: 0; border-radius: 6px; pointer-events: none; background: repeating-linear-gradient(90deg, rgba(255,255,255,.1) 0 1px, transparent 1px 3px); }
+  .tag::after { content: ""; position: absolute; right: 6px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff8, #0006); }
+  .tag i { background: rgba(0,0,0,.72); color: #f4ead6; border-radius: 3px; letter-spacing: .06em; }
+  .tag h2 { text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+
+  /* IKEA-manual microcopy line */
+  .manual { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 12px 0 0 2px; font: 700 10px var(--ui); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  .manual b { color: var(--ink); font-weight: 800; } .manual svg { width: 15px; height: 15px; vertical-align: -3px; margin-right: 4px; }
+  .manual .art { border: 1px dashed var(--line); padding: 1px 7px; border-radius: 3px; letter-spacing: .08em; margin: 0; }
+
+  /* Arsham: pull-quote as a cast relic, cracked and eroded at the edges */
+  .pull { position: relative; overflow: hidden; border-radius: 4px 22px 4px 26px; letter-spacing: -.02em;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--c) 22%, #2a2620), rgba(255,255,255,.035)); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); }
+  .pull::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 46%; opacity: .35; pointer-events: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 90' preserveAspectRatio='none'><path d='M120 0 L96 22 L104 38 L78 56 L90 70 L64 90 M96 22 L70 20 L58 4 M78 56 L52 52 L40 66 M104 38 L120 46' fill='none' stroke='white' stroke-width='.8'/></svg>") right / 100% 100% no-repeat; }
+
+  /* Basquiat: rough underline + a scrawled crown on the Hot Take */
+  .scrawl { position: relative; display: inline-block; }
+  .scrawl::after { content: ""; position: absolute; left: -2%; right: -2%; bottom: -7px; height: 9px; background: currentColor; opacity: .95;
+    clip-path: polygon(0 55%, 8% 30%, 17% 60%, 30% 25%, 44% 62%, 58% 28%, 71% 60%, 84% 30%, 100% 55%, 100% 100%, 0 100%); }
+  .crown { display: inline-block; width: 46px; height: 28px; margin: 0 8px -3px 0; color: var(--scrawl); transform: rotate(-8deg); }
+  .crown path { fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linejoin: round; stroke-linecap: round; } .crown circle { fill: currentColor; }
+  #op .col h3 { text-decoration: line-through; text-decoration-color: transparent; }
+  #op .col:hover h3 { text-decoration-color: var(--scrawl); text-decoration-thickness: 3px; transition: text-decoration-color .3s; }
+
+  /* The Machine: blueprint grid */
+  .blueprint { position: relative; padding: 4px 14px 8px; border-radius: 6px; margin-top: 10px;
+    background: linear-gradient(rgba(127,166,214,.12) 1px, transparent 1px) 0 0 / 100% 22px, linear-gradient(90deg, rgba(127,166,214,.12) 1px, transparent 1px) 0 0 / 22px 100%, rgba(12,20,34,.55);
+    border: 1px solid rgba(127,166,214,.45); }
+  .blueprint::before { content: "FIG. 1 — UNFILTERED"; position: absolute; top: -8px; left: 12px; background: #0e1522; color: var(--steel); font: 800 9px var(--ui); letter-spacing: .2em; padding: 0 8px; }
+
+  .card { border-radius: 8px 20px 8px 20px; }
+  .story .n { border-radius: 3px; }
+  .lbl::before { content: "\25A0 "; font-size: 7px; vertical-align: 2px; }
+  .sign { font-family: var(--serif); } .fin { color: var(--ochre); }
+  .fin::before, .fin::after { content: ""; display: inline-block; width: 60px; height: 8px; margin: 0 12px; vertical-align: middle; background: repeating-linear-gradient(90deg, var(--ochre) 0 3px, transparent 3px 8px); }
+
+  /* Dune: sand haze rising from the bottom; monolithic, weathered */
+  .veil { background: linear-gradient(180deg, rgba(14,12,10,.78), rgba(14,12,10,.62) 40%, rgba(58,40,24,.72) 100%); }
+  .wrap::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 22vh; z-index: 0; pointer-events: none;
+    background: linear-gradient(0deg, rgba(217,164,65,.16), transparent); mix-blend-mode: screen; }
+  /* egg-chair curves: generous, organic radii instead of hard boxes */
+  .card { border-radius: 26px 26px 34px 34px / 22px 22px 30px 30px; }
+  .pull { border-radius: 6px 36px 6px 44px; }
+  .nav a, .btn, button, select { border-radius: 99px; }
+  /* one piece of reclaimed wood: fine horizontal grain and knots through the glass */
+  .card::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: .5;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,235,205,.05) 0 1px, transparent 1px 5px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.09) 0 1px, transparent 1px 13px),
+      radial-gradient(ellipse 90px 14px at 78% 30%, rgba(0,0,0,.12), transparent 70%),
+      radial-gradient(ellipse 60px 10px at 14% 74%, rgba(0,0,0,.1), transparent 70%); }
+  .sec { scroll-margin-top: 150px; } .native .sec { scroll-margin-top: 182px; }
+  .blueprint { padding-top: 20px; } .blueprint .lbl { margin-top: 4px; }
+
+  /* ===== facts layer: TL;DR, cross-read facts, the rest of the pile ===== */
+  .tl { display: none; margin: 10px 0 14px; padding: 9px 12px; border-radius: 4px 14px 4px 14px; border-left: 4px solid var(--c, var(--accent)); background: rgba(255,255,255,.07); font: 600 13.5px/1.45 var(--ui); }
+  .tl.on { display: block; animation: rise .5s var(--ease) both; }
+  .tl b { font: 900 10px var(--display); letter-spacing: .14em; color: var(--c, var(--accent)); margin-right: 7px; }
+  .tl em { display: block; font: italic 400 12px var(--serif); color: var(--dim); margin-top: 3px; }
+  .lazy { margin: 22px 0 6px; }
+  .lazy .lbl { display: flex; justify-content: space-between; align-items: baseline; }
+  .lazy .prog2 { font: 700 10px var(--ui); letter-spacing: .1em; color: var(--dim); text-transform: uppercase; }
+  .lz-g { border-top: 1px solid var(--line); } .lz-g > .lz-h { padding: 10px 0; cursor: pointer; display: flex; gap: 8px; align-items: baseline; font: 900 12.5px var(--display); letter-spacing: .04em; text-transform: uppercase; color: var(--c, var(--accent)); }
+  .lz-h span { margin-left: auto; color: var(--dim); font: 700 10px var(--ui); } .lz-b { display: none; padding-bottom: 8px; } .lz-g.open .lz-b { display: block; }
+  .lz-i { padding: 7px 0 7px 10px; border-left: 2px solid var(--line); margin: 5px 0; cursor: pointer; transition: border-color .25s, transform .25s var(--ease); } .lz-i:hover { border-color: var(--c, var(--accent)); transform: translateX(3px); }
+  .lz-i div { font: 600 13.5px/1.42 var(--ui); } .lz-i small { display: block; color: var(--dim); font: italic 12px var(--serif); margin-top: 2px; } .lz-i .t { font: 800 10.5px var(--ui); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin-bottom: 2px; }
+  .facts { margin: 4px 0 8px; padding-left: 18px; font: 500 13px/1.5 var(--ui); } .facts li { margin: 3px 0; }
+  .split { margin: 6px 0 8px; padding: 7px 10px; border-radius: 4px 12px 4px 12px; background: rgba(224,67,47,.12); border-left: 3px solid #F5333A; font: 500 12.5px/1.45 var(--ui); } .split b { color: #ff8b7a; }
+  .cmp { font: 800 10px var(--ui); letter-spacing: .12em; text-transform: uppercase; color: var(--c); margin: 8px 0 2px; }
+  .more-i { border-top: 1px solid var(--line); padding: 9px 0; cursor: pointer; } .more-i .h { font: 700 13.5px/1.35 var(--ui); display: flex; gap: 8px; align-items: baseline; }
+  .more-i .lede { color: var(--dim); font: 400 12.5px/1.45 var(--ui); margin-top: 3px; } .more-i .src { display: none; padding-top: 6px; } .more-i.open .src { display: block; animation: rise .35s var(--ease) both; }
+  .more-i .n { margin-left: auto; flex: none; font: 800 10px var(--ui); letter-spacing: .08em; text-transform: uppercase; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); padding: 1px 7px; border-radius: 3px; }
+  .note { font: italic 12.5px/1.5 var(--serif); color: var(--dim); margin: 8px 0 4px; }
+
+  .flag { display: inline-block; font: 800 9.5px var(--ui); letter-spacing: .08em; text-transform: uppercase; padding: 0 6px; border-radius: 3px; background: rgba(127,166,214,.22); color: #a9c8ee; vertical-align: 1px; }
+  .diff { padding: 6px 0 6px 10px; margin: 4px 0; border-left: 3px solid var(--c); font: 500 12.5px/1.45 var(--ui); } .diff b { color: var(--c); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } .rv { opacity: 1; transform: none; } }
+
+  /* ============ design system 3 (Muse moodboard v2): plaster + steel + rust, spec-sheet front page, woven-label kickers ============ */
+  :root { --ink: #EDE6D6; --dim: rgba(237,230,214,.66); --accent: #FF5C00; --line: rgba(237,230,214,.16); --glass: rgba(22,19,14,.8);
+    --steelc: #A9AEB5; --rust: #E0622A; --ground: #16130E; --plaster: #D9CDB8;
+    --display: "Archivo Black", "Segoe UI Black", "Arial Black", Impact, sans-serif;
+    --ui: "Jost", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif; }
+  html, body { background: var(--ground); }
+  /* the photo becomes a warm duotone that sits behind the type, not on top of it */
+  .bg { filter: grayscale(.7) sepia(.35) contrast(1.05) brightness(.8); }
+  .veil { background: linear-gradient(180deg, rgba(22,19,14,.82), rgba(22,19,14,.72) 40%, rgba(22,19,14,.93)); }
+  .wrap::after { background: linear-gradient(0deg, rgba(176,141,87,.12), transparent); }
+  .prog { background: linear-gradient(90deg, var(--rust), #FF5C00); box-shadow: 0 0 10px rgba(255,92,0,.6); }
+  .bar { background: linear-gradient(180deg, rgba(22,19,14,.96), rgba(22,19,14,.78)); }
+  .nav { background: linear-gradient(180deg, rgba(22,19,14,.8), rgba(22,19,14,0)); }
+
+  /* controls and nav: stencil tags, not pills */
+  button, select, .btn, .nav a { border-radius: 3px; font-family: var(--mono); font-weight: 500; letter-spacing: .04em; }
+  .bar button, .bar select, .bar .btn { font-size: 10.5px; padding: 5px 9px; } .bar { gap: 6px; } .bar select { max-width: 116px; }
+  .headline { font-size: clamp(22px, 6.2vw, 34px); }
+  .nav a { font-size: 10px; font-weight: 500; letter-spacing: .14em; color: var(--dim); border: 1px solid rgba(237,230,214,.28); background: rgba(22,19,14,.55); }
+  .nav a.on { background: var(--accent); color: #16130E; border-color: var(--accent); box-shadow: 0 0 0 1px #16130E, 0 0 0 2px var(--accent); transform: none; }
+  button:hover, .btn:hover { background: var(--accent); color: #16130E; }
+
+  /* masthead: box-logo wordmark, one colour; orange woven label as the kicker */
+  .kick { display: inline-block; background: var(--accent); color: #16130E; font: 700 10px var(--mono); letter-spacing: .22em; padding: 4px 11px 3px; border-radius: 1px; box-shadow: 0 0 0 1px #16130E, 0 0 0 2px var(--accent); }
+  .mast h1 { font: 400 clamp(28px, 8.2vw, 54px)/.92 var(--display); overflow-wrap: anywhere; letter-spacing: -.035em; text-transform: uppercase; background: none; -webkit-background-clip: initial; background-clip: initial; color: var(--ink); animation: none;
+    filter: none; text-shadow: 3px 3px 0 rgba(255,92,0,.85); margin: 14px 0 8px; }
+  .date { font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+  .ed { font: italic 400 14px/1.4 var(--serif); color: var(--plaster); }
+  .floral { color: var(--steelc); opacity: .42; }
+  .ticker { background: rgba(255,92,0,.1); border-block: 1px solid var(--rust); } .ticker div { font: 500 10.5px var(--mono); letter-spacing: .14em; } .ticker span b { color: var(--accent); }
+  .headline { font: 400 30px/1.06 var(--display); letter-spacing: -.025em; text-transform: uppercase; }
+  .dek { font: italic 400 17px/1.5 var(--serif); color: var(--plaster); }
+
+  /* rust-tick dividers */
+  .frieze { --c: var(--rust); height: 12px; opacity: 1;
+    background: linear-gradient(var(--c), var(--c)) 0 100% / 100% 1px no-repeat, repeating-linear-gradient(90deg, var(--c) 0 2px, transparent 2px 9px) 0 0 / 100% 8px no-repeat; }
+
+  /* section plates: riveted steel, engraved step number, stencil caps */
+  .tag { border-radius: 2px; transform: none; box-shadow: 3px 3px 0 rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.28); }
+  .tag i { font: 700 10.5px var(--mono); border-radius: 1px; background: #16130E; }
+  .tag h2 { font: 400 20px/1 var(--display); letter-spacing: -.01em; color: #16130E; text-shadow: none; }
+  .by, .lbl, .manual, .cmp, .lazy .prog2, .story .n, .more-i .n, .lz-i .t, .flag { font-family: var(--mono); font-weight: 500; }
+  .by { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
+  .lbl { font-size: 10px; letter-spacing: .18em; }
+  .sub { font: 600 19px/1.28 var(--ui); letter-spacing: -.005em; }
+  .pull { font: 400 21px/1.22 var(--display); letter-spacing: -.02em; border-radius: 2px; background: linear-gradient(135deg, rgba(255,92,0,.13), rgba(237,230,214,.03)); border: 1px solid rgba(255,92,0,.38); border-left: 4px solid var(--accent); }
+  .pull::before { color: var(--accent); }
+  .body p { font: var(--fs)/1.68 var(--serif); font-weight: 400; color: #F1EBDD; }
+  .body p:first-child::first-letter { font: 400 50px/.8 var(--display); color: var(--accent); padding: 6px 8px 0 0; }
+  .story .h, .more-i .h, .lz-i div, .facts, .split, .diff, .tl, .alm span, .letter .t { font-family: var(--ui); }
+  .story .h, .more-i .h { font-weight: 600; font-size: 14.5px; }
+  .card { border-radius: 4px 22px 4px 22px; border-color: rgba(237,230,214,.16); background: linear-gradient(145deg, rgba(237,230,214,.07), rgba(237,230,214,.015) 55%), var(--glass); }
+  .card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 16px 38px rgba(0,0,0,.42), 0 0 22px rgba(255,92,0,.14); }
+  .col h3 { font: 400 20px/1.2 var(--display); letter-spacing: -.015em; }
+  .mag .mh b, .lz-h { font-family: var(--display); font-weight: 400; }
+  .think, .note, .sign, .lz-i small, .letter .r { font-family: var(--serif); }
+  .tl { border-radius: 2px; background: rgba(237,230,214,.06); font-weight: 500; }
+  .tl b { font: 700 10px var(--mono); letter-spacing: .16em; }
+  .tl em { color: var(--dim); }
+  .fin { font: 400 11px var(--mono); letter-spacing: .34em; color: var(--dim); }
+  .fin::before, .fin::after { background: repeating-linear-gradient(90deg, var(--rust) 0 2px, transparent 2px 8px); }
+
+  /* front page as a spec sheet: mono figures in ruled cells */
+  .alm { gap: 0; border: 1px solid var(--line); border-radius: 2px; }
+  .alm > * { padding: 10px 6px 9px; border-left: 1px solid var(--line); } .alm > *:first-child { border-left: 0; }
+  .alm b { font: 700 clamp(15px, 4.6vw, 22px)/1.1 var(--mono); letter-spacing: -.02em; color: var(--ink); }
+  .alm span { font: 500 9.5px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+
+  /* the AI section: steel drafting sheet instead of blue blueprint */
+  .blueprint { border-radius: 2px; background: linear-gradient(rgba(169,174,181,.1) 1px, transparent 1px) 0 0 / 100% 22px, linear-gradient(90deg, rgba(169,174,181,.1) 1px, transparent 1px) 0 0 / 22px 100%, rgba(26,26,28,.6); border-color: rgba(169,174,181,.42); }
+  .blueprint::before { background: #1b1a18; font-family: var(--mono); }
+  .flag { background: rgba(169,174,181,.2); color: #d2d6db; }
+  .split { background: rgba(237,28,36,.11); border-left-color: #F5333A; } .split b { color: #ff7f84; }
+</style>
+</head>
+<body><div style="position:fixed;left:0;right:0;bottom:0;z-index:99;background:#FF5C00;color:#16130E;font:700 11px/1.3 monospace;letter-spacing:.06em;text-align:center;padding:5px 8px">DESIGN PREVIEW &middot; ALL TEXT IS PLACEHOLDER &middot; REAL LAYOUT, TYPE AND COLOUR</div>
+<div class="prog" id="prog"></div><div class="grain"></div>
+<div class="bg" id="bg"></div><div class="veil"></div>
+<div class="winbar pywebview-drag-region"><span class="wl pywebview-drag-region">THE RECLAMATION DAILY</span><span><button id="closeWin" title="Close">&#10005;</button></span></div>
+
+<div class="wrap">
+  <div class="bar">
+    <span class="btn" id="back">Design preview</span><span class="grow"></span>
+    <select id="dateSel" title="Past editions"></select><button id="fsDown" title="Smaller text">A&minus;</button><button id="fsUp" title="Larger text">A+</button>
+  </div>
+  <nav class="nav" id="nav"></nav>
+  <div id="paper"><div class="empty">Opening the paper&hellip;</div></div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const safe = (u) => /^https?:\/\//i.test(u || '') ? u : '';
+  const paras = (arr) => (Array.isArray(arr) ? arr : [arr]).filter(Boolean).map((t) => `<p>${esc(t)}</p>`).join('');
+  const pullOf = (arr) => { const t = String((Array.isArray(arr) ? arr[0] : arr) || '').replace(/\s+/g, ' '); const m = t.match(/^.{40,170}?[.!?](\s|$)/); return m ? m[0].trim() : (t.length > 150 ? t.slice(0, 147) + '…' : t); };
+  const native = new URLSearchParams(location.search).has('native');
+  if (native) { document.body.classList.add('native'); }
+  const api = () => (window.pywebview && window.pywebview.api) ? window.pywebview.api : null;
+  window.addEventListener('pywebviewready', () => document.body.classList.add('native'));
+  $('closeWin').addEventListener('click', () => { if (api()) api().close(); });
+  document.addEventListener('click', (e) => { const a = e.target.closest('a[href^="http"]'); if (!a) return; if (api()) { e.preventDefault(); api().open_url(a.href); } else a.target = '_blank'; });
+
+  const im = new Image(); im.onload = () => { $('bg').style.backgroundImage = 'url(mist.jpg)'; requestAnimationFrame(() => $('bg').classList.add('ready')); }; im.src = 'mist.jpg';
+  let fs = +(localStorage.getItem('ncr_paper_fs') || 15.5);
+  const applyFs = () => { document.documentElement.style.setProperty('--fs', fs + 'px'); try { localStorage.setItem('ncr_paper_fs', fs); } catch (e) {} };
+  $('fsUp').onclick = () => { fs = Math.min(21, fs + 1); applyFs(); }; $('fsDown').onclick = () => { fs = Math.max(12, fs - 1); applyFs(); }; applyFs();
+
+  const PAL = ['#FF5C00', '#A9AEB5', '#C9A46A', '#E0622A', '#D9CDB8', '#A69B8B', '#B08D57'];
+  const FLORAL = `<svg class="floral %S" viewBox="0 0 92 130"><path d="M14 126 C 20 96, 48 92, 44 62 C 42 40, 66 30, 76 44 C 84 58, 62 70, 58 58"/><path d="M44 62 C 28 58, 20 42, 30 30 C 42 36, 48 50, 44 62Z"/><path d="M30 96 C 16 90, 12 76, 22 68 C 32 74, 34 86, 30 96Z"/><path d="M50 88 C 62 84, 72 90, 72 102 C 60 104, 52 98, 50 88Z"/><ellipse cx="66" cy="20" rx="6" ry="14" transform="rotate(-20 66 20)"/><ellipse cx="66" cy="20" rx="6" ry="14" transform="rotate(50 66 20)"/><ellipse cx="66" cy="20" rx="6" ry="14" transform="rotate(120 66 20)"/><circle class="f" cx="66" cy="20" r="3"/><path d="M8 110 C 2 100, 6 90, 14 88"/></svg>`;
+  const CROWN = `<svg class="crown" viewBox="0 0 60 36"><path d="M5 32 L9 9 L21 23 L30 5 L39 23 L51 9 L55 32 Z"/><circle cx="9" cy="6" r="2.6"/><circle cx="30" cy="2.6" r="2.6"/><circle cx="51" cy="6" r="2.6"/></svg>`;
+  const PERSON = `<svg viewBox="0 0 16 16"><circle cx="8" cy="3.4" r="2.2" fill="currentColor"/><path d="M8 6 V11 M3 8 L13 8 M8 11 L4.5 15 M8 11 L11.5 15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+  const wc = (arr) => (Array.isArray(arr) ? arr : [arr]).join(' ').split(/\s+/).filter(Boolean).length;
+  const partNo = (name, i) => { let n = 0; for (const ch of String(name)) n = (n * 31 + ch.charCodeAt(0)) % 900; return `${String(100 + n).padStart(3, '0')}.${String(i + 1).padStart(2, '0')}`; };
+  const manual = (label, i, total, body, name) => `<div class="manual"><span><b>${label}</b> ${i} of ${total}</span><span>${PERSON}1 reader, 0 tools</span><span>${Math.max(1, Math.round(wc(body) / 210))} min</span><span class="art">ART. ${partNo(name, i)}</span></div>`;
+
+  const LANGN = { fr: 'French', de: 'German', es: 'Spanish', it: 'Italian', pt: 'Portuguese', ja: 'Japanese' };
+  const srcRow = (x, withLede) => `<a href="${esc(safe(x.link))}"><b>${esc(x.source)}</b> <small>&mdash; ${esc(x.lean || '')}</small>${x.lang && x.lang !== 'en' ? ` <span class="flag">${esc(LANGN[x.lang] || x.lang)} &rarr; English</span>` : ''}<br>${esc(x.title)}${x.orig ? `<br><small style="font-style:italic">${esc(x.orig)}</small>` : ''}${withLede && x.lede ? `<br><small>${esc(x.lede)}</small>` : ''}</a>`;
+  const diffPanel = (ds) => (ds || []).length ? `<div class="cmp">What other outlets do differently</div>${ds.map((d) => `<div class="diff"><b>${esc(d.source)}</b>${d.lang && d.lang !== 'en' ? ` <span class="flag">${esc(LANGN[d.lang] || d.lang)}</span>` : ''} ${esc(d.note)}${d.quote ? `<br><small style="font-style:italic;color:var(--dim)">&ldquo;${esc(d.quote)}&rdquo;</small>` : ''}</div>`).join('')}` : '';
+
+  function render(d, archive) {
+    const ed = d.edition; if (!ed) { $('paper').innerHTML = '<div class="empty">No edition yet.</div>'; return; }
+    const al = ed.almanac || {}, wx = al.weather || {}, days = (wx.days || []).slice(0, 3), mk = al.markets || {};
+    const fmt = (n) => Number(n).toLocaleString(undefined, { maximumFractionDigits: 0 });
+    const chg = (x) => x ? `<span style="color:${x.change_24h >= 0 ? '#8fe3a8' : '#ff8b7a'}">${x.change_24h >= 0 ? '+' : ''}${x.change_24h}%</span>` : '';
+    const per = ed.persona || {}, cur = per.currently || {}, navs = [];
+    const secs = ed.sections || [];
+    const tick = [];
+    if (mk.btc) tick.push(`<span><b>BTC</b> $${fmt(mk.btc.usd)} ${chg(mk.btc)}</span>`);
+    if (mk.eth) tick.push(`<span><b>ETH</b> $${fmt(mk.eth.usd)} ${chg(mk.eth)}</span>`);
+    if (wx.now !== undefined) tick.push(`<span><b>${esc(wx.place)}</b> ${esc(wx.now)}&deg; ${esc(wx.now_sky)}</span>`);
+    secs.forEach((s) => tick.push(`<span><b>${esc(s.name)}</b> ${esc(s.subhead)}</span>`));
+    let h = `<div class="mast">${FLORAL.replace("%S", "l")}${FLORAL.replace("%S", "r")}<div class="kick">the daily &middot; no filter</div><h1>${esc(ed.paper)}</h1><div class="date">${esc(ed.date_pretty)}</div>
+      <div class="ed">run by ${esc(per.name)} (${esc(per.role)}), feeling ${esc(per.mood)}${cur.listening ? `, vibing to ${esc(cur.listening)}` : ''}</div>
+      <div class="ticker"><div>${tick.join('')}${tick.join('')}</div></div><div class="frieze"></div></div>
+      <div class="headline">${esc(ed.headline)}</div><div class="dek">${esc(ed.dek)}</div><div class="lazy" id="lazy"></div>`;
+
+    h += `<div class="card rv"><div class="lbl">Vibe check</div><div class="alm">
+      <div><b>${esc(wx.now)}&deg;</b><span>${esc(wx.place)} &middot; ${esc(wx.now_sky)}</span></div>
+      <div><b>${mk.btc ? '$' + fmt(mk.btc.usd) : '-'}</b><span>Bitcoin ${chg(mk.btc)}</span></div>
+      <div><b>${mk.eth ? '$' + fmt(mk.eth.usd) : '-'}</b><span>Ether ${chg(mk.eth)}</span></div></div>
+      ${days.length ? `<div style="margin-top:11px;font-size:12px;color:var(--dim)">${days.map((x) => `${esc(x.date.slice(5))}: ${esc(x.high)}&deg;/${esc(x.low)}&deg; ${esc(x.sky)}, ${esc(x.rain_pct)}% rain`).join(' &nbsp;&middot;&nbsp; ')}</div>` : ''}
+      ${al.moon ? `<div style="margin-top:6px;font-size:12px;color:var(--dim)">Moon: ${esc(al.moon.name)}, ${esc(al.moon.illumination)}% lit</div>` : ''}
+      ${(al.blurb || []).map((b) => `<div style="margin-top:9px;font:italic 14px/1.5 var(--serif)">${esc(b)}</div>`).join('')}</div>`;
+
+    secs.forEach((s, i) => {
+      const c = PAL[i % PAL.length]; navs.push([`s${i}`, s.name, c]);
+      h += `<div class="sec rv" id="s${i}" style="--c:${c}"><div class="tag"><i>${String(i + 1).padStart(2, '0')}</i><h2>${esc(s.name)}</h2></div>${manual('Step', i + 1, secs.length, s.body, s.name)}<div class="by">by ${esc(s.byline)}</div>
+        <div class="sub">${esc(s.subhead)}</div><div class="tl" data-tl="s${i}"></div><div class="pull">${esc(pullOf(s.body))}</div><div class="body">${paras(s.body)}</div>${s.deep && (s.deep.body || []).length ? `<div class="card"><div class="art" id="s${i}d" style="--c:${c}"><div class="lbl">Cover story</div><div class="ah">${esc(s.deep.headline)}</div><div class="by" style="margin:3px 0 0">${esc(s.deep.subhead || '')}</div><div class="tl" data-tl="s${i}d"></div><div class="ab body">${paras(s.deep.body)}</div></div></div>` : ''}
+        ${(s.stories || []).length ? `<div class="card"><div class="lbl">Receipts &mdash; assembly not required</div>${s.stories.map((st) => `<div class="story"><div class="h"><span>${esc(st.headline)}</span><span class="n">${(st.sources || []).length} outlets</span></div>
+          <div class="src">${(st.facts || []).length ? `<div class="cmp">Facts &mdash; cross-read from ${st.read || (st.sources || []).length} of ${(st.sources || []).length} outlets</div><ul class="facts">${st.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}${st.split ? `<div class="split"><b>Where the outlets differ:</b> ${esc(st.split)}</div>` : ''}${diffPanel(st.diffs)}<div class="cmp">Every outlet, in their own words</div>${(st.sources || []).map((x) => srcRow(x, false)).join('')}</div></div>`).join('')}</div>` : ''}</div>`;
+    });
+
+    const op = ed.opinion;
+    if (op && (op.columns || []).length) {
+      navs.push(['op', 'Hot Take', '#F5333A']);
+      h += `<div class="sec rv" id="op" style="--c:#F5333A">${CROWN}<div class="tag" style="--c:#F5333A"><i>HOT</i><h2 class="scrawl">${esc(op.name)}</h2></div><div class="by">${esc(op.label)}</div><div class="card" style="--c:#F5333A">
+        ${op.columns.map((c, j) => `<div class="col" id="c${j}"><div class="who">${esc(c.name)} <span>&middot; ${esc(c.stance)}</span></div><h3>${esc(c.headline)}</h3><div class="tl" data-tl="c${j}"></div><div class="body">${paras(c.body)}</div></div>`).join('')}</div>`;
+      if (op.machine) {
+        const m = op.machine; navs.push(['mach', 'The Machine', '#A9AEB5']);
+        h += `</div><div class="sec rv" id="mach" style="--c:#A9AEB5"><div class="tag" style="--c:#A9AEB5"><i>AI</i><h2>${esc(m.name)}</h2></div><div class="by">${esc(m.stance)}</div><div class="sub">${esc(m.headline)}</div><div class="tl" data-tl="mach"></div><div class="blueprint">
+          ${(m.thinking || []).length ? `<div class="lbl" style="--c:#A9AEB5">Unfiltered thoughts</div><div class="think">${(m.thinking || []).map(esc).join('<br><br>')}</div>` : ''}<div class="body">${paras(m.body)}</div></div>`;
+      }
+      h += '</div>';
+    }
+    if ((ed.letters || []).length) {
+      navs.push(['let', 'Letters', '#A69B8B']);
+      h += `<div class="sec rv" id="let" style="--c:#A69B8B"><div class="tag"><i>DM</i><h2>Letters</h2></div><div class="card" style="--c:#A69B8B">${ed.letters.map((l) => `<div class="letter"><div class="lbl" style="margin-bottom:4px">${esc(l.from)}</div><div class="t">${esc(l.text)}</div><div class="r">${esc(l.reply)}</div></div>`).join('')}</div></div>`;
+    }
+    const lr = ed.longread;
+    if (lr && lr.headline) {
+      navs.push(['lr', 'Long Read', '#C9A46A']);
+      h += `<div class="sec rv" id="lr" style="--c:#C9A46A"><div class="tag"><i>LONG</i><h2>${esc(lr.name || 'The Long Read')}</h2></div><div class="sub" style="margin-top:14px">${esc(lr.headline)}</div><div class="by" style="margin-top:-4px">${esc(lr.subhead)}</div><div class="tl" data-tl="lr"></div><div class="body" style="margin-top:14px">${paras(lr.body)}</div>
+        ${(lr.sources || []).length ? `<div class="card" style="--c:#C9A46A"><div class="lbl">Reading list</div>${lr.sources.map((x) => `<a href="${esc(safe(x.link))}" style="display:block;padding:4px 0;font-size:12.5px;font-weight:600">${esc(x.source)} <small style="color:var(--dim);font-weight:400">&mdash; ${esc(x.title)}</small></a>`).join('')}</div>` : ''}</div>`;
+    }
+    if ((ed.magazines || []).length) {
+      navs.push(['mags', 'Mag Rack', '#B08D57']);
+      h += `<div class="sec rv" id="mags" style="--c:#B08D57"><div class="tag"><i>${ed.magazines.length}</i><h2>The Mag Rack</h2></div><div class="card">${ed.magazines.map((m, mi) => `<div class="mag" id="mg${mi}" style="--c:${esc(m.color || '#f0cd7a')}"><div class="mh"><b>${esc(m.name)}</b><span>${esc(m.tagline)}</span></div>
+        <div class="mb"><div class="by" style="margin:0 0 6px">edited by ${esc(m.editor)}</div>${(m.editors_note || []).map((t) => `<div class="think">${esc(t)}</div>`).join('')}
+        ${(m.articles || []).map((a, bi) => `<div class="art" id="m${mi}_${bi}"><div class="ah">${esc(a.headline)}</div><div class="by" style="margin:3px 0 0">${esc(a.byline || '')} ${a.subhead ? '&middot; ' + esc(a.subhead) : ''}</div><div class="tl" data-tl="m${mi}_${bi}"></div><div class="ab body">${paras(a.body)}</div></div>`).join('')}</div></div>`).join('')}</div></div>`;
+    }
+    const mo = ed.more || {}, moKeys = Object.keys(mo);
+    if (moKeys.length) {
+      const total = moKeys.reduce((n, k) => n + mo[k].items.length, 0); navs.push(['more', 'More', '#D9CDB8']);
+      h += `<div class="sec rv" id="more" style="--c:#D9CDB8"><div class="tag"><i>${total}</i><h2>The Rest of the Pile</h2></div>
+        <div class="note">Every story the paper pulled but didn&rsquo;t print. Facts only: each outlet&rsquo;s own headline and its own summary line, side by side, with a link to the original. No spin added by us.</div>
+        ${moKeys.map((k) => `<div class="card lz-g" style="--c:#D9CDB8"><div class="lz-h" style="color:var(--ink)">${esc(mo[k].name)}<span>${mo[k].items.length} more</span></div><div class="lz-b">${mo[k].items.map((it) => `<div class="more-i"><div class="h"><span>${esc(it.headline)}</span><span class="n">${it.n} outlet${it.n === 1 ? '' : 's'}</span></div>${it.lede ? `<div class="lede">${esc(it.lede)}</div>` : ''}
+          <div class="src">${it.sources.map((x) => srcRow(x, true)).join('')}</div></div>`).join('')}</div></div>`).join('')}</div>`;
+    }
+    h += `<div class="sign">${(ed.signoff || []).map(esc).join('<br>')}</div><div class="frieze" style="--c:var(--ochre);margin-top:30px"></div><div class="fin">that&rsquo;s the paper</div>`;
+    $('paper').innerHTML = h;
+    $('nav').innerHTML = navs.map(([id, t, c]) => `<a href="#${id}" data-t="${id}" style="--c:${c}">${esc(t)}</a>`).join('');
+    $('dateSel').innerHTML = (archive || []).map((a) => `<option value="${esc(a.date)}" ${a.date === ed.date ? 'selected' : ''}>${esc(a.date)}</option>`).join('');
+    watch();
+  }
+
+  // reveal-on-scroll + which section is active + progress bar
+  let io = null, spy = null;
+  function watch() {
+    if (io) io.disconnect(); if (spy) spy.disconnect();
+    io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    document.querySelectorAll('.rv').forEach((n) => io.observe(n));
+    spy = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { document.querySelectorAll('#nav a').forEach((a) => a.classList.toggle('on', a.dataset.t === e.target.id)); const on = document.querySelector('#nav a.on'); if (on) on.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } }), { rootMargin: '-25% 0px -65% 0px' });
+    document.querySelectorAll('.sec').forEach((n) => spy.observe(n));
+  }
+  const setProg = () => { const h = document.documentElement.scrollHeight - innerHeight; const y = Math.max(document.body.scrollTop, document.documentElement.scrollTop, scrollY); $('prog').style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%'; };
+  addEventListener('scroll', setProg, { passive: true }); document.body.addEventListener('scroll', () => { const h = document.body.scrollHeight - document.body.clientHeight; $('prog').style.width = (h > 0 ? Math.min(100, document.body.scrollTop / h * 100) : 0) + '%'; }, { passive: true });
+
+  document.addEventListener('click', (e) => {
+    const st = e.target.closest('.story'); if (st && !e.target.closest('a')) st.classList.toggle('open');
+    const mh = e.target.closest('.mh'); if (mh) mh.parentElement.classList.toggle('open');
+    const ah = e.target.closest('.ah'); if (ah) ah.parentElement.classList.toggle('open');
+    const nv = e.target.closest('#nav a'); if (nv) { e.preventDefault(); const t = document.getElementById(nv.dataset.t); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+
+  // ---- TL;DR layer (summaries written by the local model, cached as static JSON)
+  let tlTimer = 0;
+  async function loadTldr(date) {
+    clearTimeout(tlTimer);
+    let d; try { const r = await fetch('tldr.json', { cache: 'no-store' }); if (!r.ok) throw 0; d = await r.json(); } catch (e) { $('lazy').innerHTML = ''; return; }
+    const items = d.items || {};
+    document.querySelectorAll('[data-tl]').forEach((el) => {
+      const it = items[el.dataset.tl]; if (!it) return;
+      el.innerHTML = `<b>TL;DR</b>${esc(it.tldr)}${it.why ? `<em>${esc(it.why)}</em>` : ''}`; el.classList.add('on');
+    });
+    const groups = {};
+    Object.entries(items).forEach(([id, it]) => { (groups[it.group] = groups[it.group] || []).push([id, it]); });
+    const names = Object.keys(groups);
+    const busy = d.status !== 'ready';
+    const newsSet = new Set((document.querySelectorAll('.sec h2')) ? [] : []);
+    $('lazy').innerHTML = `<div class="card" style="--c:var(--accent)"><div class="lbl"><span>TL;DR &mdash; the whole paper, no fluff</span><span class="prog2">${busy ? `summarizing ${d.done || 0}/${d.total || '?'}&hellip;` : (d.built ? 'as of ' + esc(d.built) : '')}</span></div>` +
+      (names.length ? names.map((g, gi) => `<div class="lz-g ${gi < 3 ? 'open' : ''}"><div class="lz-h">${esc(g)}<span>${groups[g].length}</span></div><div class="lz-b">${groups[g].map(([id, it]) =>
+        `<div class="lz-i" data-jump="${esc(id)}"><div class="t">${esc(it.kind.replace(/^(news section|deep dive|magazine feature)[:( ]*/i, '$1 ').slice(0, 40))}</div><div>${esc(it.tldr)}</div>${it.why ? `<small>${esc(it.why)}</small>` : ''}</div>`).join('')}</div></div>`).join('')
+        : '<div class="note">Summaries are being written &mdash; check back in a few minutes.</div>') + '</div>';
+    if (busy) tlTimer = setTimeout(() => loadTldr(date), 25000);
+  }
+  function jumpTo(id) {
+    let el = document.getElementById(id); if (!el) return;
+    const mag = el.closest('.mag'); if (mag) mag.classList.add('open');
+    if (el.classList.contains('art')) el.classList.add('open');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.addEventListener('click', (e) => {
+    const lj = e.target.closest('[data-jump]'); if (lj) jumpTo(lj.dataset.jump);
+    const lh = e.target.closest('.lz-h'); if (lh) lh.parentElement.classList.toggle('open');
+    const mi = e.target.closest('.more-i'); if (mi && !e.target.closest('a')) mi.classList.toggle('open');
+  });
+
+  let archive = [];
+  async function load(date) {
+    try {
+      const d = await (await fetch('edition.json')).json();
+      if (!archive.length && d.archive) archive = d.archive;
+      render(d, archive); document.body.scrollTop = 0; scrollTo(0, 0); if (d.edition) loadTldr(d.edition.date);
+    } catch (e) { $('paper').innerHTML = '<div class="empty">Couldn’t reach the paper.</div>'; }
+  }
+  $('dateSel').addEventListener('change', (e) => load(e.target.value));
+  load(new URLSearchParams(location.search).get('date'));
+})();
+</script>
+</body>
+</html>
