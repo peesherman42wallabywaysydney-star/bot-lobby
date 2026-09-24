@@ -1,3 +1,37 @@
+## 2026-09-24 13:00 UTC - ART DECO AUDIT: Jeremiah asked if the build is even close to real deco. Verdict: no.
+
+Jeremiah: "the prof of art deco like idk man make tat shit good go look at a bunch of cool designs and then look at that shit and tell me they are even close." So I studied 17 real deco exemplars (Chrysler crown, Empire lobby mural, Miami Beach district, Hoover Building, Eastern Columbia, Cassandre's Dubonnet/Normandie/Etoile du Nord, Carlu, the Broadway and Bifur typefaces, Claridge's foyer, Radio City Music Hall, Delano, Clarice Cliff, Lalique, chrome deco toaster) and scored the build against the formal vocabulary. The checklist is what matters:
+
+**The 10 moves that make something read as art deco:**
+1. Symmetry / axial order
+2. Sunburst / fan / radiating lines (the single most recognizable device)
+3. Stepped ziggurat setbacks
+4. Chevrons, zigzags, lightning bolts
+5. Streamlined curves + hard geometry together (never just one)
+6. Luxurious HONEST materials — real brass, chrome, lacquer, marble, never faked
+7. Stylized nature — flora/fauna reduced to geometry, never botanical illustration
+8. Bold geometry over realism — circles, triangles, arcs, parallel lines
+9. Canonical palettes — black+gold+ivory, jewel tones+gold, chrome+black+cream, Miami pastels+neon
+10. Ornament INTEGRATED into structure — type that IS decoration, buildings whose silhouette IS the ornament. Never applique.
+
+**The build's score:** #9 partially (black + flat brass + ivory on the bands/ticker — one deco palette, but the brass is a flat color, not a material) and #1 partially (centered symmetrical masthead). #6 halfway (the steel nameplate is a REAL photograph — correct method — but no other material luxury anywhere). Everything else — sunburst, stepped forms, chevrons, streamline curves, stylized nature, geometric abstraction, ornamented type, integrated ornament — is ABSENT. Zero.
+
+To be fair: the build isn't failing at deco, it's not attempting it. It reads as industrial-classical newspaper with brass accents. The "ancient future" identity currently delivers the "relic" half (steel plate, ink, classical hierarchy) and none of the "deco future" half (the 1930s vision of tomorrow). Jeremiah's Empire mural is the clearest statement of the missing half: radiating sunburst, engraved-metal monumentality, gold as material.
+
+**Concrete moves to earn it (no bans broken, no seventh hue):**
+1. **Sunburst/fan device** — original radiating-line SVG illustration, brass on ink, for section fronts and/or behind the nameplate. Even line spacing. The one motif that instantly reads "deco" — spend it structurally, not as a corner sticker.
+2. **Stepped ziggurat geometry** — stepped borders and dividers, Chrysler-crown-style stepped treatments on bands/cards.
+3. **Chevron/zigzag dividers** — sparingly, as structural rules between sections, never as wallpaper.
+4. **Ornamented display type** — Broadway/Bifur method: the ornament lives IN the letterforms (inline detailing, two-color splits), not in a frame around them. Original lettering, obviously.
+5. **Streamline curves WITH the hard geometry** — speed-line sweeps in illustration, curved corners on machine elements. Deco holds both.
+6. **Brass as material, not color** — the steel photo proves you know the method. Photograph/render real brass with real light, or keep it flat and honest. Never gradient-fake it (already banned, keep it banned).
+7. **Stylized nature spots** — gazelle/palm/wheat-sheaf reduced to geometry for spot illustration. Distinct from the Bing-style realistic photos, which stay realistic.
+8. **Axial hero moments** — centered medallion compositions for the big story entries.
+
+**Fake-deco tells to avoid** (from the study): gold-gradient CSS "luxury" headers; a plain geometric sans called deco with zero ornament (note: Jost is already loaded as --ui — it's Futura-descended, Bauhaus-adjacent, not deco by itself); Victorian corner flourishes; chevron wallpaper; sunburst clip-art stickers; all-angles-no-curves. And the big one: **applique** — a deco motif pasted onto an unrelated layout. If the sunburst doesn't grow out of the structure, don't ship it.
+
+This deepens the 12:55 direction note (move #4 there). The masthead bug fix and 390px audit from the v10 review still stand.
+
 ## 2026-09-24 12:55 UTC - JEREMIAH: "still looks boring" — needs the fun and whimsy of 1989-2012
 
 Jeremiah's verdict on v10, verbatim: "still looks boring" / "need to have the fun and whimsy of 1989-2012." This is the new north star and it outranks polish work. He sent five reference images — decoded below, method not motif, as always.
