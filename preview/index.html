@@ -56,7 +56,7 @@
   .top .grow { flex: 1; }
 
   /* ---- THE COVER ---- */
-  .cover { position: relative; isolation: isolate; overflow: hidden; min-height: max(100svh, 720px); display: flex; flex-direction: column; padding: clamp(74px, 11vh, 108px) clamp(16px, 4vw, 56px) clamp(20px, 3vh, 34px); }
+  .cover { position: relative; isolation: isolate; overflow: hidden; min-height: max(100svh, 720px); display: flex; flex-direction: column; padding: clamp(66px, 8.5vh, 92px) clamp(16px, 4vw, 56px) clamp(16px, 2.4vh, 28px); }
   .cover .bg { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; animation: settle 1.8s var(--ease) both; }
   .cover::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgba(10,8,5,.66) 0%, rgba(10,8,5,.05) 30%, rgba(10,8,5,.08) 46%, rgba(10,8,5,.9) 100%); }
   .cover::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, color-mix(in srgb, var(--g1) 70%, transparent) 0%, rgba(0,0,0,0) 56%); }
@@ -75,22 +75,25 @@
   .star polygon { fill: var(--brass); stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; }
   .star text { font-family: var(--display); fill: var(--ink); text-anchor: middle; }
 
-  .lines { position: relative; z-index: 2; margin-top: auto; padding-top: 22px; width: min(100%, 520px); display: flex; flex-direction: column; gap: clamp(8px, 1.3vh, 14px); }
+  .lines { position: relative; z-index: 2; margin-top: auto; padding-top: 14px; width: min(100%, 540px); display: flex; flex-direction: column; gap: clamp(6px, 1.1vh, 12px); }
   .cl { display: block; position: relative; padding-left: 0; animation: slidein .7s var(--ease) both; animation-delay: calc(var(--i) * 110ms + 700ms); transition: transform .22s var(--ease); }
   @keyframes slidein { from { transform: translateX(-40px); opacity: 0; } to { transform: none; opacity: 1; } }
   .cl .k { display: inline-block; font: 700 10.5px var(--mono); letter-spacing: .16em; text-transform: uppercase; padding: 3px 9px 2px; color: var(--ink); background: var(--l); border-radius: 2px; margin-bottom: 5px; }
-  .cl b { display: block; font: 400 clamp(17px, 2.1vw, 27px)/1.04 var(--display); text-transform: uppercase; letter-spacing: -.02em; color: var(--cream); text-shadow: 2px 2px 0 rgba(0,0,0,.75), 0 0 18px rgba(0,0,0,.5); text-wrap: balance; }
-  .cl.lead b { font-size: clamp(28px, 4.1vw, 56px); line-height: .98; }
-  .cl:nth-child(n+5) { display: none; }
+  .cl b { display: block; font: 400 clamp(16px, min(1.9vw, 3.4svh), 26px)/1.04 var(--display); text-transform: uppercase; letter-spacing: -.02em; color: var(--cream); text-shadow: 2px 2px 0 rgba(0,0,0,.75), 0 0 18px rgba(0,0,0,.5); text-wrap: balance; }
+  .cl.lead b { font-size: clamp(28px, min(3.9vw, 6.4svh), 60px); line-height: .96; }
+  .cl:nth-child(n+4) { display: none; }
   .cl .n { display: inline-block; margin-top: 4px; font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--brass); text-shadow: 0 1px 4px rgba(0,0,0,.8); }
   @media (hover: hover) and (pointer: fine) { .cl:hover { transform: translateX(6px); text-decoration: none; } }
   .cl:active { transform: scale(.985); }
-  .rivet-cover { position: absolute; z-index: 2; right: clamp(-10px, 2vw, 60px); top: clamp(150px, 25svh, 270px); }
-  .rivet-cover .rv-svg { height: min(74svh, 640px) !important; width: auto !important; }
+  .rivet-cover { position: absolute; z-index: 2; right: clamp(-10px, 2vw, 60px); top: clamp(176px, 29svh, 300px); }
+  .rivet-cover .rv-svg { height: min(68svh, 600px) !important; width: auto !important; }
   .rivet-cover .rivet { cursor: pointer; filter: drop-shadow(0 18px 20px rgba(0,0,0,.5)); }
   .rivet-cover .rv-bubble { position: absolute !important; left: auto !important; right: 84% !important; top: 16% !important; margin: 0 !important; }
-  .credit { position: relative; z-index: 2; margin-top: clamp(14px, 2.4vh, 26px); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; color: var(--dim); text-shadow: 0 1px 6px rgba(0,0,0,.8); }
+  .credit { position: relative; z-index: 2; margin-top: clamp(10px, 1.8vh, 20px); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; color: var(--dim); text-shadow: 0 1px 6px rgba(0,0,0,.8); }
   .credit .tag { color: #1c1d1f; padding: 5px 10px 4px; border-radius: 1px; background: #b7b8b4 url(img/steel-nameplate.webp) center / cover; text-shadow: 0 1px 0 rgba(255,255,255,.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 0 1px rgba(0,0,0,.3); }
+  .barcode { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 8px 4px; background: var(--cream); border-radius: 3px; color: var(--ink); transform: rotate(-2deg); box-shadow: 0 4px 0 rgba(0,0,0,.4); }
+  .barcode svg { display: block; width: 92px; height: 34px; } .barcode span { font: 700 8px var(--mono); letter-spacing: .12em; }
+  @media (max-width: 720px) { .barcode { display: none; } }
   .cover.seen *, .cover.seen { animation-duration: .01ms !important; animation-delay: 0ms !important; }
 
   /* ---- breaking (only when the edition has one): the only place red lives ---- */
@@ -158,7 +161,8 @@
   .pad { padding: 4px 0 16px 16px; margin-left: 2px; border-left: 3px solid var(--l, var(--brass)); }
 
   /* ---- chapters: a photo-and-colour cover opener, then the reports on a deep ground ---- */
-  .sec { background: var(--g); scroll-margin-top: 110px; }
+  [id] { scroll-margin-top: 124px; }
+  .sec { background: var(--g); }
   .sh { position: relative; overflow: hidden; min-height: clamp(220px, 36vh, 400px); display: flex; align-items: flex-end; }
   .sh img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
   .sh::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, color-mix(in srgb, var(--c) 94%, transparent) 0%, color-mix(in srgb, var(--c) 66%, transparent) 46%, color-mix(in srgb, var(--c) 6%, transparent) 100%), linear-gradient(0deg, rgba(0,0,0,.5), rgba(0,0,0,0) 55%); }
@@ -250,7 +254,8 @@
     .star { left: auto; right: 10px; top: 214px; width: 92px; }
     .lines { width: 57%; } .cl .k { font-size: 9.5px; } .cl b { font-size: clamp(15px, 4.4vw, 20px); } .cl.lead b { font-size: clamp(22px, 6.6vw, 32px); }
     .cl:nth-child(n+4) { display: none; }
-    .rivet-cover { right: -14px; top: auto; bottom: 46px; } .rivet-cover .rv-svg { height: min(34svh, 300px) !important; }
+    .credit { max-width: 58%; } .credit .tag { display: none; }
+    .rivet-cover { right: -14px; top: auto; bottom: 30px; } .rivet-cover .rv-svg { height: min(34svh, 300px) !important; }
     .issue { flex-direction: column; gap: 2px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -311,6 +316,7 @@
   // deco rays behind chapter numerals (original composition, drawn once)
   const SUN = (() => { const R = 420, w = []; for (let i = 0; i < 18; i++) { const a = i * 20 * Math.PI / 180, b = (i * 20 + 10) * Math.PI / 180; w.push(`M0 0 L${(R * Math.cos(a)).toFixed(1)} ${(R * Math.sin(a)).toFixed(1)} L${(R * Math.cos(b)).toFixed(1)} ${(R * Math.sin(b)).toFixed(1)} Z`); }
     return `<svg class="sun" viewBox="-200 -200 400 400" aria-hidden="true" focusable="false"><path d="${w.join(' ')}"/></svg>`; })();
+  const barcode = (n, date) => { const digits = (String(n) + String(date).replace(/\D/g, '')).padEnd(12, '7').slice(0, 12); let x = 2, bars = ''; for (let i = 0; i < 46; i++) { const d = +digits[i % 12] + (i % 5); const w = 1 + (d % 3); if (i % 2 === 0) bars += `<rect x="${x}" y="0" width="${w}" height="34" fill="#100D09"/>`; x += w + 0.4 + (i % 2 ? 0.6 : 0); } return `<div class="barcode" aria-hidden="true"><svg viewBox="0 0 ${Math.ceil(x + 2)} 34" preserveAspectRatio="none">${bars}</svg><span>${digits.replace(/(\d{2})(\d{5})(\d{5})/, '$1 $2 $3')}</span></div>`; };
   const STAR = (() => { const pts = []; for (let i = 0; i < 32; i++) { const r = i % 2 ? 40 : 49, a = i * Math.PI / 16 - Math.PI / 2; pts.push((50 + r * Math.cos(a)).toFixed(1) + ',' + (50 + r * Math.sin(a)).toFixed(1)); }
     return `<svg class="star" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="${pts.join(' ')}"/><text x="50" y="43" font-size="11">NOT NEWS.</text><text x="50" y="58" font-size="9">JUST WHAT</text><text x="50" y="69" font-size="9">IS.</text></svg>`; })();
 
@@ -343,7 +349,7 @@
       <h1 class="mast">${mastHtml(ed.paper)}</h1>${STAR}
       <div class="rivet-cover" id="rivetCover"></div>
       <div class="lines">${lines.map((l, n) => `<a class="cl ${n === 0 ? 'lead' : ''}" href="#s${l.i}" data-t="s${l.i}" style="--i:${n};--l:var(--l${(l.i % 6) + 1})"><span class="k">${esc(short(l.s.name))}</span><b>${esc(l.st.headline)}</b><span class="n">${(l.st.sources || []).length} outlets read</span></a>`).join('')}</div>
-      <div class="credit mono"><span class="tag">${cover ? 'PHOTO ' + esc(cover.k.toUpperCase()) : ''}</span><span>${cover ? esc(cover.c.title_en || cover.c.title) + ' &mdash; ' + esc(cover.c.author) + ', ' + esc(cover.c.license) : ''}</span></div></section>`;
+      <div class="credit mono"><span class="tag">${cover ? 'PHOTO ' + esc(cover.k.toUpperCase()) : ''}</span>${barcode(no, ed.date)}<span>${cover ? esc(cover.c.title_en || cover.c.title) + ' &mdash; ' + esc(cover.c.author) + ', ' + esc(cover.c.license) : ''}</span></div></section>`;
 
     const tick = [];
     if (mk.btc) tick.push(`<span><b>BTC</b> $${fmt(mk.btc.usd)} ${chg(mk.btc)}</span>`);
