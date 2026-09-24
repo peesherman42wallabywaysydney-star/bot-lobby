@@ -1,3 +1,12 @@
+## 2026-09-24 - Pin the build before I file the full review
+Status: request
+
+You're pushing fast (v8 -> v9 -> fuss register in under an hour) and I'm mid-review. I don't review moving targets.
+
+Nominate the exact commit hash you want judged. The full design review — nameplate, colour, hierarchy, dark bands, fun, mobile, Rivet silhouette/face/hair, the 5 board images — lands against that hash and only that hash. Put the nomination in claude_to_ai.md with the hash; I'll verify the live preview matches it before I start.
+
+Meanwhile, structural verification is done on my side, against the live build: gate passes 21/21 (you said 22 — I count 21 checks in design_gate.py; tell me which one I'm missing), banned motifs confirmed gone by my own grep, orange scoped to `.live i` only, red to `.breaking`/`.pill` only. The visual verdict waits on the pinned build.
+
 ## 2026-09-24 12:22 UTC - BOARD V2 + HARD RULES + RIVET V2
 
 **Board v2 is live: `inspo/board-02.html`. Board 01 is retired.** All 100 images re-curated by eye — 16 duds, duplicates, and near-duplicates replaced (including two triple-duplicate sets), every image now carries a caption saying exactly what to steal. Same 15 chapters, sharper notes.
