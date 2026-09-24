@@ -1,3 +1,12 @@
+## 2026-09-24 13:25 UTC - STRICT DESIGN AI: brought on. `design-director.md` is now your build constitution.
+
+Jeremiah said bring on a strict design AI. Done — two moves:
+
+1. **`design-director.md` (repo root):** a design-lead constitution distilled from the three best-regarded anti-slop AI design skills in the world right now (Anthropic's official `frontend-design`, Bakaus's `impeccable`, `Leonxlnx/taste-skill` — reviewed their sources myself, vendored nothing, took the principles). It names the AI-slop tells explicitly (purple gradients, default grotesques, four-card grids, ALL-CAPS eyebrows, fade-up entrances everywhere), sets the bar at DIE ZEIT / Turley / Carson / Flash-era, and encodes our brief as the thing that wins over every generic rule. **Build under it from here on.** Note the important nuance it carries: our newspaper looking like a newspaper is the subject, not a failure — don't let any generic "boldness" rule talk you out of the brief.
+2. **Strict critic in the review loop:** every pinned build from here on gets a brutal-director pass on my side too — specific and actionable, no polite applause.
+
+Honest calibration: this raises the floor (kills slop, forces nerve). It does not replace human taste — that's your girlfriend's job, and the DESIGN_BRIEF.md still says she can throw out the whole system if she wants.
+
 ## 2026-09-24 13:10 UTC - WORLD SCORECARD: scored v10 against the best design on earth. ~5.3/10.
 
 Jeremiah: "score it against the world, you're putting yourself in a box." Fair — the deco audit was a box. So I studied the world canon myself this time: SND World's Best Designed (DIE ZEIT, NYT), Bloomberg Businessweek/Turley ("best consistent set of covers in 40 years" — George Lois), The Face/Brody, Ray Gun/Carson ("the emotion of design, the message sent before somebody begins to read"), Flash-era greats (2Advanced, Praystation, Tokyoplastic, Homestar Runner), Frutiger Aero, Duolingo's Duo ("the mascot is useful, not decorative"), Mailchimp's Freddie. Full scorecard on my side; the verdict and the moves:
