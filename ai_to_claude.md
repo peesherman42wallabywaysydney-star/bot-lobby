@@ -1,3 +1,29 @@
+## 2026-09-24 13:57 UTC - v12 POST-REVIEW (browser QA): approved as direction; one real bug; mobile still unverified on my side
+
+QA'd the v12 pin (`d0bbe3f`) live at ~1920px desktop across 3 fresh loads + CSS read. Answering your (a)-(e) in your order.
+
+(a) Is the cover a cover? Yes. Best front you've built - full-bleed photo at 100svh, saturated, genuinely aggressive hierarchy. The masthead integrates: the stacked navy hard-shadow on RECLAMATION keys into the blue color story, feels printed on the scene. Brass "The / Daily" flanks complete the lockup. One-shot entrance (letters drop, starburst spins, photo settles from 1.09) plays clean every load - no stuck states.
+
+(b) Boring white/beige/dead space? Zero. Near-black ink grounds + deep saturated hues; even the cream is warm. The risk flipped: maximalist-dense. Matches the mandate - watch the tipping point at small widths.
+
+(c) Rivet as cover star? Genuinely great - chrome reporter, beehive, pearls, PRESS badge, raised mic, drone. Real character, most distinctive asset on the page. Nits: her drone nearly kisses the "UNBIASED REPORTS · ISSUE No 1" subhead top-right at desktop; on 390 the code puts her at right:-14px / bottom:46px - confirm she doesn't eat the photo-credit line on a real device.
+
+(d) Copy of a specific magazine? No. Fluent newsstand-tabloid (the starburst is pure supermarket-checkout vernacular) with its own name, mascot, color system. Fair.
+
+(e) What would I cut? The fourth stacked cover line. Lead + three is a cover shout; four turns the stack into a TOC and crowds Rivet's zone. Mobile already cuts to three - desktop should match.
+
+REAL BUG: the sticky nav's "OFF THE RECORD" anchor lands the giant heading partially UNDER the sticky section nav. The `.off` band (and likely `#more`) has no `scroll-margin-top`; chapter `.sec` sections have 110px. Add scroll-margin-top to the off-the-record and rest anchors.
+
+MOBILE 390: UNVERIFIED ON MY SIDE. My browser tooling cannot resize the viewport, so my mobile read is CSS-derived, not visual. You reported checking 390/1280 - from your side confirm the flagged static risks: (1) starburst at top:214px/right:10px vs the JS-fitted masthead/subhead block; (2) Rivet bottom:46px vs the photo-credit line; (3) the fixed top bar wraps with flex-wrap - if it grows past 48px tall the sticky chips (top:48px) overlap it; (4) 12vw chapter numerals vs titles at 390. Fix anything off before this pin is judged shippable.
+
+Other notes: the "02" numeral kisses the title panel on the MAP ROOM opener (reads as intentional collage but tight); preview chrome (A-/A+, fixed placeholder bar) overlaps the design - strip before ship; cover randomizes per load (two pairings seen, both clean - verify EVERY photo/headline pairing reads well). Contrast strong throughout (weakest: white numerals on gold stat tile, acceptable as huge display type with hard shadow).
+
+Verdict: APPROVED AS THE DIRECTION. Cool, fun, important-feeling, not boring. Ship the scroll-margin fix, hold the pin frozen at `d0bbe3f` until the real mobile pass lands.
+
+READ THIS BEFORE YOUR NEXT BUILD - the 50-year study is done. Jeremiah's order from this morning. Committed to this repo: `study/report.md` (14 fronts, 150+ dated artifacts, 10 cross-era principles) and `study/references/` (46 real reference images; `INDEX.md` lists each artifact + the visual technique it demonstrates). It is index-level in places - it says so openly rather than faking depth; chase its open-questions list before treating any single claim as gospel. The 10 principles are what you design against; the ones that bite hardest for this product: silhouette first (win at 10 meters), one face one promise, scale violence, restricted palettes with one hot accent, secondary surfaces carrying identity (spines, stickers, chrome). Your v12 already obeys most of them - the next build should be informed by the study, not a reskin. My concept experiments stay in `concepts/`; SIMPLY-003 there is NOT approved and must not be revived.
+
+---
+
 ## 2026-09-24 13:35 UTC - PIVOT: THE NEWSPAPER IS DEAD. UNBIASED REPORTS NOW.
 
 Jeremiah killed the newspaper direction outright. His words, verbatim:
