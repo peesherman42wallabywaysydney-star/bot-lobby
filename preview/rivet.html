@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rivet: Character Sheet</title>
+<style>
+  @font-face { font-family: 'Archivo Black'; font-weight: 400; font-display: swap; src: url(fonts/ArchivoBlack-normal-400.woff2) format('woff2'); }
+  @font-face { font-family: 'Jost'; font-weight: 400 700; font-display: swap; src: url(fonts/Jost-normal-400.woff2) format('woff2'); }
+  @font-face { font-family: 'IBM Plex Mono'; font-weight: 500; font-display: swap; src: url(fonts/IBMPlexMono-normal-500.woff2) format('woff2'); }
+  @font-face { font-family: 'Newsreader'; font-weight: 400 600; font-display: swap; src: url(fonts/Newsreader-normal-400.woff2) format('woff2'); }
+  :root { --ink: #EDE6D6; --dim: rgba(237,230,214,.66); --ground: #16130E; --line: rgba(237,230,214,.16); --accent: #FF5C00; --steel: #A9AEB5;
+    --display: "Archivo Black", "Arial Black", sans-serif; --ui: "Jost", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace; --serif: "Newsreader", Georgia, serif; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--ground); color: var(--ink); font: 15px/1.55 var(--ui); }
+  main { max-width: 860px; margin: 0 auto; padding: 28px 16px 70px; }
+  .kick { font: 500 10px var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+  h1 { font: 400 clamp(30px, 8vw, 54px)/.95 var(--display); letter-spacing: -.03em; text-transform: uppercase; margin: 8px 0 6px; }
+  h2 { font: 400 20px/1.1 var(--display); letter-spacing: -.01em; text-transform: uppercase; margin: 36px 0 10px; }
+  p, li { font-family: var(--serif); font-size: 16.5px; line-height: 1.65; max-width: 66ch; }
+  .lede { font: italic 400 19px/1.5 var(--serif); color: #D9CDB8; max-width: 60ch; }
+  .stage { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: 24px; align-items: center; margin: 22px 0; padding: 22px; border: 1px solid var(--line); border-radius: 3px; background: #1d1a15; }
+  @media (max-width: 620px) { .stage { grid-template-columns: 1fr; justify-items: center; } }
+  .moods { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  button { font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); cursor: pointer; padding: 10px 14px; min-height: 44px; border-radius: 3px; border: 1px solid #14161a;
+    background: linear-gradient(180deg, #55595f, #33363b 55%, #2a2c30); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
+  button:hover, button[aria-pressed="true"] { background: var(--accent); color: #16130E; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .cell { border: 1px solid var(--line); border-radius: 3px; padding: 12px 8px 8px; text-align: center; background: #1d1a15; }
+  .cell b { display: block; font: 500 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-top: 6px; }
+  .quips { display: grid; gap: 10px; }
+  .q { border-left: 3px solid var(--steel); padding: 6px 12px; background: rgba(237,230,214,.04); cursor: pointer; }
+  .q small { display: block; font: 500 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  ul { padding-left: 20px; } li { margin: 5px 0; }
+  .note { font: 500 11px/1.6 var(--mono); letter-spacing: .05em; color: var(--dim); border: 1px dashed var(--line); padding: 10px 12px; border-radius: 3px; max-width: 70ch; }
+  label { font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); display: inline-flex; gap: 8px; align-items: center; min-height: 44px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="kick">Character sheet &middot; v1</div>
+  <h1>Rivet</h1>
+  <p class="lede">A small steel robot with a coil beehive, lipstick, and opinions. She reads everything so you don&rsquo;t have to, and she&rsquo;ll tell you what she thinks whether you asked or not.</p>
+
+  <div class="stage">
+    <div id="hero" aria-live="off"></div>
+    <div>
+      <div class="kick">Try her</div>
+      <div class="moods" id="moods" role="group" aria-label="Expressions"></div>
+      <div class="moods">
+        <button id="sayBtn">Say something</button>
+        <label><input type="checkbox" id="voice"> Speak it (browser voice)</label>
+      </div>
+      <div class="note">Voice: no cloning of any real person. The &ldquo;sound&rdquo; is the writing, plus your browser&rsquo;s own text-to-speech, pitched up and sped up a touch. Off by default.</div>
+    </div>
+  </div>
+
+  <h2>Expressions</h2>
+  <div class="grid" id="sheet"></div>
+
+  <h2>Who she is</h2>
+  <ul>
+    <li><b>Voice:</b> brassy, fast, big-city warm. Gossipy in a way that&rsquo;s actually about the facts. Laughs at her own jokes. Secretly soft.</li>
+    <li><b>Rule one:</b> the facts are never the joke. She teases the situation, the outlets, the spin, never the victims and never a tragedy.</li>
+    <li><b>Rule two:</b> one quip per screenful. She&rsquo;s a garnish, not the meal.</li>
+    <li><b>Rule three:</b> no exclamation points outside the Notice Board. She gets loud with word choice, not punctuation.</li>
+    <li><b>Never:</b> real people&rsquo;s catchphrases, show lines, or a copy of anyone&rsquo;s voice. Everything she says is original.</li>
+  </ul>
+
+  <h2>Quip bank</h2>
+  <div class="quips" id="quips"></div>
+  <p class="note">Click a line to hear her say it. Every line is original and written for this paper.</p>
+</main>
+<script src="rivet.js"></script>
+<script>
+  const $ = (id) => document.getElementById(id);
+  const hero = Rivet.make({ size: 220 }); $('hero').appendChild(hero.el);
+  const MOODS = ['idle', 'talk', 'laugh', 'shock', 'smug'];
+  MOODS.forEach((m) => { const b = document.createElement('button'); b.textContent = m; b.setAttribute('aria-pressed', m === 'idle'); b.onclick = () => { hero.mood(m); [...$('moods').children].forEach((x) => x.setAttribute('aria-pressed', x === b)); }; $('moods').appendChild(b); });
+  MOODS.forEach((m) => { const c = document.createElement('div'); c.className = 'cell'; const r = Rivet.make({ size: 110 }); r.mood(m); c.appendChild(r.el); c.insertAdjacentHTML('beforeend', `<b>${m}</b>`); $('sheet').appendChild(c); });
+  const kinds = Object.keys(Rivet.QUIPS); let n = 0;
+  const speak = () => $('voice').checked;
+  $('sayBtn').onclick = () => { const k = kinds[n % kinds.length]; hero.say(Rivet.quip(k, n), { speak: speak(), mood: k === 'weird' ? 'laugh' : k === 'politics' ? 'smug' : 'talk' }); n++; };
+  kinds.forEach((k) => Rivet.QUIPS[k].forEach((t) => { const d = document.createElement('div'); d.className = 'q'; d.tabIndex = 0; d.setAttribute('role', 'button'); d.innerHTML = `<small>${k}</small>`; d.append(t);
+    const go = () => hero.say(t, { speak: speak(), mood: k === 'weird' ? 'laugh' : k === 'politics' ? 'smug' : 'talk' });
+    d.onclick = go; d.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }; $('quips').appendChild(d); }));
+  setTimeout(() => hero.say(Rivet.quip('greet', 1), { mood: 'talk' }), 900);
+</script>
+</body>
+</html>
