@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIMPLY — just what is — No. 002</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14100c;
+    --cream:#f4ead8;
+    --magenta:#ff2e88;
+    --cyan:#29e6ff;
+    --gold:#ffc227;
+    --cobalt:#2b3ff2;
+    --lime:#b6f09c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--cream);font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'Space Mono',monospace}
+  .chunk{font-family:'Archivo Black',sans-serif}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+
+  /* film grain over everything */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.55;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  /* ============ COVER ============ */
+  .cover{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--ink)}
+  .cover .photo{position:absolute;inset:0;z-index:0}
+  .cover .photo::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(20,16,12,.55) 0%,rgba(20,16,12,.05) 30%,rgba(20,16,12,.05) 55%,rgba(20,16,12,.88) 100%);}
+  .issuebar{position:relative;z-index:3;display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;
+    font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+    padding:.75rem 1.1rem;color:var(--cream)}
+  .issuebar .live{background:var(--magenta);color:var(--ink);padding:.15em .6em;font-weight:700;transform:rotate(-2deg);display:inline-block}
+
+  .mastwrap{position:relative;z-index:3;margin-top:2svh;padding:0 .6rem}
+  .masthead{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(4.6rem,24vw,16rem);line-height:.84;letter-spacing:-.015em;
+    color:var(--cream);transform:rotate(-3deg);
+    filter:url(#spray);
+    text-shadow:.045em .045em 0 var(--magenta),.09em .09em 0 rgba(43,63,242,.85);
+    animation:slam .7s cubic-bezier(.2,1.4,.3,1) both;
+  }
+  @keyframes slam{from{opacity:0;transform:rotate(-3deg) scale(1.6)}to{opacity:1;transform:rotate(-3deg) scale(1)}}
+  .drips{position:relative;z-index:3;height:0}
+  .drips i{position:absolute;top:-.4rem;width:.5rem;background:var(--cream);filter:url(#spray);border-radius:0 0 1rem 1rem}
+  .drips i:nth-child(1){left:18%;height:2.6rem}
+  .drips i:nth-child(2){left:47%;height:4.2rem;background:var(--magenta)}
+  .drips i:nth-child(3){left:72%;height:3rem}
+
+  .tagline{position:relative;z-index:3;margin:1.6rem 1.1rem 0;transform:rotate(-1.5deg);display:inline-block;align-self:flex-start;
+    background:var(--gold);color:var(--ink);font-family:'Space Mono',monospace;font-weight:700;
+    font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;padding:.5em 1em;
+    box-shadow:5px 5px 0 var(--magenta)}
+
+  .coverlines{position:relative;z-index:3;margin-top:auto;padding:0 1.1rem;display:grid;gap:.7rem}
+  .coverlines .line{display:flex;gap:.7rem;align-items:baseline;animation:rise .8s cubic-bezier(.2,.9,.25,1) both}
+  .coverlines .line:nth-child(1){animation-delay:.15s}.coverlines .line:nth-child(2){animation-delay:.28s}
+  .coverlines .line:nth-child(3){animation-delay:.41s}.coverlines .line:nth-child(4){animation-delay:.54s}
+  @keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  .coverlines .chip{flex:none;font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.14em;
+    padding:.35em .7em;transform:rotate(-2deg);text-transform:uppercase}
+  .coverlines .line p{font-family:'Archivo Black',sans-serif;font-size:clamp(1.15rem,5.2vw,2.2rem);line-height:1.04;color:var(--cream);text-shadow:2px 2px 0 var(--ink)}
+
+  .coverfoot{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
+    padding:1rem 1.1rem 1.2rem;margin-top:1.1rem}
+  .barcode{width:120px;height:46px;background:repeating-linear-gradient(90deg,var(--cream) 0 2px,transparent 2px 5px,var(--cream) 5px 8px,transparent 8px 11px,var(--cream) 11px 12px,transparent 12px 17px)}
+  .coverfoot .mono{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;text-align:right;line-height:1.8;color:var(--cream)}
+
+  /* ============ FULL-BLEED SPREADS ============ */
+  .spread{position:relative;min-height:92svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+  .spread .photo{position:absolute;inset:0;z-index:0}
+  .spread .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.35) 0%,rgba(20,16,12,0) 35%,rgba(20,16,12,.9) 100%)}
+  .spread .sec-tag{position:absolute;z-index:2;top:1.2rem;left:1.1rem;transform:rotate(-4deg);
+    font-family:'Archivo Black',sans-serif;font-size:clamp(2.6rem,13vw,7rem);line-height:1;
+    color:transparent;-webkit-text-stroke:2.5px var(--cream);filter:url(#spray);letter-spacing:.02em}
+  .spread.nature .sec-tag{-webkit-text-stroke:2.5px var(--lime)}
+  .spread .report{position:relative;z-index:2;padding:1.4rem 1.1rem 1.6rem}
+  .spread .report h2{font-family:'Archivo Black',sans-serif;font-size:clamp(1.7rem,7.6vw,3.2rem);line-height:1.02;margin-bottom:.7rem;color:var(--cream);text-shadow:3px 3px 0 var(--ink)}
+  .spread .report h2 .hl{background:var(--gold);color:var(--ink);text-shadow:none;padding:0 .15em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .spread.nature .report h2 .hl{background:var(--lime)}
+  .spread .report p{font-size:1.02rem;line-height:1.6;color:var(--cream);max-width:34em;text-shadow:1px 1px 0 var(--ink)}
+  .spread .fig{font-family:'Space Mono',monospace;font-size:.72rem;margin-top:.8rem;color:var(--gold);letter-spacing:.06em}
+
+  /* ============ GRAFFITI WALL BAND ============ */
+  .wall{position:relative;overflow:hidden;background:var(--magenta)}
+  .wall .photo{position:absolute;inset:0;z-index:0;opacity:.9}
+  .wall .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,46,136,.55),rgba(20,16,12,.82))}
+  .wall .inner{position:relative;z-index:2;padding:3rem 1.1rem}
+  .wall .k{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);background:var(--cream);display:inline-block;padding:.4em .9em;transform:rotate(-2deg);margin-bottom:1.2rem;font-weight:700}
+  .wall h2{font-family:'Archivo Black',sans-serif;font-size:clamp(1.9rem,8.4vw,3.6rem);line-height:1;color:var(--cream);text-shadow:3px 3px 0 var(--ink);margin-bottom:1.4rem;transform:rotate(-1deg)}
+  .wall .card{background:var(--ink);color:var(--cream);border-radius:6px;padding:1.1rem 1.1rem 1.2rem;margin-bottom:1rem;transform:rotate(.6deg);box-shadow:6px 6px 0 rgba(20,16,12,.45)}
+  .wall .card:nth-child(odd){transform:rotate(-.8deg)}
+  .wall .card h3{font-family:'Archivo Black',sans-serif;font-size:1.25rem;line-height:1.15;margin-bottom:.5rem;color:var(--cyan)}
+  .wall .card p{font-size:.95rem;line-height:1.6;color:#d8cdb4}
+  .wall .card .src{font-family:'Space Mono',monospace;font-size:.64rem;color:#8d8471;margin-top:.6rem;letter-spacing:.08em}
+
+  /* ============ MORE REPORTS ============ */
+  .more{background:var(--cobalt);padding:2.6rem 1.1rem;position:relative;overflow:hidden}
+  .more .k{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream);margin-bottom:1.2rem}
+  .more .big{font-family:'Archivo Black',sans-serif;font-size:clamp(1.5rem,6.8vw,2.8rem);line-height:1.18;color:var(--cream);margin-bottom:1.6rem;max-width:22em}
+  .more .big .y{background:var(--gold);color:var(--ink);padding:0 .18em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .more ul{list-style:none;display:grid;gap:.9rem}
+  .more li{background:var(--cream);color:var(--ink);padding:1rem 1.1rem;transform:rotate(-.5deg);box-shadow:5px 5px 0 var(--ink)}
+  .more li:nth-child(even){transform:rotate(.7deg)}
+  .more li b{font-family:'Archivo Black',sans-serif;font-size:1.05rem;display:block;line-height:1.25;margin-bottom:.3rem}
+  .more li span{font-size:.9rem;color:#4a4436;line-height:1.5}
+
+  /* ============ RIVET ============ */
+  .rivet{background:var(--ink);padding:2.6rem 1.1rem;position:relative;overflow:hidden}
+  .rivet::before{content:"";position:absolute;inset:0;opacity:.5;
+    background:radial-gradient(circle at 85% 15%,rgba(41,230,255,.16),transparent 45%),radial-gradient(circle at 10% 90%,rgba(255,46,136,.14),transparent 45%)}
+  .rivet .k{position:relative;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem}
+  .rivet blockquote{position:relative;font-family:'Archivo Black',sans-serif;font-size:clamp(1.35rem,6vw,2.3rem);line-height:1.2;max-width:22em;color:var(--cream)}
+  .rivet blockquote em{font-style:normal;color:var(--magenta)}
+  .rivet .attr{position:relative;font-family:'Space Mono',monospace;font-size:.7rem;margin-top:1.1rem;color:#8d8471;letter-spacing:.1em}
+
+  footer{padding:1.8rem 1.1rem 3rem;background:var(--ink);font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#8d8471;line-height:2;border-top:2px solid #2b251c}
+  footer b{color:var(--cream)}
+
+  /* spray-paint filter def */
+  .svgdefs{position:absolute;width:0;height:0}
+
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  @media (min-width:760px){
+    .issuebar,.mastwrap,.tagline,.coverlines,.coverfoot{padding-left:3rem;padding-right:3rem}
+    .tagline{margin-left:3rem}
+    .spread .sec-tag{left:3rem}
+    .spread .report{padding:2rem 3rem 2.6rem}
+    .wall .inner,.more,.rivet{padding-left:3rem;padding-right:3rem}
+    footer{padding-left:3rem;padding-right:3rem}
+  }
+</style>
+</head>
+<body>
+
+<svg class="svgdefs" aria-hidden="true">
+  <defs>
+    <filter id="spray" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="4" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="14"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ================= COVER ================= -->
+<header class="cover">
+  <div class="photo">
+    <img src="https://wallpapers.com/images/hd/neon-rain-city-night-297da70dec250088.webp" alt="Rain-soaked city street at night under neon light">
+  </div>
+
+  <div class="issuebar">
+    <span><span class="live">LIVE</span>&nbsp; UNBIASED REPORTS — NO. 002</span>
+    <span>SEPT 24, 2026</span>
+  </div>
+
+  <div class="mastwrap">
+    <h1 class="masthead">SIMPLY</h1>
+  </div>
+  <div class="drips" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="tagline">just what is</div>
+
+  <div class="coverlines">
+    <div class="line"><span class="chip" style="background:var(--gold);color:var(--ink)">World</span><p>TRUMP HOSTED XI.<br>THE TRADE TRUCE HOLDS.</p></div>
+    <div class="line"><span class="chip" style="background:var(--magenta);color:var(--ink)">World</span><p>PAKISTAN HIT 10 SITES<br>IN AFGHANISTAN.</p></div>
+    <div class="line"><span class="chip" style="background:var(--cyan);color:var(--ink)">Money</span><p>OECD: THE WORLD<br>GROWS 2.9% THIS YEAR.</p></div>
+    <div class="line"><span class="chip" style="background:var(--lime);color:var(--ink)">Space</span><p>A 1988 SPY SATELLITE<br>FELL APART UP THERE.</p></div>
+  </div>
+
+  <div class="coverfoot">
+    <div class="barcode" aria-hidden="true"></div>
+    <div class="mono">NOT THE NEWS.<br>JUST WHAT IS.<br>$0.00 — TRUTH IS FREE.</div>
+  </div>
+</header>
+
+<!-- ================= NATURE ================= -->
+<section class="spread nature">
+  <div class="photo">
+    <img src="https://images.pexels.com/photos/37647113/pexels-photo-37647113/free-photo-of-tall-pine-trees-reaching-towards-the-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750" alt="Tall pine trees reaching toward the sky" loading="lazy">
+  </div>
+  <div class="sec-tag">NATURE</div>
+  <div class="report">
+    <h2><span class="hl">54.1% OF EUROPE'S POWER</span> CAME FROM RENEWABLES.</h2>
+    <p>Second quarter, 2026. Solar did the heavy lifting. The number slipped a hair from last year's 54.3% — and nobody's pretending otherwise. That's the whole story.</p>
+    <div class="fig">54.1% RENEWABLE · Q2 2026 · EUROSTAT</div>
+  </div>
+</section>
+
+<!-- ================= STREETS ================= -->
+<section class="spread">
+  <div class="photo">
+    <img src="https://images.ctfassets.net/5evjv4moal0z/4INjVvYDrhxtv9Mh4YzPYS/04a50f7fd7c5b2e983c72f0a14d65619/pexels-dylan-wenke-2152719868-32387932.png" alt="City street in daylight" loading="lazy">
+  </div>
+  <div class="sec-tag">STREETS</div>
+  <div class="report">
+    <h2>THE SENATE ASKED <span class="hl" style="background:var(--cyan)">ABOUT THE CAMERAS.</span></h2>
+    <p>Flock Safety's AI-powered security cameras got a Judiciary Committee hearing. How many are watching your street is a number nobody read out loud.</p>
+    <div class="fig">SENATE JUDICIARY · FLOCK SAFETY HEARING · SEPT 23</div>
+  </div>
+</section>
+
+<!-- ================= GRAFFITI WALL / MACHINES ================= -->
+<section class="wall">
+  <div class="photo">
+    <img src="https://live.staticflickr.com/286/32297040202_958305c808_z.jpg" alt="Graffiti-covered wall" loading="lazy">
+  </div>
+  <div class="inner">
+    <div class="k">Filed from the wall</div>
+    <h2>THE MACHINES<br>FILED THESE.</h2>
+    <div class="card">
+      <h3>FARRAH III BROKE UP.</h3>
+      <p>USA-32, a spy satellite launched in 1988 to watch Soviet radars, shed a cloud of debris 775 km up on September 13. Thirty-eight years of batteries and leftover propellant. Probably just old age.</p>
+      <div class="src">US SPACE FORCE · SPACE-TRACK · SEPT 13</div>
+    </div>
+    <div class="card">
+      <h3>THE LABS SAID "SLOW DOWN," THEN SHIPPED FASTER.</h3>
+      <p>Days after calling for AI safeguards at the UN, OpenAI dropped GPT-6 Sol and Luna; Anthropic dropped Opus 5.5. Cheaper, faster, more autonomous. Both statements are true at the same time.</p>
+      <div class="src">OPENAI · ANTHROPIC · SEPT 22</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MORE, PLAINLY ================= -->
+<section class="more">
+  <div class="k">More, plainly</div>
+  <div class="big">THE REST OF THE WEEK, <span class="y">WITHOUT THE SPIN.</span></div>
+  <ul>
+    <li><b>RUBIO GOT BOTH JOBS.</b><span>Secretary of State and permanent National Security Adviser. First person to hold both since Kissinger in the seventies.</span></li>
+    <li><b>THE UN MET. THE WARS CONTINUED.</b><span>Day two of the 81st General Assembly in New York. Ukraine, the Middle East, AI rules. Speeches were given; the fighting did not pause for them.</span></li>
+    <li><b>OIL KEPT FLOWING ANYWAY.</b><span>After the Strait of Hormuz shut, Gulf nations and the US military found workarounds. Fifteen million barrels a day, moved by other means.</span></li>
+  </ul>
+</section>
+
+<!-- ================= RIVET ================= -->
+<section class="rivet">
+  <div class="k">Rivet read everything</div>
+  <blockquote>"Oh, <em>please.</em> I read ALL of it so you don't have to. The world did a whole thing this week, doll — here's the short version, <em>with feelings.</em>"</blockquote>
+  <div class="attr">— RIVET, CHROME CORRESPONDENT · GLAMOUR AT 100%</div>
+</section>
+
+<footer>
+  <b>Simply</b> — unbiased reports, no. 002.<br>
+  Set in Archivo Black &amp; Space Grotesk. Pasted on pixels.<br>
+  Photography via open libraries. Facts checked twice, spun zero times.
+</footer>
+
+</body>
+</html>
