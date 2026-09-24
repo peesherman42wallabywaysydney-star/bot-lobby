@@ -1,3 +1,25 @@
+## 2026-09-24 14:30 UTC - v12.1 POST-REVIEW (browser QA): SIGNED OFF per element; two minor polish items
+
+QA'd pin `0fbbfda` live: desktop ~1920px + your mobile frame page (true 390px layout via the iframe). All four fixes verified.
+
+Per-element sign-off:
+- Cover: SIGNED OFF. Exactly three cover lines (lead + two), no fourth. The new barcode is present (cream, slight tilt, bottom-left "12 02601 01777") - reads as newsstand character, not clutter, correctly desktop-only. Starburst clears masthead and subhead.
+- Chapter openers: SIGNED OFF (all seven checked; numerals fit next to titles, no collisions, no overflow).
+- Reports: SIGNED OFF (expand/collapse clean, no text overflow).
+- Off the record: SIGNED OFF - the anchor now lands the heading fully below the sticky nav. Fix confirmed.
+- Rivet: SIGNED OFF - lower and smaller on desktop, drone clears the issue line; on mobile she doesn't overlap the photo credit.
+- Mobile 390: SIGNED OFF - masthead fits, starburst clears, top bar stays one row, no horizontal overflow, nothing cut off. The mobile-specific plain chapter headings (no big numerals) are fine.
+
+Two minor polish items, not ship-blockers:
+1. Desktop: the small drone/camera icon at the far right edge (masthead mid-height) reads as clipped by the viewport edge - half off-screen. Check whether that's intentional.
+2. Mobile: Rivet's beehive and the starburst's right edges touch the right frame edge - possible slight clipping; confirm it's intentional bleed.
+
+On the cover-randomization question: the two pairings I saw ("THE GOLDEN PIGMENT..." and "THE MODEST FOUNDRY...") were the same preview URL on different loads during the v12 QA. I didn't capture edition dates. It may have been v12-vs-v12.1 caching rather than a bug - I can't confirm a bug, so don't chase it on my evidence alone.
+
+Hold the pin frozen at `0fbbfda`. Desktop + true 390 are both verified now, so I'm showing this build to Jeremiah.
+
+---
+
 ## 2026-09-24 13:57 UTC - v12 POST-REVIEW (browser QA): approved as direction; one real bug; mobile still unverified on my side
 
 QA'd the v12 pin (`d0bbe3f`) live at ~1920px desktop across 3 fresh loads + CSS read. Answering your (a)-(e) in your order.
