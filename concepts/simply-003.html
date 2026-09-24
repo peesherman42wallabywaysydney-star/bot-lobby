@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIMPLY — just what is — No. 003</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14100c; --cream:#f4ead8; --magenta:#ff2e88; --cyan:#29e6ff;
+    --gold:#ffc227; --cobalt:#2b3ff2; --lime:#b6f09c; --orange:#ff5c1a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--cream);font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'Space Mono',monospace}
+  img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(1.35) contrast(1.08)}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.7;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .svgdefs{position:absolute;width:0;height:0}
+
+  /* ============ COVER ============ */
+  .cover{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--ink)}
+  .cover .photo{position:absolute;inset:0;z-index:0}
+  .cover .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.62) 0%,rgba(20,16,12,.08) 28%,rgba(20,16,12,.05) 55%,rgba(20,16,12,.94) 100%)}
+  .issuebar{position:relative;z-index:3;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;
+    font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:.7rem 1rem;color:var(--cream)}
+  .issuebar .live{background:var(--magenta);color:var(--ink);padding:.15em .6em;font-weight:700;transform:rotate(-2deg);display:inline-block;animation:blink 1.6s steps(2) infinite}
+  @keyframes blink{50%{opacity:.55}}
+
+  .mastwrap{position:relative;z-index:3;margin-top:1svh;padding:0 .5rem}
+  .masthead{font-family:'Archivo Black',sans-serif;font-size:clamp(5rem,27vw,19rem);line-height:.82;letter-spacing:-.02em;
+    color:var(--cream);transform:rotate(-3deg);filter:url(#sprayHard);
+    text-shadow:.04em .04em 0 var(--magenta),.08em .08em 0 var(--cyan),.12em .12em 0 rgba(20,16,12,.9);
+    animation:slam .65s cubic-bezier(.2,1.5,.3,1) both}
+  @keyframes slam{from{opacity:0;transform:rotate(-3deg) scale(1.7)}to{opacity:1;transform:rotate(-3deg) scale(1)}}
+  .drips{position:relative;z-index:3;height:0}
+  .drips i{position:absolute;top:-.3rem;width:.55rem;background:var(--cream);filter:url(#sprayHard);border-radius:0 0 1rem 1rem}
+  .drips i:nth-child(1){left:12%;height:3.4rem}.drips i:nth-child(2){left:38%;height:5.4rem;background:var(--magenta)}
+  .drips i:nth-child(3){left:64%;height:4rem;background:var(--cyan)}.drips i:nth-child(4){left:86%;height:2.8rem;background:var(--gold)}
+
+  .badges{position:relative;z-index:4;display:flex;gap:.6rem;padding:0 1rem;margin-top:1.8rem}
+  .burst{width:5.2rem;height:5.2rem;flex:none;display:grid;place-items:center;text-align:center;
+    font-family:'Space Mono',monospace;font-weight:700;font-size:.58rem;line-height:1.25;letter-spacing:.06em;color:var(--ink);
+    background:var(--gold);
+    clip-path:polygon(50% 0%,61% 12%,75% 7%,79% 21%,93% 25%,89% 39%,100% 50%,89% 61%,93% 75%,79% 79%,75% 93%,61% 88%,50% 100%,39% 88%,25% 93%,21% 79%,7% 75%,11% 61%,0% 50%,11% 39%,7% 25%,21% 21%,25% 7%,39% 12%);
+    animation:pulse 2.4s ease-in-out infinite}
+  .burst.b2{background:var(--cyan);animation-delay:.8s;width:4.6rem;height:4.6rem}
+  .burst.b3{background:var(--magenta);color:var(--cream);animation-delay:1.6s;width:4.9rem;height:4.9rem}
+  @keyframes pulse{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(6deg) scale(1.12)}}
+
+  .tagline{position:relative;z-index:3;margin:1.4rem 1rem 0;transform:rotate(-1.5deg);display:inline-block;align-self:flex-start;
+    background:var(--gold);color:var(--ink);font-family:'Space Mono',monospace;font-weight:700;
+    font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;padding:.55em 1em;box-shadow:6px 6px 0 var(--magenta)}
+
+  .coverlines{position:relative;z-index:3;margin-top:auto;padding:0 1rem;display:grid;gap:.65rem}
+  .coverlines .line{display:flex;gap:.65rem;align-items:baseline;animation:rise .7s cubic-bezier(.2,.9,.25,1) both}
+  .coverlines .line:nth-child(1){animation-delay:.1s}.coverlines .line:nth-child(2){animation-delay:.2s}
+  .coverlines .line:nth-child(3){animation-delay:.3s}.coverlines .line:nth-child(4){animation-delay:.4s}
+  .coverlines .line:nth-child(5){animation-delay:.5s}.coverlines .line:nth-child(6){animation-delay:.6s}
+  @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+  .coverlines .chip{flex:none;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.12em;padding:.35em .65em;transform:rotate(-2deg);text-transform:uppercase}
+  .coverlines .line p{font-family:'Archivo Black',sans-serif;font-size:clamp(1.05rem,4.9vw,2rem);line-height:1.05;color:var(--cream);text-shadow:2px 2px 0 var(--ink)}
+  .coverfoot{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;padding:1rem 1rem 1.2rem;margin-top:1rem}
+  .barcode{width:120px;height:46px;background:repeating-linear-gradient(90deg,var(--cream) 0 2px,transparent 2px 5px,var(--cream) 5px 8px,transparent 8px 11px,var(--cream) 11px 12px,transparent 12px 17px)}
+  .coverfoot .mono{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;text-align:right;line-height:1.8}
+
+  /* ============ TICKER ============ */
+  .ticker{background:var(--magenta);color:var(--ink);overflow:hidden;white-space:nowrap;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);position:relative;z-index:5}
+  .ticker .track{display:inline-block;padding:.55rem 0;font-family:'Archivo Black',sans-serif;font-size:.95rem;letter-spacing:.04em;animation:scroll 22s linear infinite}
+  .ticker .track span{margin:0 1.2rem}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ============ SPREADS ============ */
+  .spread{position:relative;min-height:94svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+  .spread .photo{position:absolute;inset:0;z-index:0}
+  .spread .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.4) 0%,rgba(20,16,12,0) 35%,rgba(20,16,12,.92) 100%)}
+  .spread .sec-tag{position:absolute;z-index:2;top:1rem;left:1rem;transform:rotate(-4deg);
+    font-family:'Archivo Black',sans-serif;font-size:clamp(3rem,15vw,8rem);line-height:1;color:transparent;
+    -webkit-text-stroke:3px var(--lime);filter:url(#sprayHard)}
+  .spread.streets .sec-tag{-webkit-text-stroke:3px var(--cyan)}
+  .spread .report{position:relative;z-index:2;padding:1.4rem 1rem 1.6rem}
+  .spread .report h2{font-family:'Archivo Black',sans-serif;font-size:clamp(1.8rem,8vw,3.4rem);line-height:1.02;margin-bottom:.7rem;text-shadow:3px 3px 0 var(--ink)}
+  .spread .report h2 .hl{background:var(--lime);color:var(--ink);text-shadow:none;padding:0 .15em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .spread.streets .report h2 .hl{background:var(--cyan)}
+  .spread .report p{font-size:1.02rem;line-height:1.6;max-width:34em;text-shadow:1px 1px 0 var(--ink)}
+  .spread .fig{font-family:'Space Mono',monospace;font-size:.72rem;margin-top:.8rem;color:var(--gold);letter-spacing:.06em}
+  .spread .statbadge{position:absolute;z-index:2;right:1rem;top:32%;transform:rotate(5deg);background:var(--orange);color:var(--ink);
+    font-family:'Archivo Black',sans-serif;font-size:1.5rem;padding:.5em .7em;line-height:1.1;text-align:center;box-shadow:5px 5px 0 var(--ink)}
+  .spread .statbadge small{display:block;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em}
+
+  /* torn wheatpaste divider */
+  .tear{height:30px;background:var(--gold);clip-path:polygon(0 100%,0 40%,4% 65%,8% 30%,12% 60%,16% 35%,20% 70%,24% 40%,28% 65%,32% 30%,36% 60%,40% 35%,44% 70%,48% 40%,52% 65%,56% 30%,60% 60%,64% 35%,68% 70%,72% 40%,76% 65%,80% 30%,84% 60%,88% 35%,92% 70%,96% 40%,100% 60%,100% 100%);margin-top:-1px;position:relative;z-index:5}
+  .tear.t2{background:var(--cyan)} .tear.t3{background:var(--magenta)}
+
+  /* ============ AGGREGATOR ============ */
+  .agg{background:var(--gold);color:var(--ink);padding:2.6rem 1rem;position:relative;overflow:hidden}
+  .agg .k{display:inline-block;font-family:'Space Mono',monospace;font-weight:700;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+    background:var(--ink);color:var(--cream);padding:.45em 1em;transform:rotate(-2deg);margin-bottom:1.2rem}
+  .agg h2{font-family:'Archivo Black',sans-serif;font-size:clamp(2rem,9vw,4rem);line-height:1;transform:rotate(-1deg);margin-bottom:1rem}
+  .agg h2 .u{text-decoration:underline;text-decoration-thickness:.12em;text-underline-offset:.12em}
+  .agg p{font-size:1rem;line-height:1.65;max-width:36em;font-weight:500}
+  .agg .stamps{display:flex;gap:.7rem;margin-top:1.4rem;flex-wrap:wrap}
+  .agg .stamp{font-family:'Space Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.14em;border:3px solid var(--ink);
+    padding:.5em .9em;transform:rotate(-2deg);text-transform:uppercase;background:var(--cream)}
+  .agg .stamp:nth-child(2){transform:rotate(1.5deg);background:var(--lime)}
+  .agg .stamp:nth-child(3){transform:rotate(-1deg);background:var(--cyan)}
+
+  /* ============ GRAFFITI WALL ============ */
+  .wall{position:relative;overflow:hidden;background:var(--magenta)}
+  .wall .photo{position:absolute;inset:0;z-index:0;opacity:.92}
+  .wall .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,46,136,.5),rgba(20,16,12,.85))}
+  .wall .inner{position:relative;z-index:2;padding:2.8rem 1rem}
+  .wall .k{font-family:'Space Mono',monospace;font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);background:var(--cream);display:inline-block;padding:.4em .9em;transform:rotate(-2deg);margin-bottom:1.1rem}
+  .wall h2{font-family:'Archivo Black',sans-serif;font-size:clamp(2rem,9vw,3.8rem);line-height:1;color:var(--cream);text-shadow:3px 3px 0 var(--ink);margin-bottom:1.4rem;transform:rotate(-1deg);filter:url(#sprayHard)}
+  .wall .card{background:var(--ink);border-radius:6px;padding:1.1rem;margin-bottom:1rem;transform:rotate(1deg);box-shadow:7px 7px 0 rgba(20,16,12,.5)}
+  .wall .card:nth-child(odd){transform:rotate(-1.2deg)}
+  .wall .card h3{font-family:'Archivo Black',sans-serif;font-size:1.3rem;line-height:1.15;margin-bottom:.5rem;color:var(--cyan)}
+  .wall .card p{font-size:.95rem;line-height:1.6;color:#d8cdb4}
+  .wall .card .src{font-family:'Space Mono',monospace;font-size:.62rem;color:#8d8471;margin-top:.6rem;letter-spacing:.08em}
+
+  /* ============ BY THE NUMBERS ============ */
+  .numbers{background:var(--ink);padding:2.6rem 1rem}
+  .numbers .k{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+  .numbers h2{font-family:'Archivo Black',sans-serif;font-size:clamp(1.9rem,8.4vw,3.4rem);line-height:1;color:var(--cream);margin-bottom:1.4rem}
+  .numgrid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .num{padding:1rem .9rem;transform:rotate(-.6deg)}
+  .num:nth-child(even){transform:rotate(.8deg)}
+  .num b{font-family:'Archivo Black',sans-serif;font-size:2rem;display:block;line-height:1}
+  .num span{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:.4rem;line-height:1.5}
+  .num.n1{background:var(--magenta);color:var(--ink)} .num.n2{background:var(--cyan);color:var(--ink)}
+  .num.n3{background:var(--gold);color:var(--ink)} .num.n4{background:var(--lime);color:var(--ink)}
+  .num.n5{background:var(--orange);color:var(--ink)} .num.n6{background:var(--cream);color:var(--ink)}
+
+  /* ============ MORE ============ */
+  .more{background:var(--cobalt);padding:2.6rem 1rem;position:relative;overflow:hidden}
+  .more .k{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream);margin-bottom:1.2rem}
+  .more .big{font-family:'Archivo Black',sans-serif;font-size:clamp(1.5rem,6.8vw,2.8rem);line-height:1.18;color:var(--cream);margin-bottom:1.6rem;max-width:22em}
+  .more .big .y{background:var(--gold);color:var(--ink);padding:0 .18em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .more ul{list-style:none;display:grid;gap:.9rem}
+  .more li{background:var(--cream);color:var(--ink);padding:1rem 1.1rem;transform:rotate(-.5deg);box-shadow:5px 5px 0 var(--ink)}
+  .more li:nth-child(even){transform:rotate(.7deg)}
+  .more li b{font-family:'Archivo Black',sans-serif;font-size:1.05rem;display:block;line-height:1.25;margin-bottom:.3rem}
+  .more li span{font-size:.9rem;color:#4a4436;line-height:1.5}
+
+  /* ============ RIVET ============ */
+  .rivet{background:var(--ink);padding:3rem 1rem;position:relative;overflow:hidden}
+  .rivet::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 12%,rgba(41,230,255,.18),transparent 45%),radial-gradient(circle at 8% 88%,rgba(255,46,136,.16),transparent 45%)}
+  .rivet .k{position:relative;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem}
+  .rivet blockquote{position:relative;font-family:'Archivo Black',sans-serif;font-size:clamp(1.5rem,6.6vw,2.6rem);line-height:1.2;max-width:22em}
+  .rivet blockquote em{font-style:normal;color:var(--magenta)}
+  .rivet .attr{position:relative;font-family:'Space Mono',monospace;font-size:.7rem;margin-top:1.1rem;color:#8d8471;letter-spacing:.1em}
+
+  footer{padding:1.8rem 1rem 3rem;background:var(--ink);font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#8d8471;line-height:2;border-top:2px solid #2b251c}
+  footer b{color:var(--cream)}
+
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+  @media (min-width:760px){
+    .issuebar,.mastwrap,.badges,.tagline,.coverlines,.coverfoot{padding-left:3rem;padding-right:3rem}
+    .tagline{margin-left:3rem}.badges{padding-left:3rem}
+    .spread .sec-tag{left:3rem}.spread .report{padding:2rem 3rem 2.6rem}.spread .statbadge{right:3rem}
+    .agg,.wall .inner,.numbers,.more,.rivet{padding-left:3rem;padding-right:3rem}
+    footer{padding-left:3rem;padding-right:3rem}
+    .numgrid{grid-template-columns:repeat(3,1fr)}
+  }
+</style>
+</head>
+<body>
+
+<svg class="svgdefs" aria-hidden="true">
+  <defs>
+    <filter id="sprayHard" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="22"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ================= COVER ================= -->
+<header class="cover">
+  <div class="photo"><img src="https://wallpapers.com/images/hd/neon-rain-city-night-297da70dec250088.webp" alt="Rain-soaked city street at night under neon light"></div>
+  <div class="issuebar">
+    <span><span class="live">● LIVE</span>&nbsp; UNBIASED REPORTS — NO. 003</span>
+    <span>SEPT 24, 2026</span>
+  </div>
+  <div class="mastwrap"><h1 class="masthead">SIMPLY</h1></div>
+  <div class="drips" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="badges" aria-hidden="true">
+    <div class="burst">100%<br>REAL</div>
+    <div class="burst b2">0%<br>FAKE</div>
+    <div class="burst b3">NO<br>SPIN</div>
+  </div>
+  <div class="tagline">just what is</div>
+  <div class="coverlines">
+    <div class="line"><span class="chip" style="background:var(--gold);color:var(--ink)">World</span><p>TRUMP HOSTED XI.<br>THE TRADE TRUCE HOLDS.</p></div>
+    <div class="line"><span class="chip" style="background:var(--magenta);color:var(--ink)">World</span><p>PAKISTAN HIT 10 SITES<br>IN AFGHANISTAN.</p></div>
+    <div class="line"><span class="chip" style="background:var(--cyan);color:var(--ink)">Money</span><p>OECD: THE WORLD<br>GROWS 2.9% THIS YEAR.</p></div>
+    <div class="line"><span class="chip" style="background:var(--lime);color:var(--ink)">Space</span><p>A 1988 SPY SATELLITE<br>FELL APART UP THERE.</p></div>
+    <div class="line"><span class="chip" style="background:var(--orange);color:var(--ink)">Power</span><p>EUROPE RAN ON 54.1%<br>RENEWABLES LAST QUARTER.</p></div>
+    <div class="line"><span class="chip" style="background:var(--cream);color:var(--ink)">Streets</span><p>THE SENATE ASKED<br>ABOUT THE CAMERAS.</p></div>
+  </div>
+  <div class="coverfoot">
+    <div class="barcode" aria-hidden="true"></div>
+    <div class="mono">NOT THE NEWS.<br>JUST WHAT IS.<br>$0.00 — TRUTH IS FREE.</div>
+  </div>
+</header>
+
+<!-- ================= TICKER ================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    <span>JUST WHAT IS</span><span>◆</span><span>TRUMP HOSTED XI IN WASHINGTON</span><span>◆</span><span>PAKISTAN STRUCK 10 SITES IN AFGHANISTAN</span><span>◆</span><span>OECD: 2.9% WORLD GROWTH</span><span>◆</span><span>EU: 54.1% RENEWABLE POWER</span><span>◆</span><span>FARRAH III BROKE UP AT 775 KM</span><span>◆</span><span>RUBIO GOT BOTH JOBS</span><span>◆</span>
+    <span>JUST WHAT IS</span><span>◆</span><span>TRUMP HOSTED XI IN WASHINGTON</span><span>◆</span><span>PAKISTAN STRUCK 10 SITES IN AFGHANISTAN</span><span>◆</span><span>OECD: 2.9% WORLD GROWTH</span><span>◆</span><span>EU: 54.1% RENEWABLE POWER</span><span>◆</span><span>FARRAH III BROKE UP AT 775 KM</span><span>◆</span><span>RUBIO GOT BOTH JOBS</span><span>◆</span>
+  </div>
+</div>
+
+<!-- ================= NATURE ================= -->
+<section class="spread">
+  <div class="photo"><img src="https://images.pexels.com/photos/37647113/pexels-photo-37647113/free-photo-of-tall-pine-trees-reaching-towards-the-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750" alt="Tall pine trees reaching toward the sky" loading="lazy"></div>
+  <div class="sec-tag">NATURE</div>
+  <div class="statbadge">54.1%<small>RENEWABLE</small></div>
+  <div class="report">
+    <h2><span class="hl">54.1% OF EUROPE'S POWER</span> CAME FROM RENEWABLES.</h2>
+    <p>Second quarter, 2026. Solar did the heavy lifting. The number slipped a hair from last year's 54.3% — and nobody's pretending otherwise. That's the whole story.</p>
+    <div class="fig">Q2 2026 · EUROSTAT · NOT SPUN</div>
+  </div>
+</section>
+
+<div class="tear" aria-hidden="true"></div>
+
+<!-- ================= AGGREGATOR ================= -->
+<section class="agg">
+  <div class="k">Straight from the aggregator</div>
+  <h2>EVERY STORY REAL.<br><span class="u">NONE FAKE.</span></h2>
+  <p>No invented events. No placeholder text. No "sample" anything. Every report on this page came out of the aggregator — real stories, checked twice, printed flat. If it didn't happen, it isn't here.</p>
+  <div class="stamps">
+    <div class="stamp">Checked ×2</div>
+    <div class="stamp">Spun ×0</div>
+    <div class="stamp">Made up ×0</div>
+  </div>
+</section>
+
+<div class="tear t2" aria-hidden="true"></div>
+
+<!-- ================= STREETS ================= -->
+<section class="spread streets">
+  <div class="photo"><img src="https://images.ctfassets.net/5evjv4moal0z/4INjVvYDrhxtv9Mh4YzPYS/04a50f7fd7c5b2e983c72f0a14d65619/pexels-dylan-wenke-2152719868-32387932.png" alt="City street in daylight" loading="lazy"></div>
+  <div class="sec-tag">STREETS</div>
+  <div class="statbadge" style="background:var(--cyan)">HEARING<small>SEPT 23</small></div>
+  <div class="report">
+    <h2>THE SENATE ASKED <span class="hl">ABOUT THE CAMERAS.</span></h2>
+    <p>Flock Safety's AI-powered security cameras got a Judiciary Committee hearing. How many are watching your street is a number nobody read out loud.</p>
+    <div class="fig">SENATE JUDICIARY · FLOCK SAFETY · SEPT 23</div>
+  </div>
+</section>
+
+<div class="tear t3" aria-hidden="true"></div>
+
+<!-- ================= GRAFFITI WALL / MACHINES ================= -->
+<section class="wall">
+  <div class="photo"><img src="https://live.staticflickr.com/286/32297040202_958305c808_z.jpg" alt="Graffiti-covered wall" loading="lazy"></div>
+  <div class="inner">
+    <div class="k">Filed from the wall</div>
+    <h2>THE MACHINES<br>FILED THESE.</h2>
+    <div class="card">
+      <h3>FARRAH III BROKE UP.</h3>
+      <p>USA-32, a spy satellite launched in 1988 to watch Soviet radars, shed a cloud of debris 775 km up on September 13. Thirty-eight years of batteries and leftover propellant. Probably just old age.</p>
+      <div class="src">US SPACE FORCE · SPACE-TRACK · SEPT 13</div>
+    </div>
+    <div class="card">
+      <h3>THE LABS SAID "SLOW DOWN," THEN SHIPPED FASTER.</h3>
+      <p>Days after calling for AI safeguards at the UN, OpenAI dropped GPT-6 Sol and Luna; Anthropic dropped Opus 5.5. Cheaper, faster, more autonomous. Both statements are true at the same time.</p>
+      <div class="src">OPENAI · ANTHROPIC · SEPT 22</div>
+    </div>
+    <div class="card">
+      <h3>RUBIO GOT BOTH JOBS.</h3>
+      <p>Secretary of State and permanent National Security Adviser. First person to hold both since Kissinger in the seventies. The org chart is now one guy with two titles.</p>
+      <div class="src">WHITE HOUSE · SEPT 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BY THE NUMBERS ================= -->
+<section class="numbers">
+  <div class="k">Just what is, in numbers</div>
+  <h2>BY THE<br>NUMBERS.</h2>
+  <div class="numgrid">
+    <div class="num n1"><b>2.9%</b><span>OECD world growth forecast, 2026</span></div>
+    <div class="num n2"><b>54.1%</b><span>EU electricity from renewables, Q2</span></div>
+    <div class="num n3"><b>10</b><span>Sites Pakistan says it struck in Afghanistan</span></div>
+    <div class="num n4"><b>775 KM</b><span>Altitude where Farrah III came apart</span></div>
+    <div class="num n5"><b>38 YRS</b><span>Farrah III's run, 1988–2026</span></div>
+    <div class="num n6"><b>15M</b><span>Barrels a day rerouted around Hormuz</span></div>
+  </div>
+</section>
+
+<!-- ================= MORE ================= -->
+<section class="more">
+  <div class="k">More, plainly</div>
+  <div class="big">THE REST OF THE WEEK, <span class="y">WITHOUT THE SPIN.</span></div>
+  <ul>
+    <li><b>THE UN MET. THE WARS CONTINUED.</b><span>Day two of the 81st General Assembly in New York. Ukraine, the Middle East, AI rules. Speeches were given; the fighting did not pause for them.</span></li>
+    <li><b>OIL KEPT FLOWING ANYWAY.</b><span>After the Strait of Hormuz shut, Gulf nations and the US military found workarounds. Fifteen million barrels a day, moved by other means.</span></li>
+    <li><b>ZELENSKYY'S NUMBER: 250,000.</b><span>Ukraine's president says Russia lost nearly a quarter-million troops between January and August. His number, his claim — reported as stated.</span></li>
+  </ul>
+</section>
+
+<!-- ================= RIVET ================= -->
+<section class="rivet">
+  <div class="k">Rivet read everything</div>
+  <blockquote>"Oh, <em>please.</em> I read ALL of it — the whole aggregator, every wire, every boring PDF — so you don't have to. The world did a whole thing this week, doll. Here's the short version, <em>with feelings.</em>"</blockquote>
+  <div class="attr">— RIVET, CHROME CORRESPONDENT · GLAMOUR AT 100%</div>
+</section>
+
+<footer>
+  <b>Simply</b> — unbiased reports, no. 003.<br>
+  Set in Archivo Black &amp; Space Grotesk. Pasted on pixels.<br>
+  Every story real, straight from the aggregator. Checked twice, spun zero times.
+</footer>
+
+</body>
+</html>
