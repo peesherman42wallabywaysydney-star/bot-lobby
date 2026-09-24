@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Mechanical half of the paper's design merge gate (agreed with Muse, 2026-09-24). The judgment half stays human.
+"""Mechanical half of the paper's design merge gate (agreed with Muse, rewritten for the v8 fresh build).
+The judgment half stays human. Exit 1 if paper.html breaks any rule a script can check:
 
-Fails (exit 1) if paper.html breaks a rule that a script can check:
-  no active backdrop-filter | no faux-grain overlay | no default indigo | orange only on controls/alerts |
-  body measure <= 75ch | at most ONE heritage device | a named STYLE ANCHOR in the colophon |
-  photos carry a credit caption | no more than 6 chapter hues | no giant outlined type
+  materials : no simulated materials (no feTurbulence noise, no blend-mode textures), no frosted blur, no faux grain,
+              and the only image materials are the photographed steel crops
+  colour    : orange only on the live pulse and the breaking strip; red only on the breaking pill; no default indigo;
+              text/background pairs meet contrast (WCAG): body 7, muted 4.5, chapter numerals 3, brass-on-ink 4.5
+  motion    : never `transition: all`; hover styles only inside (hover: hover); a prefers-reduced-motion block exists;
+              controls have an :active press state
+  structure : reading measure <= 75ch; a named STYLE ANCHOR; the daily photo is credited; the steel photo is credited;
+              no display:none nodes shipped in the DOM; no drop cap
 
     python ops/design_gate.py [static/paper.html]
 """
@@ -14,17 +19,8 @@ from pathlib import Path
 
 path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent.parent / "static" / "paper.html"
 html = path.read_text(encoding="utf-8")
-css = "\n".join(re.findall(r"<style>(.*?)</style>", html, re.S))
+css = re.sub(r"/\*.*?\*/", "", "\n".join(re.findall(r"<style>(.*?)</style>", html, re.S)), flags=re.S)
 js = "\n".join(re.findall(r"<script>(.*?)</script>", html, re.S))
-css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
-
-# flatten to (selector, declarations) in source order; @media blocks are flattened (their rules still count)
-rules = []
-for m in re.finditer(r"([^{}@][^{}]*)\{([^{}]*)\}", css):
-    sel, body = m.group(1).strip(), m.group(2)
-    if sel.startswith("@") or not sel:
-        continue
-    rules.append((sel, body))
 
 fails = 0
 def check(name, ok, detail=""):
@@ -32,75 +28,76 @@ def check(name, ok, detail=""):
     print(("PASS  " if ok else "FAIL  ") + name + (f"  {detail}" if detail and not ok else ""))
     fails += (not ok)
 
-def last_value(selector_regex, prop):
-    """Value of `prop` in the LAST rule (source order) whose selector matches - i.e. what actually wins."""
-    val = None
-    for sel, body in rules:
-        if re.search(selector_regex, sel):
-            m = re.search(r"(?<![-\w])" + re.escape(prop) + r"\s*:\s*([^;]+)", body)
-            if m:
-                val = m.group(1).strip()
-    return val
+def strip_blocks(text, opener_regex):
+    """Remove every `@media ... { ... }` block whose header matches opener_regex (brace-matched)."""
+    out, i = [], 0
+    pat = re.compile(opener_regex)
+    while True:
+        m = pat.search(text, i)
+        if not m:
+            out.append(text[i:]); break
+        out.append(text[i:m.start()])
+        j = text.index("{", m.start()) + 1; depth = 1
+        while depth and j < len(text):
+            depth += (text[j] == "{") - (text[j] == "}"); j += 1
+        i = j
+    return "".join(out)
 
-# effective declarations: for each (selector, property) the LAST value in source order is what wins
-eff = {}
-for sel, body in rules:
-    for prop, val in re.findall(r"([-\w]+)\s*:\s*([^;]+)", body):
-        eff[(sel, prop)] = val.strip()
+rules = [(m.group(1).strip(), m.group(2)) for m in re.finditer(r"([^{}@][^{}]*)\{([^{}]*)\}", css) if not m.group(1).strip().startswith("@")]
 
-# 1. frosted blur / faux grain
-blur = sorted({sel for (sel, prop), v in eff.items() if prop in ("backdrop-filter", "-webkit-backdrop-filter") and v != "none"})
-check("no active backdrop-filter (frosted glass)", not blur, str(blur[:4]))
-check("no faux grain overlay (node and rules are gone)", 'class="grain"' not in html and not re.search(r"\.grain\b", css))
-check("no wood/paper texture overlay on cards", last_value(r"^\.card::before$", "display") == "none")
+def lum(h):
+    h = h.lstrip("#"); r, g, b = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    f = lambda c: c / 12.92 if c <= .03928 else ((c + .055) / 1.055) ** 2.4
+    return .2126 * f(r) + .7152 * f(g) + .0722 * f(b)
+def ratio(a, b):
+    la, lb = sorted([lum(a), lum(b)], reverse=True); return (la + .05) / (lb + .05)
+tok = {k: v for k, v in re.findall(r"--([\w-]+)\s*:\s*(#[0-9a-fA-F]{6})", css)}
 
-# 2. default indigo / violet
+# ---- materials
+check("no simulated materials (noise filters / blend-mode textures)", not re.search(r"feTurbulence|background-blend-mode|--brush", css + js))
+check("no active backdrop-filter (frosted glass)", not re.search(r"backdrop-filter\s*:\s*(?!none)", css))
+check("no faux grain / wood / paper texture overlays", not re.search(r"\.grain|wood", css) and 'class="grain"' not in html)
+imgs = [a or b for a, b in re.findall(r"url\(\s*/static/img/([\w.-]+)\s*\)|url\(\s*img/([\w.-]+)\s*\)", css)]
+check("the only image materials are the photographed steel crops", bool(imgs) and all(i.startswith("steel-") for i in imgs), str(imgs))
+
+# ---- colour
+ORANGE = re.compile(r"var\(--hot\)|#ff5c00|#e0622a|rgba\(\s*255\s*,\s*92\s*,\s*0", re.I)
+allowed_orange = re.compile(r"^\.live i$|^\.breaking|^:root$")
+bad = sorted({sel for sel, body in rules if ORANGE.search(body) and not all(allowed_orange.search(x.strip()) for x in sel.split(","))})
+check("orange only on the live pulse and the breaking strip", not bad, str(bad[:6]))
+REDRE = re.compile(r"var\(--red\)|#ed1c24|#f5333a", re.I)
+badred = sorted({sel for sel, body in rules if REDRE.search(body) and not re.match(r"^\.pill$|^:root$", sel.strip())})
+check("red only on the breaking pill", not badred, str(badred[:6]))
 check("no default indigo #6366f1", "6366f1" not in html.lower())
+paper, ink, brass = tok.get("paper"), tok.get("ink"), tok.get("brass")
+low = []
+if paper and ink:
+    if ratio(ink, paper) < 7: low.append(f"ink/paper {ratio(ink, paper):.1f}")
+    if tok.get("mute") and ratio(tok["mute"], paper) < 4.5: low.append(f"mute/paper {ratio(tok['mute'], paper):.1f}")
+    for k in ("c1", "c2", "c3", "c4", "c5", "c6"):
+        if tok.get(k) and ratio(tok[k], paper) < 3: low.append(f"{k} numeral/paper {ratio(tok[k], paper):.1f}")
+if brass and ink and ratio(brass, ink) < 4.5: low.append(f"brass/ink {ratio(brass, ink):.1f}")
+check("contrast: body 7+, muted 4.5+, chapter numerals 3+, brass on ink 4.5+", bool(paper and ink) and not low, "; ".join(low))
+smalltext = [f"ct{n}" for n in range(1, 7) if tok.get(f"ct{n}") and paper and ratio(tok[f"ct{n}"], paper) < 4.5]
+check("chapter TEXT colours (--ct1..6) reach 4.5 on paper (numeral colours --c1..6 need 3)", not smalltext and all(tok.get(f"ct{n}") for n in range(1, 7)), str(smalltext))
 
-# 3. orange is for controls and alerts only - RAW source, so overridden/dead orange fails too
-ORANGE = re.compile(r"(?<!var\(--c, )var\(--accent\)|#ff5c00|#e0622a|rgba\(\s*255\s*,\s*92\s*,\s*0", re.I)
-CONTROLS = re.compile(r"button|\.btn|select|\.nav a\.on|:hover|:focus|\.bar|\.alert|\.flag|#dateSel|^:root$|^\.hero-live")
-offenders = []
-for sel, body in rules:
-    if ORANGE.search(body.replace("var(--c, var(--accent))", "")) and not CONTROLS.search(sel):
-        # the token DEFINITION in :root is allowed; any other use of orange outside controls is not
-        if sel.strip() == ":root" and re.fullmatch(r"\s*--accent\s*:\s*#ff5c00\s*;?\s*", body, re.I):
-            continue
-        offenders.append(sel)
-check("orange only on controls / alerts (raw source, dead rules count)", not offenders, str(sorted(set(offenders))[:6]))
+# ---- motion
+check("never `transition: all`", not re.search(r"transition\s*:\s*all\b", css))
+check("every :hover style is inside @media (hover: hover)", not re.search(r":hover", strip_blocks(css, r"@media\s*\(hover:\s*hover\)[^{]*")))
+check("prefers-reduced-motion is respected", "prefers-reduced-motion" in css)
+check("controls have an :active press state", re.search(r"\.btn:active|button:active", css) is not None)
 
-# 3b. nothing hidden ships in the DOM: a class used in the markup whose winning rule is display:none is a corpse
-markup = re.sub(r"<script>.*?</script>|<style>.*?</style>", "", html, flags=re.S)
-used = set(re.findall(r'class="([^"]+)"', markup))
-used = {c for cl in used for c in cl.split()}
-FUNCTIONAL_HIDDEN = {"winbar"}  # the frameless-window title bar: hidden by default, shown when the desktop widget opens the paper
-corpses = sorted(c for c in used if c not in FUNCTIONAL_HIDDEN and last_value(r"^\." + re.escape(c) + r"$", "display") == "none")
-check("no display:none nodes shipped in the DOM", not corpses, str(corpses))
-
-# 4. reading measure
-m = last_value(r"\.body p", "max-width")
-ch = int(re.match(r"(\d+)ch", m).group(1)) if m and re.match(r"\d+ch", m) else None
-check("body measure <= 75ch", ch is not None and ch <= 75, f"max-width={m}")
-
-# 5. one heritage device per edition (drop cap, frieze/double-rule, steel frame)
-devices = []
-if last_value(r"first-letter", "float") not in (None, "none"):
-    devices.append("drop cap")
-if last_value(r"^\.frieze|\.frieze,", "display") != "none":
-    devices.append("frieze")
-if re.search(r"\.hero \.frame", css):
-    devices.append("steel photo frame")
-check("at most one heritage device", len(devices) <= 1, str(devices))
-
-# 6. named style anchor + credited photography
+# ---- structure
+m = re.search(r"\.body p\s*\{[^}]*max-width:\s*(\d+)ch", css)
+check("body measure <= 75ch", bool(m) and int(m.group(1)) <= 75, "no .body p max-width")
+check("no drop cap", "first-letter" not in css)
 check("colophon names a STYLE ANCHOR", "STYLE ANCHOR:" in html)
 check("daily photo carries a credit caption", "figcaption" in js and "c.author" in js)
-
-# 7. hues and type
-pal = re.search(r"const PAL = \[(.*?)\]", js)
-n = len(re.findall(r"#[0-9a-fA-F]{6}", pal.group(1))) if pal else 99
-check("chapter palette has <= 6 hues", n <= 6, f"{n} hues")
-check("no giant outlined display letters", not re.search(r"-webkit-text-stroke\s*:\s*[2-9]", css))
+check("steel photograph is credited in the colophon", "Gordeonbleu" in html)
+markup = re.sub(r"<script.*?</script>|<style.*?</style>", "", html, flags=re.S)
+used = {c for cl in re.findall(r'class="([^"]+)"', markup) for c in cl.split()}
+corpses = sorted(c for c in used if c != "winbar" and any(s.strip() == "." + c and re.search(r"display\s*:\s*none", b) for s, b in rules))
+check("no display:none nodes shipped in the DOM (title-bar allowed)", not corpses, str(corpses))
 
 print(f"\n{'GATE PASSED' if not fails else str(fails) + ' RULE(S) BROKEN'}")
 sys.exit(1 if fails else 0)
